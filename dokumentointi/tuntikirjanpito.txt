@@ -1,3 +1,4 @@
 16.12.2013
 - 4 tuntia
-- Repository ja projekti luoto, saatu toimimaan windowsilla säädön jälkeen, kirjoitettu aihekuvaus, harjoiteltu javadoccia, "tehty projektin alustusta"
+- Repository ja projekti luoto, saatu toimimaan windowsilla säädön jälkeen,
+  kirjoitettu aihekuvaus, harjoiteltu javadoccia, "tehty projektin alustusta"
