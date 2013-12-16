@@ -1,0 +1,18 @@
+Tarkoitus on luoda tietokonepeli, jossa kaksi pelaajaa yrittää etsiä aarretta vanhassa tyrmässä (dungeon). Pelaajat liikuvat vuoropohjaisesti kartassa, joka on luotu sattuman varaisesti. Oikeaa suuntaa ei kerrota. Käytävät voivat risteillä ja taitekohdissa voi olla useita vaihtoehtoja. Käytävillä voi kohdata erilaisia mörköjä, jotka täytyy tietenkin nitistää. Matkalta voi löytää esineitä, jotka auttavat voivat auttaa eritavoin. Aarteenlöytäjä voittaa pelin.
+
+Tavoite:
+- Vähintään kaksi pelaaja
+- Pari monsteria
+- Jokunen esine
+- Taistelut
+- Sattumanvarainen tyrmä
+- Yksinkertainen, graafinen, käyttöliittymä (ei liikaa kuvia)
+
+Ekstra tavoitteet (jos aikaa jää...):
+- Ääretön määrä pelaajia
+- Paljon monstereita
+- Paljon enemmän esineitä
+- erilaisia tapahtumia, joita voi kohdata (esimerkiksi katto sortuu)
+- Pelaajien väilinen taistelu, jos sattuu kohtaamaan
+- Nettipeli
+- 2D/3D grafiikka
