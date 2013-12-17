@@ -1,5 +1,7 @@
 package logic;
 
+import dungeon.Map;
+import dungeon.Tunnel;
 import actors.Player;
 import java.util.ArrayList;
 

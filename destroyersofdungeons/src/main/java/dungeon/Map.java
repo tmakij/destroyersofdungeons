@@ -1,4 +1,4 @@
-package logic;
+package dungeon;
 
 import java.util.ArrayList;
 
