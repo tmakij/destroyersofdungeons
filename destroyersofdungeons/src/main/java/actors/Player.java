@@ -11,8 +11,8 @@ public final class Player extends Actor {
     private final String name;
     private final ArrayList<Item> items = new ArrayList<>();
 
-    public Player(String name) {
-        super();
+    public Player(int id, String name) {
+        super(id);
         this.name = name;
     }
 

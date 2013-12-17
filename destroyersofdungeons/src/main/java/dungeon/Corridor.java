@@ -20,11 +20,12 @@ public final class Corridor {
 
     public void generate() {
         // Test dungeon
-        Tunnel previous = new Tunnel();
+        int ids = 0;
+        Tunnel previous = new Tunnel(ids++);
         startBlock = previous;
         Tunnel block = null;
         for (int i = 0; i < lenght; i++) {
-            block = new Tunnel();
+            block = new Tunnel(ids++);
             block.addBlock(previous);
             previous.addBlock(block);
             previous = block;

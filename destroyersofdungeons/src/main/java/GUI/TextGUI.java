@@ -15,6 +15,7 @@ public final class TextGUI {
         System.out.println("Welcome to Destroyers Of Dungeons");
         System.out.println(game.addPlayer("TestPlayer"));
         System.out.println(game.addPlayer("AnotherTestPlayer"));
+        game.checkHostilities();
         OUTER:
         while (true) {
             System.out.println("Please enter 0 - 1");

@@ -16,7 +16,7 @@ public final class TunnelTest {
     }
 
     private Actor addDummyPlayer() {
-        Actor a = new Player("TESTI_PELAAJA");
+        Actor a = new Player(1, "TESTI_PELAAJA");
         tunnel.addActor(a);
         return a;
     }
@@ -25,7 +25,7 @@ public final class TunnelTest {
     public void testAddBlock() {
         final int amount = 29;
         for (int i = 0; i < amount; i++) {
-            tunnel.addBlock(new Tunnel());
+            tunnel.addBlock(new Tunnel(i));
         }
         assertEquals(amount, tunnel.getNextTo().size());
     }
@@ -37,8 +37,8 @@ public final class TunnelTest {
 
     @Test
     public void testNextBlocks() {
-        Tunnel second = new Tunnel();
-        Tunnel third = new Tunnel();
+        Tunnel second = new Tunnel(1);
+        Tunnel third = new Tunnel(2);
         tunnel.addBlock(second);
         second.addBlock(third);
         third.addBlock(tunnel);

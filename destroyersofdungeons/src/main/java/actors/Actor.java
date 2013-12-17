@@ -8,12 +8,11 @@ import dungeon.Tunnel;
 public abstract class Actor {
 
     private Tunnel myBlock;
-    private static int ids = 0;
-    private final int id;
+    protected final int id;
     private int health = 100;
 
-    public Actor() {
-        this.id = ++ids;
+    public Actor(int id) {
+        this.id = id;
     }
 
     public final Tunnel getMyBlock() {

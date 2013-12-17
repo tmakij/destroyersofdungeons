@@ -2,35 +2,29 @@ package dungeon;
 
 import actors.Actor;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.List;
 
 /**
  * The basic block from which the dungeon is build
  */
 public final class Tunnel {
 
-    private final ArrayList<Tunnel> nextTo = new ArrayList<>();
-    private final HashSet<Actor> actors = new HashSet<>();
-    private static int ids = 0;
+    private final List<Tunnel> nextTo = new ArrayList<>();
+    private final List<Actor> actors = new ArrayList<>();
     private final int id;
 
-    public Tunnel() {
-        this.id = ids++;
-    }
-
     /**
-     * Constructor for testing hashcode.
-     * @param id custom tunnel id.
+     * @param id Custom tunnel id, used for equals and hashcode.
      */
     public Tunnel(int id) {
-        this.id = id;
+        this.id = id++;
     }
 
     public void addBlock(Tunnel t) {
         nextTo.add(t);
     }
 
-    public ArrayList<Tunnel> getNextTo() {
+    public List<Tunnel> getNextTo() {
         return nextTo;
     }
 
@@ -51,7 +45,7 @@ public final class Tunnel {
     public String getActors(Actor me) {
         String ret;
         if (actors.size() == 1) {
-            ret = "You see noone else on this tunnel block";
+            ret = "You see nobody else on this tunnel block";
         } else {
             ret = actors.size() == 2 ? "You see another person on the block:\n" : "You see other persons on the block:\n";
             for (Actor a : actors) {
@@ -63,7 +57,18 @@ public final class Tunnel {
         return ret;
     }
 
-    public HashSet<Actor> getActorSet() {
+    public String getHostilityOptions(Actor a) {
+        String actions = "";
+        for (int i = 0; i < actors.size(); i++) {
+            Actor enemy = actors.get(i);
+            if (!enemy.equals(a)) {
+                actions += "[" + i + "] " + enemy;
+            }
+        }
+        return actions;
+    }
+
+    public List<Actor> getActorSet() {
         return actors;
     }
 

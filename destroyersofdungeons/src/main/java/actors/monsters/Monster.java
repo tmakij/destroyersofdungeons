@@ -15,7 +15,8 @@ public abstract class Monster extends Actor {
     protected static final Map<Type, Race> races = new HashMap<>();
     private final Race race;
 
-    public Monster(Race race) {
+    public Monster(int id, Race race) {
+        super(id);
         this.race = race;
     }
 
@@ -23,7 +24,7 @@ public abstract class Monster extends Actor {
      * Loads the races. This method is only to be called once.
      */
     public static void loadRaces() {
-        races.put(MinotaurMonster.class, new MinotaurRace());
+        races.put(Minotaur.class, new MinotaurRace());
     }
 
     @Override
