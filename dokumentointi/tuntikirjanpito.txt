@@ -2,3 +2,7 @@
 - 4 tuntia
 - Repository ja projekti luoto, saatu toimimaan windowsilla säädön jälkeen,
   kirjoitettu aihekuvaus, harjoiteltu javadoccia, "tehty projektin alustusta"
+  
+  17.12.2013
+  - 7 tuntia
+  - Testejä: DestroyersOfDungeons, Tunnel. Luokat: Tunnel, Map, Corridor, Actor, Player, Monsterit alulleen, Battle runkoa, DestroyersOfDungeons, teksti käyttöliittymä alulleen (pystyy liikkuu tunnelissa, vuorottain)
