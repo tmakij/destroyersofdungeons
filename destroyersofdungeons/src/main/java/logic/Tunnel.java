@@ -17,16 +17,35 @@ public final class Tunnel {
         id = ids++;
     }
 
-    public final void addBlock(Tunnel t) {
+    public void addBlock(Tunnel t) {
         nextTo.add(t);
     }
 
-    public final ArrayList<Tunnel> getNextTo() {
+    public ArrayList<Tunnel> getNextTo() {
         return nextTo;
     }
 
     @Override
-    public final String toString() {
+    public String toString() {
         return "Tunnel (" + id + ")";
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 47 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Tunnel other = (Tunnel) obj;
+        return this.id == other.id;
     }
 }

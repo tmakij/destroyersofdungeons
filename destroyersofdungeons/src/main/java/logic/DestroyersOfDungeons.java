@@ -26,7 +26,7 @@ public final class DestroyersOfDungeons {
      *
      * @return Message about the operation.
      */
-    public final String nextPlayer() {
+    public String nextPlayer() {
         current = current == players.size() - 1 ? 0 : current + 1;
         currentPlayer = players.get(current);
         return "Now is " + currentPlayer + "'s turn";
@@ -38,13 +38,13 @@ public final class DestroyersOfDungeons {
      * @param name the name of the player.
      * @return Message about the operation.
      */
-    public final String addPlayer(String name) {
+    public String addPlayer(String name) {
         String ret;
         Player p = new Player(name);
         players.add(p);
         p.setMyBlock(map.getFirstBlock());
         ret = "Added player " + p;
-        if (currentPlayer == null){
+        if (currentPlayer == null) {
             currentPlayer = p;
             ret += " (Starting player)";
         }
@@ -56,7 +56,7 @@ public final class DestroyersOfDungeons {
      *
      * @return Message about the operation.
      */
-    public final String play() {
+    public String play() {
         String ret;
         Tunnel nextBlock = currentPlayer.getMyBlock();
         ArrayList<Tunnel> nextTo = nextBlock.getNextTo();
@@ -73,7 +73,7 @@ public final class DestroyersOfDungeons {
      * @param to Which block to move into.
      * @return Message about the operation.
      */
-    public final String movePlayerTo(int to) {
+    public String movePlayerTo(int to) {
         Tunnel nextBlock = currentPlayer.getMyBlock();
         ArrayList<Tunnel> nextTo = nextBlock.getNextTo();
         if (to > nextTo.size() - 1) {
@@ -82,5 +82,17 @@ public final class DestroyersOfDungeons {
         Tunnel block = nextTo.get(to);
         currentPlayer.setMyBlock(block);
         return "You have moved to " + currentPlayer.getMyBlock();
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public Map getMap() {
+        return map;
     }
 }
