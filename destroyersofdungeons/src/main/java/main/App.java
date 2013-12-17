@@ -1,14 +1,11 @@
 package main;
 
-import logic.NewClass;
+import GUI.TextGUI;
 
 final class App {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-        System.out.println("Testing from home!");
-        System.out.println("\\o/");
-        NewClass nc = new NewClass();
-        nc.print(23);
+        TextGUI gui = new TextGUI();
+        gui.start();
     }
 }
