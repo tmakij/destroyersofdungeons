@@ -14,11 +14,11 @@ public final class Player {
         this.name = name;
     }
 
-    public Tunnel getMyBlock() {
+    public final Tunnel getMyBlock() {
         return myBlock;
     }
 
-    public void setMyBlock(Tunnel myBlock) {
+    public final void setMyBlock(Tunnel myBlock) {
         this.myBlock = myBlock;
     }
 

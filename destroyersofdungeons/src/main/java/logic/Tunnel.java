@@ -10,7 +10,7 @@ public final class Tunnel {
 
     private final ArrayList<Tunnel> nextTo = new ArrayList<>();
     private Monster monster;
-    private static int ids = 0;
+    private static int ids = 4322;
     private final int id;
 
     public Tunnel() {
