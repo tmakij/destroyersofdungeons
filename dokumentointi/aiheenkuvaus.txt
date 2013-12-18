@@ -14,6 +14,7 @@ Tavoite:
 - Yksinkertainen, graafinen, käyttöliittymä (ei liikaa kuvia)
 
 Ekstra tavoitteet (jos aikaa jää...):
+- Lokalisointi, kaikki teksti yhteen erilliseen tiedostoon josta sitten ladataan oikean kielen tekstit
 - Ääretön määrä pelaajia
 - Paljon monstereita
 - Paljon enemmän esineitä

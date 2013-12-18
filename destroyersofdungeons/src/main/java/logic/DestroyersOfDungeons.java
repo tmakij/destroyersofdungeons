@@ -15,7 +15,7 @@ public final class DestroyersOfDungeons {
     private final Map map;
     private Player currentPlayer;
     private int current = 0;
-    private int playerIds = 0;
+    private static int playerIds = 0;
 
     /**
      * Creates a new instance of the game.
