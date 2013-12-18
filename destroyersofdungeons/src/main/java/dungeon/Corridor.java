@@ -32,9 +32,4 @@ public final class Corridor {
         }
         endBlock = block;
     }
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
 }

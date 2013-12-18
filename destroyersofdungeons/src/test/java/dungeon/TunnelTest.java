@@ -2,6 +2,8 @@ package dungeon;
 
 import actors.Actor;
 import actors.Player;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -70,33 +72,13 @@ public final class TunnelTest {
     }
 
     @Test
-    public void testToString() {
-        assertEquals("Tunnel (0)", tunnel.toString());
-    }
-
-    @Test
-    public void testHashCodeIdZero() {
-        assertEquals(235, tunnel.hashCode());
-    }
-
-    @Test
-    @SuppressWarnings("null")
-    public void testHashCodeId66546() {
-        tunnel = new Tunnel(66546);
-        assertEquals(66781, tunnel.hashCode());
-    }
-
-    @Test
-    public void testEqualsTrue() {
-        tunnel = new Tunnel(443);
-        Tunnel tunnelCopy = new Tunnel(443);
-        assertEquals(tunnel, tunnelCopy);
-    }
-
-    @Test
-    public void testEqualsFalse() {
-        tunnel = new Tunnel(6665);
-        Tunnel tunnelCopy = new Tunnel(5688254);
-        assertEquals(false, tunnel.equals(tunnelCopy));
+    public void testgetOtherActors() {
+        Actor a = new Player(34, "TESTI_PELAAJA");
+        Actor b = new Player(3334, "TESTI_PELAAJA_NO2");
+        tunnel.addActor(a);
+        tunnel.addActor(b);
+        List<Actor> others = new ArrayList<>();
+        others.add(b);
+        assertEquals(others, tunnel.getOtherActors(a));
     }
 }

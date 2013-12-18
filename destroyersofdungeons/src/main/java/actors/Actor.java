@@ -1,23 +1,49 @@
 package actors;
 
+import GameObject.GameObject;
 import dungeon.Tunnel;
+import items.Item;
+import java.util.ArrayList;
 
 /**
  * Base class for all actors in the game. Each actor has unique id.
  */
-public abstract class Actor {
+public abstract class Actor extends GameObject {
+
+    public static final int BASE_HEALTH = 100;
+    public static final int BASE_ATTACK = 25;
 
     private Tunnel myBlock;
-    protected final int id;
-    private int health = 100;
+    protected int health = BASE_HEALTH;
+    private final ArrayList<Item> items = new ArrayList<>();
 
-    public Actor(int id) {
-        this.id = id;
+    public Actor(int id, String name) {
+        super(id, name);
+    }
+
+    public ArrayList<Item> getItems() {
+        return items;
     }
 
     public final Tunnel getMyBlock() {
         return myBlock;
     }
+
+    /**
+     * Adds an item to the actor.
+     *
+     * @param i The item to be added.
+     */
+    public final void addItem(Item i) {
+        items.add(i);
+    }
+
+    /**
+     * Tells whether the actor is contolled by a human or not.
+     *
+     * @return Is the actor human.
+     */
+    public abstract boolean isPlayerControlled();
 
     /**
      * Moves the Actor to another block.
@@ -33,35 +59,23 @@ public abstract class Actor {
      *
      * @param to The actor into which the damage is inflicted.
      */
-    public void attack(Actor to) {
-        to.takeHit(25);
+    public final void attack(Actor to) {
+        int amount = BASE_ATTACK;
+        for (Item i : items) {
+            amount = i.onAttack(amount);
+        }
+        to.takeHit(amount);
     }
 
     /**
-     * The actor takes the damage. Replace with item param?
+     * The actor takes the damage.
      *
-     * @param amount
+     * @param amount How much damage is inflicted.
      */
-    public void takeHit(int amount) {
+    public final void takeHit(int amount) {
+        for (Item i : items) {
+            amount = i.onDamageReceived(amount);
+        }
         health -= amount;
-    }
-
-    @Override
-    public final int hashCode() {
-        int hash = 3;
-        hash = 19 * hash + this.id;
-        return hash;
-    }
-
-    @Override
-    public final boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Actor other = (Actor) obj;
-        return this.id == other.id;
     }
 }

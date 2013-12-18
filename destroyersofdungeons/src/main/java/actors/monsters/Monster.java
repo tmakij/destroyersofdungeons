@@ -12,12 +12,17 @@ import java.util.Map;
  */
 public abstract class Monster extends Actor {
 
-    protected static final Map<Type, Race> races = new HashMap<>();
+    private static final Map<Type, Race> races = new HashMap<>();
     private final Race race;
 
-    public Monster(int id, Race race) {
-        super(id);
-        this.race = race;
+    public Monster(int id, Type race) {
+        super(id, races.get(race).toString());
+        this.race = races.get(race);
+    }
+
+    @Override
+    public final boolean isPlayerControlled() {
+        return false;
     }
 
     /**
@@ -25,10 +30,5 @@ public abstract class Monster extends Actor {
      */
     public static void loadRaces() {
         races.put(Minotaur.class, new MinotaurRace());
-    }
-
-    @Override
-    public final String toString() {
-        return race.toString();
     }
 }

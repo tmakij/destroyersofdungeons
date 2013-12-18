@@ -28,12 +28,10 @@ public final class DestroyersOfDungeons {
     /**
      * Selects next player.
      *
-     * @return Message about the operation.
      */
-    public String nextPlayer() {
+    public void nextPlayer() {
         current = current == players.size() - 1 ? 0 : current + 1;
         currentPlayer = players.get(current);
-        return "Now is " + currentPlayer + "'s turn";
     }
 
     /**
@@ -59,44 +57,31 @@ public final class DestroyersOfDungeons {
     /**
      * Starts the turn.
      *
-     * @return Message about the operation.
+     * @return Blocks next to player's current block.
      */
-    public String play() {
-        String ret;
+    public List<Tunnel> play() {
         Tunnel nextBlock = currentPlayer.getMyBlock();
         List<Tunnel> nextTo = nextBlock.getNextTo();
-        ret = "I can move to the following blocks:\n";
-        for (int i = 0; i < nextTo.size(); i++) {
-            ret += "[" + i + "]" + nextTo.get(i) + "\n";
-        }
-        return ret;
+        return nextTo;
     }
 
     /**
      * Moves the player.
      *
      * @param to Which block to move into.
-     * @return Message about the operation.
+     * @return The block where player moved into.
      */
-    public String movePlayerTo(int to) {
-        String ret;
+    public Tunnel movePlayerTo(int to) {
         Tunnel nextBlock = currentPlayer.getMyBlock();
         List<Tunnel> nextTo = nextBlock.getNextTo();
         if (to > nextTo.size() - 1) {
-            return "";
+            return null;
         }
         Tunnel block = nextTo.get(to);
         currentPlayer.getMyBlock().removeActor(currentPlayer);
         currentPlayer.setMyBlock(block);
         currentPlayer.getMyBlock().addActor(currentPlayer);
-        ret = "You have moved to " + currentPlayer.getMyBlock() + "\n" + block.getActors(currentPlayer);
-        return ret;
-    }
-
-    public String checkHostilities() {
-        String ret;
-        ret = currentPlayer.getMyBlock().getHostilityOptions(currentPlayer);
-        return ret;
+        return block;
     }
 
     public Player getCurrentPlayer() {

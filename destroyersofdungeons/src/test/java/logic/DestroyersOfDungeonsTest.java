@@ -71,11 +71,7 @@ public final class DestroyersOfDungeonsTest {
         String expected;
         Tunnel firstBlock = game.getMap().getFirstBlock();
         List<Tunnel> nextTo = firstBlock.getNextTo();
-        expected = "I can move to the following blocks:\n";
-        for (int i = 0; i < nextTo.size(); i++) {
-            expected += "[" + i + "]" + nextTo.get(i) + "\n";
-        }
-        assertEquals(expected, game.play());
+        assertEquals(nextTo, game.play());
     }
 
     @Test
@@ -93,7 +89,7 @@ public final class DestroyersOfDungeonsTest {
         Player p = game.getCurrentPlayer();
         Tunnel t = p.getMyBlock();
         Tunnel movingTo = t.getNextTo().get(0);
-        assertEquals("You have moved to " + movingTo + "\nYou see nobody else on this tunnel block", game.movePlayerTo(0));
+        assertEquals(movingTo, game.movePlayerTo(0));
     }
 
     @Test
@@ -108,21 +104,6 @@ public final class DestroyersOfDungeonsTest {
     @Test
     public void testMovePlayerToInvalidBlockString() {
         Player p = game.getCurrentPlayer();
-        assertEquals("", game.movePlayerTo(23434));
-    }
-
-    @Test
-    public void testMoveMultiplePlayerToString() {
-        game.movePlayerTo(0);
-        game.addPlayer("TEST_PLAYER_NO2");
-        game.nextPlayer();
-        Tunnel movingTo = game.getCurrentPlayer().getMyBlock().getNextTo().get(0);
-        assertEquals("You have moved to " + movingTo + "\nYou see another person on the block:\nTEST_PLAYER\n", game.movePlayerTo(0));
-    }
-
-    @Test
-    public void testHostilitiesToString() {
-        game.addPlayer("TEST_PLAYER_NO2");
-        assertEquals("[1] TEST_PLAYER_NO2", game.checkHostilities());
+        assertEquals(null, game.movePlayerTo(23434));
     }
 }
