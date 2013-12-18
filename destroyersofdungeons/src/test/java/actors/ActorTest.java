@@ -4,6 +4,7 @@ import dungeon.Tunnel;
 import items.Item;
 import items.WoodenShield;
 import items.WoodenSword;
+import logic.BattleAction;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -39,7 +40,7 @@ public final class ActorTest {
     @Test
     public void testAttack() {
         Actor b = new Player(123, "TEST_PLAYER_NO2");
-        a.attack(b);
+        a.attack(b, BattleAction.ATTACK);
         assertEquals(Actor.BASE_HEALTH - Actor.BASE_ATTACK, b.health);
     }
 
@@ -47,7 +48,7 @@ public final class ActorTest {
     public void testAttackWithItem() {
         Actor b = new Player(123, "TEST_PLAYER_NO2");
         addItem();
-        a.attack(b);
+        a.attack(b, BattleAction.ATTACK);
         assertEquals(Actor.BASE_HEALTH - ((int) (Actor.BASE_ATTACK * WoodenSword.ATTACK)), b.health);
     }
 
@@ -55,7 +56,7 @@ public final class ActorTest {
     public void testTakeHitWithItem() {
         Actor b = new Player(123, "TEST_PLAYER_NO2");
         b.addItem(new WoodenShield(1));
-        a.attack(b);
+        a.attack(b, BattleAction.ATTACK);
         assertEquals(Actor.BASE_HEALTH - ((int) (Actor.BASE_ATTACK * WoodenShield.DEFENCE)), b.health);
     }
 }

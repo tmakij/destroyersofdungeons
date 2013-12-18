@@ -8,39 +8,43 @@ import java.util.Random;
  * player controlled, its actions are taken by java.util.Random instead.
  */
 public final class Battle {
-    
+
     private final Actor attacker;
     private final Actor defender;
     private final Random rand;
     private Actor current;
     private BattleAction lastAction;
-    
+
     public Battle(Actor attacker, Actor defender) {
         this.attacker = attacker;
         this.defender = defender;
         this.current = defender;
         this.rand = new Random();
     }
-    
+
     public Actor getNextActor() {
         return current == attacker ? defender : attacker;
     }
-    
+
     public void nextTurn() {
         current = getNextActor();
     }
-    
+
     public void takeAction(int action) {
         BattleAction act = BattleAction.values()[action];
         switch (act) {
             case ATTACK:
-                current.attack(getNextActor());
+                current.attack(getNextActor(), BattleAction.ATTACK);
+                if (lastAction == BattleAction.DEFEND) {
+                    getNextActor().attack(current, lastAction);
+                }
                 break;
             case FLEE:
                 break;
             case DO_NOTHING:
                 break;
             case CAST_SPELL:
+                current.attack(getNextActor(), BattleAction.CAST_SPELL);
                 break;
             case DEFEND:
                 break;
@@ -48,15 +52,15 @@ public final class Battle {
                 throw new AssertionError(act.name());
         }
     }
-    
+
     public Actor getDefender() {
         return defender;
     }
-    
+
     public Actor getAttacker() {
         return attacker;
     }
-    
+
     public Actor getCurrent() {
         return current;
     }
