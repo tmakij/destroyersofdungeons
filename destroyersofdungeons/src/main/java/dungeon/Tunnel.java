@@ -2,7 +2,9 @@ package dungeon;
 
 import GameObject.GameObject;
 import actors.Actor;
+import items.Item;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -12,12 +14,24 @@ public final class Tunnel extends GameObject {
 
     private final List<Tunnel> nextTo = new ArrayList<>();
     private final List<Actor> actors = new ArrayList<>();
+    private final List<Item> items = new ArrayList<>();
 
-    /**
-     * @param id Custom tunnel id, used for equals and hashcode.
-     */
     public Tunnel(int id) {
         super(id, "Tunnel (" + id + ")");
+    }
+
+    public void addItems(Collection<Item> items) {
+        for (Item i : items) {
+            addItem(i);
+        }
+    }
+
+    public void addItem(Item i) {
+        items.add(i);
+    }
+
+    public List<Item> getItems() {
+        return items;
     }
 
     public void addBlock(Tunnel t) {

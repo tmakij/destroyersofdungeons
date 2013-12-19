@@ -1,6 +1,7 @@
 package dungeon;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The map holds all the corridors.
@@ -9,7 +10,7 @@ public final class Map {
 
     private final int minSize;
     private final int maxSize;
-    private final ArrayList<Corridor> corridors = new ArrayList<>();
+    private final List<Corridor> corridors = new ArrayList<>();
     
     public Map(int minSize, int maxSize) {
         this.minSize = minSize;

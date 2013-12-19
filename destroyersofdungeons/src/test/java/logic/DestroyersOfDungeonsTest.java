@@ -41,6 +41,25 @@ public final class DestroyersOfDungeonsTest {
     }
 
     @Test
+    public void testNextIfOnlyOnePlayer() {
+        Player p = game.getCurrentPlayer();
+        game.nextPlayer();
+        assertEquals(p, game.getCurrentPlayer());
+    }
+
+    @Test
+    public void testNextIfTooManyPlayers() {
+        addAnotherPlayer();
+        addAnotherPlayer();
+        try {
+            game.nextPlayer();
+            fail("You can add too many players.");
+        } catch (UnsupportedOperationException ex) {
+            assertEquals(ex.getClass(), UnsupportedOperationException.class);
+        }
+    }
+
+    @Test
     public void test2NextPlayer() {
         addAnotherPlayer();
         game.nextPlayer();
@@ -105,5 +124,23 @@ public final class DestroyersOfDungeonsTest {
     public void testMovePlayerToInvalidBlockString() {
         Player p = game.getCurrentPlayer();
         assertEquals(null, game.movePlayerTo(23434));
+    }
+
+    @Test
+    public void testDeletePlayer() {
+        addAnotherPlayer();
+        Player p = game.getCurrentPlayer();
+        game.nextPlayer();
+        game.removePlayer(p);
+        assertEquals(1, game.getPlayers().size());
+    }
+
+    @Test
+    public void testDeleteCurrentPlayer() {
+        addAnotherPlayer();
+        Player p = game.getCurrentPlayer();
+        game.nextPlayer();
+        game.removePlayer(game.getCurrentPlayer());
+        assertEquals(p, game.getCurrentPlayer());
     }
 }

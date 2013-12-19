@@ -41,7 +41,7 @@ public final class ActorTest {
     public void testAttack() {
         Actor b = new Player(123, "TEST_PLAYER_NO2");
         a.attack(b, BattleAction.ATTACK);
-        assertEquals(Actor.BASE_HEALTH - Actor.BASE_ATTACK, b.health);
+        assertEquals(Actor.BASE_HEALTH - Actor.BASE_ATTACK, b.getHealth());
     }
 
     @Test
@@ -49,7 +49,7 @@ public final class ActorTest {
         Actor b = new Player(123, "TEST_PLAYER_NO2");
         addItem();
         a.attack(b, BattleAction.ATTACK);
-        assertEquals(Actor.BASE_HEALTH - ((int) (Actor.BASE_ATTACK * WoodenSword.ATTACK)), b.health);
+        assertEquals(Actor.BASE_HEALTH - ((int) (Actor.BASE_ATTACK * WoodenSword.ATTACK)), b.getHealth());
     }
 
     @Test
@@ -57,6 +57,23 @@ public final class ActorTest {
         Actor b = new Player(123, "TEST_PLAYER_NO2");
         b.addItem(new WoodenShield(1));
         a.attack(b, BattleAction.ATTACK);
-        assertEquals(Actor.BASE_HEALTH - ((int) (Actor.BASE_ATTACK * WoodenShield.DEFENCE)), b.health);
+        assertEquals(Actor.BASE_HEALTH - ((int) (Actor.BASE_ATTACK * WoodenShield.DEFENCE)), b.getHealth());
+    }
+
+    @Test
+    public void testLastBlockNull() {
+        Tunnel t = new Tunnel(0);
+        Tunnel t2 = new Tunnel(1);
+        a.setMyBlock(t);
+        assertEquals(null, a.getMyLastBlock());
+    }
+
+    @Test
+    public void testLastBlockWorking() {
+        Tunnel t = new Tunnel(0);
+        Tunnel t2 = new Tunnel(1);
+        a.setMyBlock(t);
+        a.setMyBlock(t2);
+        assertEquals(t, a.getMyLastBlock());
     }
 }

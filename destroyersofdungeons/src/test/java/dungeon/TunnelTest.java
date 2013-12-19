@@ -2,7 +2,12 @@ package dungeon;
 
 import actors.Actor;
 import actors.Player;
+import items.Item;
+import items.WoodenShield;
+import items.WoodenSword;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -80,5 +85,34 @@ public final class TunnelTest {
         List<Actor> others = new ArrayList<>();
         others.add(b);
         assertEquals(others, tunnel.getOtherActors(a));
+    }
+
+    @Test
+    public void testEmptyItems() {
+        assertEquals(0, tunnel.getItems().size());
+    }
+
+    @Test
+    public void testAddItemCount() {
+        tunnel.addItem(new WoodenSword(0));
+        assertEquals(1, tunnel.getItems().size());
+    }
+
+    @Test
+    public void testAddItem() {
+        Item i = new WoodenSword(0);
+        tunnel.addItem(i);
+        assertEquals(i, tunnel.getItems().get(0));
+    }
+
+    @Test
+    public void testAddItems() {
+        Item i = new WoodenSword(0);
+        Item i2 = new WoodenShield(1);
+        Collection<Item> items = new LinkedList<>();
+        items.add(i2);
+        items.add(i);
+        tunnel.addItems(items);
+        assertEquals(items, tunnel.getItems());
     }
 }

@@ -4,7 +4,9 @@ import GameObject.GameObject;
 import dungeon.Tunnel;
 import items.Item;
 import java.util.ArrayList;
+import java.util.List;
 import logic.BattleAction;
+import logic.DestroyersOfDungeons;
 
 /**
  * Base class for all actors in the game. Each actor has unique id.
@@ -16,13 +18,49 @@ public abstract class Actor extends GameObject {
 
     private Tunnel myLastBlock;
     private Tunnel myBlock;
-    protected int health = BASE_HEALTH;
-    private final ArrayList<Item> items = new ArrayList<>();
+    private int health;
+    private final List<Item> items = new ArrayList<>();
 
     public Actor(int id, String name) {
         super(id, name);
+        health = BASE_HEALTH;
     }
 
+    /**
+     * Erases the actor from the game.
+     *
+     * @param game Current instance of the game.
+     */
+    public void die(DestroyersOfDungeons game) {
+        if (!isAlive()) {
+            myBlock.removeActor(this);
+            myBlock.addItems(items);
+        }
+    }
+
+    /**
+     * Determines, wheter the actor has health > 0.
+     *
+     * @return Is the actor alive or not.
+     */
+    public final boolean isAlive() {
+        return health > 0;
+    }
+
+    /**
+     * Get the health of the actor.
+     *
+     * @return Health of the actor.
+     */
+    public final int getHealth() {
+        return health;
+    }
+
+    /**
+     * Get the lastblock of the actor.
+     *
+     * @return The lastblock of the actor.
+     */
     public final Tunnel getMyLastBlock() {
         return myLastBlock;
     }
@@ -32,7 +70,7 @@ public abstract class Actor extends GameObject {
      *
      * @return List of items the actor possess.
      */
-    public final ArrayList<Item> getItems() {
+    public final List<Item> getItems() {
         return items;
     }
 

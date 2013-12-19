@@ -1,11 +1,13 @@
 package main;
 
+import GUI.SwingGUI;
 import GUI.TextGUI;
 
 final class App {
 
     public static void main(String[] args) {
-        TextGUI gui = new TextGUI();
-        gui.start();
+        /*TextGUI tgui = new TextGUI();
+        tgui.start();*/
+        SwingGUI sgui = new SwingGUI();
     }
 }

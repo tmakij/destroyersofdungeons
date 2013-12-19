@@ -15,7 +15,7 @@ public final class DestroyersOfDungeons {
     private final Map map;
     private Player currentPlayer;
     private int current = 0;
-    private static int playerIds = 0;
+    private int playerIds = 0;
 
     /**
      * Creates a new instance of the game.
@@ -30,7 +30,13 @@ public final class DestroyersOfDungeons {
      *
      */
     public void nextPlayer() {
-        current = current == players.size() - 1 ? 0 : current + 1;
+        if (players.size() == 2) {
+            current = current == players.size() - 1 ? 0 : current + 1;
+        } else if (players.size() == 1) {
+            current = 0;
+        } else {
+            throw new UnsupportedOperationException("Too many players");
+        }
         currentPlayer = players.get(current);
     }
 
@@ -82,6 +88,13 @@ public final class DestroyersOfDungeons {
         currentPlayer.setMyBlock(block);
         currentPlayer.getMyBlock().addActor(currentPlayer);
         return block;
+    }
+
+    public void removePlayer(Player p) {
+        players.remove(p);
+        if (p.equals(currentPlayer)) {
+            nextPlayer();
+        }
     }
 
     public Player getCurrentPlayer() {

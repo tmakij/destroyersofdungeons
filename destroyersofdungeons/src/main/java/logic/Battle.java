@@ -14,20 +14,32 @@ public final class Battle {
     private final Random rand;
     private Actor current;
     private BattleAction lastAction;
+    private boolean isEveryoneAlive;
 
     public Battle(Actor attacker, Actor defender) {
         this.attacker = attacker;
         this.defender = defender;
-        this.current = defender;
+        this.current = attacker;
         this.rand = new Random();
+        this.lastAction = BattleAction.DO_NOTHING;
+        this.isEveryoneAlive = true;
     }
 
     public Actor getNextActor() {
         return current == attacker ? defender : attacker;
     }
 
+    public void endBattle(DestroyersOfDungeons game) {
+        attacker.die(game);
+        defender.die(game);
+    }
+
     public void nextTurn() {
         current = getNextActor();
+    }
+
+    public boolean resume() {
+        return isEveryoneAlive;
     }
 
     public void takeAction(int action) {
@@ -51,6 +63,8 @@ public final class Battle {
             default:
                 throw new AssertionError(act.name());
         }
+        lastAction = act;
+        isEveryoneAlive = getNextActor().isAlive() && current.isAlive();
     }
 
     public Actor getDefender() {

@@ -5,20 +5,15 @@ package logic;
  */
 public enum BattleAction {
 
-    ATTACK, FLEE, DO_NOTHING, CAST_SPELL, DEFEND;
+    ATTACK(1.0D), FLEE(1.0D), DO_NOTHING(1.0D), CAST_SPELL(0.8D), DEFEND(1.2D);
+
+    private final double value;
+
+    private BattleAction(double value) {
+        this.value = value;
+    }
 
     public double actModifier() {
-        switch (this) {
-            case CAST_SPELL:
-                return 0.8D;
-            case DEFEND:
-                return 1.2D;
-            case ATTACK:
-            case FLEE:
-            case DO_NOTHING:
-            default:
-                return 1.0D;
-
-        }
+        return value;
     }
 }
