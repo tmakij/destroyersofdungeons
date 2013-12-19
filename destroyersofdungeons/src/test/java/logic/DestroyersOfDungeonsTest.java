@@ -1,7 +1,7 @@
 package logic;
 
-import dungeon.Tunnel;
-import actors.Player;
+import gameobjects.dungeon.Tunnel;
+import gameobjects.actors.Player;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;

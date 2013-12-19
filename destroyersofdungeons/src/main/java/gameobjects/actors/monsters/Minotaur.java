@@ -1,4 +1,4 @@
-package actors.monsters;
+package gameobjects.actors.monsters;
 
 /**
  *

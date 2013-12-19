@@ -1,11 +1,13 @@
-package actors;
+package gameobjects.actors;
 
-import actors.monsters.Minotaur;
-import actors.monsters.Monster;
-import dungeon.Tunnel;
-import items.Item;
-import items.WoodenShield;
-import items.WoodenSword;
+import gameobjects.actors.Player;
+import gameobjects.actors.Actor;
+import gameobjects.actors.monsters.Minotaur;
+import gameobjects.actors.monsters.Monster;
+import gameobjects.dungeon.Tunnel;
+import gameobjects.items.Item;
+import gameobjects.items.WoodenShield;
+import gameobjects.items.WoodenSword;
 import logic.BattleAction;
 import org.junit.Before;
 import org.junit.Test;

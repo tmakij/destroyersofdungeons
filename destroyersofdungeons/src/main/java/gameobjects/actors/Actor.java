@@ -1,8 +1,8 @@
-package actors;
+package gameobjects.actors;
 
-import GameObject.GameObject;
-import dungeon.Tunnel;
-import items.Item;
+import gameobjects.GameObject;
+import gameobjects.dungeon.Tunnel;
+import gameobjects.items.Item;
 import java.util.ArrayList;
 import java.util.List;
 import logic.BattleAction;

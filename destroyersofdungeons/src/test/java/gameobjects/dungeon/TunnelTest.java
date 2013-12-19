@@ -1,10 +1,11 @@
-package dungeon;
+package gameobjects.dungeon;
 
-import actors.Actor;
-import actors.Player;
-import items.Item;
-import items.WoodenShield;
-import items.WoodenSword;
+import gameobjects.dungeon.Tunnel;
+import gameobjects.actors.Actor;
+import gameobjects.actors.Player;
+import gameobjects.items.Item;
+import gameobjects.items.WoodenShield;
+import gameobjects.items.WoodenSword;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;

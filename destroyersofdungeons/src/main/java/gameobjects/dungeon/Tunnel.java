@@ -1,8 +1,8 @@
-package dungeon;
+package gameobjects.dungeon;
 
-import GameObject.GameObject;
-import actors.Actor;
-import items.Item;
+import gameobjects.GameObject;
+import gameobjects.actors.Actor;
+import gameobjects.items.Item;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

@@ -1,8 +1,8 @@
 package logic;
 
-import dungeon.Map;
-import dungeon.Tunnel;
-import actors.Player;
+import gameobjects.dungeon.Map;
+import gameobjects.dungeon.Tunnel;
+import gameobjects.actors.Player;
 import java.util.ArrayList;
 import java.util.List;
 

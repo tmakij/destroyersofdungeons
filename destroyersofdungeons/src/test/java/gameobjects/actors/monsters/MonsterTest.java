@@ -1,5 +1,7 @@
-package actors.monsters;
+package gameobjects.actors.monsters;
 
+import gameobjects.actors.monsters.Monster;
+import gameobjects.actors.monsters.Minotaur;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

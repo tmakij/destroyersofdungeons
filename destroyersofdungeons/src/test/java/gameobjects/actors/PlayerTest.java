@@ -1,6 +1,8 @@
-package actors;
+package gameobjects.actors;
 
-import dungeon.Tunnel;
+import gameobjects.actors.Player;
+import gameobjects.actors.Actor;
+import gameobjects.dungeon.Tunnel;
 import logic.DestroyersOfDungeons;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package actors.races;
+package gameobjects.actors.races;
 
 /**
  *

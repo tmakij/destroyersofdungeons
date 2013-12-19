@@ -44,17 +44,21 @@
                 <version>0.32</version>
                 <configuration>
                     <targetClasses>
-                        <param>GameObject*</param>
-                        <param>actors*</param>
-                        <param>dungeon*</param>
-                        <param>items*</param>
+                        <param>gameobjects*</param>
+                        <param>gameobjects.actors*</param>
+                        <param>gameobjects.actors.monsters*</param>
+                        <param>gameobjects.actors.races*</param>
+                        <param>gameobjects.dungeon*</param>
+                        <param>gameobjects.items*</param>
                         <param>logic*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>GameObject*</param>
-                        <param>actors*</param>
-                        <param>dungeon*</param>
-                        <param>items*</param>
+                        <param>gameobjects*</param>
+                        <param>gameobjects.actors*</param>
+                        <param>gameobjects.actors.monsters*</param>
+                        <param>gameobjects.actors.races*</param>
+                        <param>gameobjects.dungeon*</param>
+                        <param>gameobjects.items*</param>
                         <param>logic*</param>
                     </targetTests>
                 </configuration>

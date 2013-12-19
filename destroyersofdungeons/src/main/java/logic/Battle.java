@@ -1,6 +1,6 @@
 package logic;
 
-import actors.Actor;
+import gameobjects.actors.Actor;
 import java.util.Random;
 
 /**

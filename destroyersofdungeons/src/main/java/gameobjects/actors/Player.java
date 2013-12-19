@@ -1,4 +1,4 @@
-package actors;
+package gameobjects.actors;
 
 import logic.DestroyersOfDungeons;
 

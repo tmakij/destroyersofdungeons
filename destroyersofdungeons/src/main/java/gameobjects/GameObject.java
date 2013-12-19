@@ -1,4 +1,4 @@
-package GameObject;
+package gameobjects;
 
 /**
  * Default class for gameobjects, holds ID, Name, hashcode, equals and toString

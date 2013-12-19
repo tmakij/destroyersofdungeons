@@ -1,4 +1,4 @@
-package dungeon;
+package gameobjects.dungeon;
 
 /**
  * Corridor is a line of blocks. In the end of it there are one or more

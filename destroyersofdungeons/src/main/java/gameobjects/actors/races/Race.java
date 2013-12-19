@@ -1,4 +1,4 @@
-package actors.races;
+package gameobjects.actors.races;
 
 /**
  * Race contains the values, which monster of the same race have. Only one

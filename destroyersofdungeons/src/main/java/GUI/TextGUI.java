@@ -1,8 +1,8 @@
 package GUI;
 
-import actors.Actor;
-import actors.Player;
-import dungeon.Tunnel;
+import gameobjects.actors.Actor;
+import gameobjects.actors.Player;
+import gameobjects.dungeon.Tunnel;
 import java.util.List;
 import java.util.Scanner;
 import logic.DestroyersOfDungeons;

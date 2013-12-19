@@ -1,8 +1,8 @@
-package actors.monsters;
+package gameobjects.actors.monsters;
 
-import actors.races.MinotaurRace;
-import actors.races.Race;
-import actors.Actor;
+import gameobjects.actors.races.MinotaurRace;
+import gameobjects.actors.races.Race;
+import gameobjects.actors.Actor;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;

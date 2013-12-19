@@ -1,8 +1,9 @@
-package GameObject;
+package gameobjects;
 
-import actors.Actor;
-import actors.Player;
-import dungeon.Tunnel;
+import gameobjects.GameObject;
+import gameobjects.actors.Actor;
+import gameobjects.actors.Player;
+import gameobjects.dungeon.Tunnel;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

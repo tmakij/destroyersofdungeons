@@ -1,6 +1,6 @@
-package items;
+package gameobjects.items;
 
-import GameObject.GameObject;
+import gameobjects.GameObject;
 
 /**
  * Items can provide different types of bonuses. Their effects are checked

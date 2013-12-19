@@ -1,7 +1,7 @@
 package logic;
 
-import actors.Actor;
-import actors.Player;
+import gameobjects.actors.Actor;
+import gameobjects.actors.Player;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

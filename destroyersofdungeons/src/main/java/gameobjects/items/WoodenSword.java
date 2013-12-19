@@ -1,4 +1,4 @@
-package items;
+package gameobjects.items;
 
 /**
  * Wooden sword item, increases attack strength slightly.
