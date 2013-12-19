@@ -1,5 +1,7 @@
 package actors;
 
+import actors.monsters.Minotaur;
+import actors.monsters.Monster;
 import dungeon.Tunnel;
 import items.Item;
 import items.WoodenShield;
@@ -8,6 +10,7 @@ import logic.BattleAction;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 
 public final class ActorTest {
 
@@ -15,7 +18,12 @@ public final class ActorTest {
 
     @Before
     public void setUp() {
-        a = new Player(0, "TEST_PLAYER");
+        a = new Minotaur(0);
+    }
+
+    @BeforeClass
+    public static void onlyOnce() {
+        Monster.loadRaces();
     }
 
     private Item addItem() {
@@ -35,6 +43,19 @@ public final class ActorTest {
     public void testAddItem() {
         Item i = addItem();
         assertEquals(a.getItems().get(0), i);
+    }
+
+    @Test
+    public void testAddItemSize() {
+        Item i = addItem();
+        assertEquals(1, a.getItems().size());
+    }
+
+    @Test
+    public void testRemoveItem() {
+        Item i = addItem();
+        a.removeItem(i);
+        assertEquals(0, a.getItems().size());
     }
 
     @Test
@@ -75,5 +96,27 @@ public final class ActorTest {
         a.setMyBlock(t);
         a.setMyBlock(t2);
         assertEquals(t, a.getMyLastBlock());
+    }
+
+    @Test
+    public void testDyeing() {
+        a.takeHit(Actor.BASE_HEALTH + 1);
+        assertEquals(false, a.isAlive());
+    }
+
+    @Test
+    public void testDyeingAndRemoval() {
+        Tunnel t = new Tunnel(0);
+        a.setMyBlock(t);
+        addItem();
+        a.takeHit(Actor.BASE_HEALTH + 1);
+        a.die(null);
+        assertEquals(1, t.getItems().size());
+        /*
+         DestroyersOfDungeons game = new DestroyersOfDungeons();
+         game.addPlayer("TEST_PLAYER");
+         game.addPlayer("TEST_PLAYER_NO2");
+         game.getCurrentPlayer().takeHit(Actor.BASE_HEALTH + 1);
+         game.getCurrentPlayer().die(game);*/
     }
 }

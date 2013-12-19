@@ -35,7 +35,7 @@ public final class DestroyersOfDungeons {
         } else if (players.size() == 1) {
             current = 0;
         } else {
-            throw new UnsupportedOperationException("Too many players");
+            throw new UnsupportedOperationException("Unsupported amount of players");
         }
         currentPlayer = players.get(current);
     }
