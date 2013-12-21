@@ -14,3 +14,7 @@
   19.12.2013
   - 5 tuntia
   - Testejä, taisteluja jatkettu, lokalisaatiota.
+  
+  20-21.12
+  - 7 tuntia
+  - Testejä, javadoccia, lokalisaatiota, gui harjoittelua/suunnittelua

@@ -51,8 +51,8 @@ public final class DestroyersOfDungeons {
             currentPlayer = p;
         }
         players.add(p);
-        p.setMyBlock(map.getFirstBlock());
-        map.getFirstBlock().addActor(p);
+        p.setMyBlock(map.getAStartingBlock());
+        map.getAStartingBlock().addActor(p);
     }
 
     /**

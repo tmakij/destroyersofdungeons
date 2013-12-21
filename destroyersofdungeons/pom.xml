@@ -13,7 +13,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
+    
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -50,6 +50,7 @@
                         <param>gameobjects.actors.races*</param>
                         <param>gameobjects.dungeon*</param>
                         <param>gameobjects.items*</param>
+                        <param>localisation*</param>
                         <param>logic*</param>
                     </targetClasses>
                     <targetTests>
@@ -59,11 +60,11 @@
                         <param>gameobjects.actors.races*</param>
                         <param>gameobjects.dungeon*</param>
                         <param>gameobjects.items*</param>
+                        <param>localisation*</param>
                         <param>logic*</param>
                     </targetTests>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-    
 </project>

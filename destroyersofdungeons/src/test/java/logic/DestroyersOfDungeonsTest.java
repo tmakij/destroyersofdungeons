@@ -76,7 +76,7 @@ public final class DestroyersOfDungeonsTest {
     @Test
     public void testPlay() {
         addAnotherPlayer();
-        Tunnel firstBlock = game.getMap().getFirstBlock();
+        Tunnel firstBlock = game.getMap().getAStartingBlock();
         List<Tunnel> nextTo = firstBlock.getNextTo();
         assertEquals(nextTo, game.play());
     }

@@ -8,6 +8,12 @@ import gameobjects.GameObject;
  */
 public abstract class Item extends GameObject {
 
+    /**
+     * Initialize a new item.
+     *
+     * @param id The unique id of the item.
+     * @param name The name of the item.
+     */
     public Item(int id, String name) {
         super(id, name);
     }
