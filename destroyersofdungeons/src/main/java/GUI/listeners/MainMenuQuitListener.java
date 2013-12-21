@@ -1,11 +1,12 @@
-package GUI;
+package GUI.listeners;
 
+import GUI.SwingGUI;
 import java.awt.event.ActionEvent;
 
 /**
  *
  */
-final class MainMenuQuitListener extends AbstractGUIListener {
+public final class MainMenuQuitListener extends AbstractGUIListener {
 
     public MainMenuQuitListener(SwingGUI gui) {
         super(gui);

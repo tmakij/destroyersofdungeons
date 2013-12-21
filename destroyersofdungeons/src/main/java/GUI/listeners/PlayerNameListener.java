@@ -1,12 +1,14 @@
-package GUI;
+package GUI.listeners;
 
+import GUI.SwingGUI;
+import GUI.panels.TurnPanel;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 
 /**
  *
  */
-final class PlayerNameListener extends AbstractGUIListener {
+public final class PlayerNameListener extends AbstractGUIListener {
     
     private final JTextField[] fields;
     
@@ -32,6 +34,6 @@ final class PlayerNameListener extends AbstractGUIListener {
                 gui.getGame().addPlayer(field.getText());
             }
         }
-        gui.switchToTurnTab();
+        gui.setPanel(new TurnPanel(gui));
     }
 }

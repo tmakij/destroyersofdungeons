@@ -1,11 +1,13 @@
-package GUI;
+package GUI.listeners;
 
+import GUI.SwingGUI;
+import GUI.panels.MainPanel;
 import java.awt.event.ActionEvent;
 
 /**
  *
  */
-final class TurnBeginListener extends AbstractGUIListener {
+public final class TurnBeginListener extends AbstractGUIListener {
 
     public TurnBeginListener(SwingGUI gui) {
         super(gui);
@@ -13,6 +15,6 @@ final class TurnBeginListener extends AbstractGUIListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        gui.switchToMainTab();
+        gui.setPanel(new MainPanel(gui));
     }
 }

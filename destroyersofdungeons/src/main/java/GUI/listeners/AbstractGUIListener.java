@@ -1,5 +1,6 @@
-package GUI;
+package GUI.listeners;
 
+import GUI.SwingGUI;
 import java.awt.event.ActionListener;
 
 /**
