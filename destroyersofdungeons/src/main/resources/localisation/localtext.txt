@@ -1,0 +1,3 @@
+KEY;english;finnish
+TITLE;Destroyers of Dungeons;Destroyers of Dungeons
+START_GAME;Start Game;Aloita Peli

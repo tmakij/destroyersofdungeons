@@ -8,5 +8,9 @@
   - Testejä: DestroyersOfDungeons, Tunnel. Luokat: Tunnel, Map, Corridor, Actor, Player, Monsterit alulleen, Battle runkoa, DestroyersOfDungeons, tekstikäyttöliittymä alulleen (pystyy liikkuu tunnelissa, vuorottain).
   
   18.12.2013
-  - 5+ tuntia
-  - Testejä: Gameobject, Actor, player tunnel. Esineitä, taistelut, logiikan/käyttöliittymän erottelua, pit ja cobertura testaus, Luokkakaavio.
+  - 7 tuntia
+  - Testejä: Gameobject, Actor, player tunnel. Esineitä, taistelut, logiikan/käyttöliittymän erottelua, pit ja cobertura testaus, Luokkakaavio. Swingin harjoittelua.
+  
+  19.12.2013
+  - 5 tuntia
+  - Testejä, taisteluja jatkettu, lokalisaatiota.

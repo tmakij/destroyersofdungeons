@@ -1,13 +1,12 @@
 package main;
 
 import GUI.SwingGUI;
-import GUI.TextGUI;
+import localisation.Dictionary;
 
 final class App {
 
     public static void main(String[] args) {
-        /*TextGUI tgui = new TextGUI();
-        tgui.start();*/
+        Dictionary.loadText("english");
         SwingGUI sgui = new SwingGUI();
     }
 }
