@@ -1,7 +1,6 @@
 package GUI;
 
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -26,12 +25,12 @@ public final class SwingGUI {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         tab = getMainMenu();
         frame.setContentPane(tab);
-        //frame.pack();
-        //frame.setResizable(false);
+        frame.pack();
+        frame.setResizable(false);
         frame.setVisible(true);
     }
 
-    public void setPane(JPanel panel) {
+    void clearActionListeners() {
         for (Component c : tab.getComponents()) {
             if (c.getClass() == JButton.class) {
                 JButton j = (JButton) c;
@@ -40,6 +39,10 @@ public final class SwingGUI {
                 }
             }
         }
+    }
+
+    void setPane(JPanel panel) {
+        clearActionListeners();
         frame.setContentPane(panel);
         tab = panel;
         frame.revalidate();
@@ -55,12 +58,15 @@ public final class SwingGUI {
         menu.setLayout(new GridLayout(3, 1, 15, 15));
 
         JButton start = new JButton(Dictionary.getValue("START_GAME"));
-        MainMenuListener mListener = new MainMenuListener(this);
+        MainMenuStartListener mListener = new MainMenuStartListener(this);
         start.addActionListener(mListener);
-        start.setPreferredSize(new Dimension(3, 3));
+
+        MainMenuQuitListener qListener = new MainMenuQuitListener(this);
         JButton quit = new JButton(Dictionary.getValue("QUIT_GAME"));
+        quit.addActionListener(qListener);
+
         JLabel mainmenu = new JLabel(Dictionary.getValue("MAIN_MENU"));
-        mainmenu.setFont(new Font("Arail", Font.PLAIN, 50));
+        mainmenu.setFont(new Font("Arail", Font.PLAIN, 40));
         mainmenu.setHorizontalAlignment(SwingConstants.CENTER);
         menu.add(mainmenu);
         menu.add(start);
@@ -74,20 +80,19 @@ public final class SwingGUI {
         //namePanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         namePanel.setLayout(layout);
 
-        createPlayerFields(namePanel, "Player 1", layout, 1);
-        createPlayerFields(namePanel, "Player 2", layout, 2);
+        createPlayerFields(namePanel, Dictionary.getValue("PLAYER_1"), layout, 1);
+        createPlayerFields(namePanel, Dictionary.getValue("PLAYER_2"), layout, 2);
 
-        JButton start = new JButton("Start");
+        JButton start = new JButton(Dictionary.getValue("START_GAME"));
         PlayerNameListener al = new PlayerNameListener(this);
         start.addActionListener(al);
-        namePanel.add(start);
-
         layout.putConstraint(SpringLayout.WEST, start,
                 90,
                 SpringLayout.WEST, namePanel);
         layout.putConstraint(SpringLayout.NORTH, start,
                 135,
                 SpringLayout.NORTH, namePanel);
+        namePanel.add(start);
 
         return namePanel;
     }
@@ -113,9 +118,7 @@ public final class SwingGUI {
         namePanel.add(nameFieldPlayer);
     }
 
-    private static void putConst(SpringLayout layout, int m, String dir, JPanel namePanel, Component c) {
-        layout.putConstraint(dir, c,
-                50 * m,
-                dir, namePanel);
+    void dispose() {
+        frame.dispose();
     }
 }

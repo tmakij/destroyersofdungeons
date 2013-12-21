@@ -5,9 +5,9 @@ import java.awt.event.ActionEvent;
 /**
  *
  */
-public final class MainMenuListener extends AbstractGUIListener {
+final class MainMenuStartListener extends AbstractGUIListener {
 
-    public MainMenuListener(SwingGUI gui) {
+    public MainMenuStartListener(SwingGUI gui) {
         super(gui);
     }
 

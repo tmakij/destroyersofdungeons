@@ -3,3 +3,5 @@ TITLE;Destroyers of Dungeons;Destroyers of Dungeons;;;;;;
 START_GAME;Start Game;Aloita Peli;;;;;;
 QUIT_GAME;Quit;Lopeta;;;;;;
 MAIN_MENU;Main Menu;Päävalikko;;;;;;
+PLAYER_1;Player 1;Pelaaja 1;;;;;;
+PLAYER_2;Player 2;Pelaaja 2;;;;;;
