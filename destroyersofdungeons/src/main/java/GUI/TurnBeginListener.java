@@ -5,14 +5,14 @@ import java.awt.event.ActionEvent;
 /**
  *
  */
-final class MainMenuStartListener extends AbstractGUIListener {
+final class TurnBeginListener extends AbstractGUIListener {
 
-    public MainMenuStartListener(SwingGUI gui) {
+    public TurnBeginListener(SwingGUI gui) {
         super(gui);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        gui.switchToPlayerNames();
+        gui.switchToMainTab();
     }
 }

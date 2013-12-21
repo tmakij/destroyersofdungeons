@@ -44,20 +44,15 @@ public final class DestroyersOfDungeons {
      * Adds a new player to the game.
      *
      * @param name the name of the player.
-     * @return Message about the operation.
      */
-    public String addPlayer(String name) {
-        String ret;
+    public void addPlayer(String name) {
         Player p = new Player(playerIds++, name);
-        ret = "Added player " + p;
         if (players.isEmpty()) {
             currentPlayer = p;
-            ret += " (Starting player)";
         }
         players.add(p);
         p.setMyBlock(map.getFirstBlock());
         map.getFirstBlock().addActor(p);
-        return ret;
     }
 
     /**

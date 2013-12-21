@@ -17,8 +17,8 @@ public final class DestroyersOfDungeonsTest {
         game.addPlayer("TEST_PLAYER");
     }
 
-    private String addAnotherPlayer() {
-        return game.addPlayer("TEST_PLAYER_NO2");
+    private void addAnotherPlayer() {
+        game.addPlayer("TEST_PLAYER_NO2");
     }
 
     @Test
@@ -74,20 +74,8 @@ public final class DestroyersOfDungeonsTest {
     }
 
     @Test
-    public void testAddPlayerString() {
-        game.getPlayers().clear();
-        assertEquals("Added player TEST_PLAYER_NO2 (Starting player)", addAnotherPlayer());
-    }
-
-    @Test
-    public void testAdd2PlayerString() {
-        assertEquals("Added player TEST_PLAYER_NO2", addAnotherPlayer());
-    }
-
-    @Test
     public void testPlay() {
         addAnotherPlayer();
-        String expected;
         Tunnel firstBlock = game.getMap().getFirstBlock();
         List<Tunnel> nextTo = firstBlock.getNextTo();
         assertEquals(nextTo, game.play());

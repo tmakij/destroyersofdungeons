@@ -20,8 +20,8 @@ public final class TextGUI {
      */
     public final void start() {
         System.out.println("Welcome to Destroyers Of Dungeons");
-        System.out.println(game.addPlayer("TestPlayer"));
-        System.out.println(game.addPlayer("AnotherTestPlayer"));
+        game.addPlayer("TestPlayer");
+        game.addPlayer("AnotherTestPlayer");
         OUTER:
         while (true) {
             Player current = game.getCurrentPlayer();
