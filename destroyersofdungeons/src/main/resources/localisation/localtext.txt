@@ -8,3 +8,5 @@ CURRENT_TURN;Currently in turn: ;Seuraavaksi vuorossa: ;;;;;;
 START_TURN;Start turn;Aloita vuoro;;;;;;
 MY_LOCATION;My location: ;Sijaitsen: ;;;;;;
 ITEMS_TITLE;My items;Esineeni;;;;;;
+MOVE_TO;Move to;Siirry;;;;;;
+YOU_COLLIDED;You have met others;Törmäsit muihin;;;;;;

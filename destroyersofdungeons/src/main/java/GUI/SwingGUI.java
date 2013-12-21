@@ -22,20 +22,19 @@ public final class SwingGUI {
         frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        currentPanel = new MainMenuPanel(this);
-        frame.setContentPane(currentPanel.getPanel());
+        setPanel(new MainMenuPanel(this));
         frame.pack();
         frame.setResizable(false);
         frame.setVisible(true);
     }
 
     public void setPanel(IDungeonPanel panel) {
-        if (panel != null) {
+        frame.setContentPane(panel.getPanel());
+        if (currentPanel != null) {
             currentPanel.dispose();
+            frame.revalidate();
         }
         currentPanel = panel;
-        frame.setContentPane(currentPanel.getPanel());
-        frame.revalidate();
     }
 
     public DestroyersOfDungeons getGame() {

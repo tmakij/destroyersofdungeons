@@ -15,6 +15,6 @@
   - 5 tuntia
   - Testejä, taisteluja jatkettu, lokalisaatiota.
   
-  20-21.12
-  - 7 tuntia
-  - Testejä, javadoccia, lokalisaatiota, gui harjoittelua/suunnittelua
+  21.12
+  - 10 tuntia
+  - Testejä, javadoccia, lokalisaatiota, gui harjoittelua/suunnittelua/toteutusta

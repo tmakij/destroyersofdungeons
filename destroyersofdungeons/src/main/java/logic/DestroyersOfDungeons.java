@@ -92,6 +92,11 @@ public final class DestroyersOfDungeons {
         }
     }
 
+    public boolean lastMoveCreatedCollisions() {
+        Tunnel t = currentPlayer.getMyBlock();
+        return !t.getOtherActors(currentPlayer).isEmpty() || !t.getItems().isEmpty();
+    }
+
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
