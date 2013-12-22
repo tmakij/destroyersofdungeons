@@ -1,6 +1,6 @@
 package gameobjects.actors;
 
-import gameobjects.GameObject;
+import gameobjects.Itemholder;
 import gameobjects.dungeon.Tunnel;
 import gameobjects.items.Item;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import logic.DestroyersOfDungeons;
 /**
  * Base class for all actors in the game. Each actor has unique id.
  */
-public abstract class Actor extends GameObject {
+public abstract class Actor extends Itemholder {
 
     public static final int BASE_HEALTH = 100;
     public static final int BASE_ATTACK = 25;
@@ -19,7 +19,6 @@ public abstract class Actor extends GameObject {
     private Tunnel myLastBlock;
     private Tunnel myBlock;
     private int health;
-    private final List<Item> items = new ArrayList<>();
 
     public Actor(int id, String name) {
         super(id, name);
@@ -34,7 +33,7 @@ public abstract class Actor extends GameObject {
     public void die(DestroyersOfDungeons game) {
         if (!isAlive()) {
             myBlock.removeActor(this);
-            myBlock.addItems(items);
+            myBlock.addItems(getItems());
         }
     }
 
@@ -66,39 +65,12 @@ public abstract class Actor extends GameObject {
     }
 
     /**
-     * Get a list of items the actor possess.
-     *
-     * @return List of items the actor possess.
-     */
-    public final List<Item> getItems() {
-        return items;
-    }
-
-    /**
      * Returns the block on which the actor is currently on.
      *
      * @return The block on which the actor is currently on.
      */
     public final Tunnel getMyBlock() {
         return myBlock;
-    }
-
-    /**
-     * Adds an item to the actor.
-     *
-     * @param i The item to be added.
-     */
-    public final void addItem(Item i) {
-        items.add(i);
-    }
-
-    /**
-     * Removes an item from the actor.
-     *
-     * @param i The item to be Removed.
-     */
-    public final void removeItem(Item i) {
-        items.remove(i);
     }
 
     /**
@@ -126,7 +98,7 @@ public abstract class Actor extends GameObject {
      */
     public final void attack(Actor to, BattleAction act) {
         int amount = (int) (BASE_ATTACK * act.actModifier());
-        for (Item i : items) {
+        for (Item i : getItems()) {
             amount = i.onAttack(amount);
         }
         to.takeHit(amount);
@@ -138,7 +110,7 @@ public abstract class Actor extends GameObject {
      * @param amount How much damage is inflicted.
      */
     public final void takeHit(int amount) {
-        for (Item i : items) {
+        for (Item i : getItems()) {
             amount = i.onDamageReceived(amount);
         }
         health -= amount;

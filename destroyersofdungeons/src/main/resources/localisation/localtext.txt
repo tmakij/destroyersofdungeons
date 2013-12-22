@@ -12,3 +12,6 @@ MOVE_TO;Move to;Siirry;;;;;;
 YOU_COLLIDED;You have met others;Törmäsit muihin;;;;;;
 YOU_MOVED_TO;You have moved to ;Siirryit ;;;;;;
 OK;Ok;Ok;;;;;;
+ATTACK;Attack;Hyökkää;;;;;;
+FOUND_ITEMS;You have found items!;Olet löytänyt esineitä;;;;;;
+FOUND_ITEMS_RESUME;These will surely help!;Nämä varmasti auttavat!;;;;;;

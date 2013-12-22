@@ -5,7 +5,7 @@ import GUI.panels.MainPanel;
 import java.awt.event.ActionEvent;
 
 /**
- *
+ * Listen start turn button. On click it switches to MainPanel.
  */
 public final class TurnBeginListener extends AbstractGUIListener {
 

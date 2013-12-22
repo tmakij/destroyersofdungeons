@@ -33,7 +33,7 @@ public final class TurnPanel extends AbstractPanel {
 
     private void addStartTurn(SwingGUI gui, SpringLayout layout) {
         JButton beginTurn = new JButton(Dictionary.getValue("START_TURN"));
-        Component whoseTurn = panel.getComponents()[panel.getComponents().length - 1];
+        Component whoseTurn = getLastComponent();
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, beginTurn,
                 0,
                 SpringLayout.HORIZONTAL_CENTER, whoseTurn);

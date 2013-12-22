@@ -31,6 +31,10 @@ public abstract class AbstractPanel implements IDungeonPanel {
         return panel;
     }
 
+    protected Component getLastComponent() {
+        return panel.getComponents()[panel.getComponents().length - 1];
+    }
+
     @Override
     @SuppressWarnings("FinalizeDeclaration")
     protected final void finalize() throws Throwable {
