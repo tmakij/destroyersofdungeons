@@ -3,6 +3,7 @@ package logic;
 import gameobjects.dungeon.Map;
 import gameobjects.dungeon.Tunnel;
 import gameobjects.actors.Player;
+import gameobjects.items.WoodenSword;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * Main class for the game
  */
 public final class DestroyersOfDungeons {
-
+    
     private final List<Player> players = new ArrayList<>();
     private final Map map;
     private Player currentPlayer;
@@ -49,6 +50,7 @@ public final class DestroyersOfDungeons {
         Player p = new Player(playerIds++, name);
         if (players.isEmpty()) {
             currentPlayer = p;
+            p.addItem(new WoodenSword(0));
         }
         players.add(p);
         p.setMyBlock(map.getAStartingBlock());
@@ -84,27 +86,27 @@ public final class DestroyersOfDungeons {
         currentPlayer.getMyBlock().addActor(currentPlayer);
         return block;
     }
-
+    
     public void removePlayer(Player p) {
         players.remove(p);
         if (p.equals(currentPlayer)) {
             nextPlayer();
         }
     }
-
+    
     public boolean lastMoveCreatedCollisions() {
         Tunnel t = currentPlayer.getMyBlock();
         return !t.getOtherActors(currentPlayer).isEmpty() || !t.getItems().isEmpty();
     }
-
+    
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
-
+    
     public List<Player> getPlayers() {
         return players;
     }
-
+    
     public Map getMap() {
         return map;
     }

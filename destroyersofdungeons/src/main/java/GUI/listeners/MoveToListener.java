@@ -1,6 +1,7 @@
 package GUI.listeners;
 
 import GUI.SwingGUI;
+import GUI.panels.MoveResultPanel;
 import java.awt.event.ActionEvent;
 
 /**
@@ -18,6 +19,6 @@ public final class MoveToListener extends AbstractGUIListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         gui.getGame().movePlayerTo(moveTo);
-        gui.setPanel(null);
+        gui.setPanel(new MoveResultPanel(gui));
     }
 }

@@ -23,7 +23,7 @@ public final class SwingGUI {
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setPanel(new MainMenuPanel(this));
-        frame.pack();
+        frame.setSize(800, 600);
         frame.setResizable(false);
         frame.setVisible(true);
     }
