@@ -1,7 +1,5 @@
 package gameobjects.actors.races;
 
-import gameobjects.actors.races.MinotaurRace;
-import gameobjects.actors.races.Race;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

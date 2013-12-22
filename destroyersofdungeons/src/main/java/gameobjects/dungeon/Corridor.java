@@ -5,19 +5,19 @@ package gameobjects.dungeon;
  * corridors or the treasure.
  */
 public final class Corridor {
-
+    
     private final int lenght;
     private Tunnel startBlock;
     private Tunnel endBlock;
-
+    
     public Corridor(int lenght) {
         this.lenght = lenght;
     }
-
+    
     public Tunnel getStartBlock() {
         return startBlock;
     }
-
+    
     public void generate() {
         // Test dungeon
         int ids = 0;

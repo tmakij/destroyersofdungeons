@@ -66,4 +66,31 @@ public final class BattleTest {
         bt.takeAction(0);
         assertEquals(false, bt.resume());
     }
+
+    private DestroyersOfDungeons testDying() {
+        DestroyersOfDungeons game = new DestroyersOfDungeons();
+        game.addPlayer("TEST_PLAYER");
+        game.addPlayer("TEST_PLAYER_NO2");
+        def = game.getCurrentPlayer();
+        game.nextPlayer();
+        att = game.getCurrentPlayer();
+        bt = new Battle(att, def);
+        return game;
+    }
+
+    @Test
+    public void testDefLosersDie() {
+        DestroyersOfDungeons game = testDying();
+        def.takeHit(Actor.BASE_HEALTH + 1);
+        bt.endBattle(game);
+        assertEquals(false, game.getPlayers().contains(def));
+    }
+
+    @Test
+    public void testAttLosersDie() {
+        DestroyersOfDungeons game = testDying();
+        att.takeHit(Actor.BASE_HEALTH + 1);
+        bt.endBattle(game);
+        assertEquals(false, game.getPlayers().contains(att));
+    }
 }

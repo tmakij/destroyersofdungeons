@@ -1,7 +1,5 @@
 package gameobjects.actors;
 
-import gameobjects.actors.Player;
-import gameobjects.actors.Actor;
 import gameobjects.actors.monsters.Minotaur;
 import gameobjects.actors.monsters.Monster;
 import gameobjects.dungeon.Tunnel;
@@ -39,25 +37,6 @@ public final class ActorTest {
         Tunnel t = new Tunnel(0);
         a.setMyBlock(t);
         assertEquals(t, a.getMyBlock());
-    }
-
-    @Test
-    public void testAddItem() {
-        Item i = addItem();
-        assertEquals(a.getItems().get(0), i);
-    }
-
-    @Test
-    public void testAddItemSize() {
-        Item i = addItem();
-        assertEquals(1, a.getItems().size());
-    }
-
-    @Test
-    public void testRemoveItem() {
-        Item i = addItem();
-        a.removeItem(i);
-        assertEquals(0, a.getItems().size());
     }
 
     @Test
@@ -102,8 +81,18 @@ public final class ActorTest {
 
     @Test
     public void testDyeing() {
-        a.takeHit(Actor.BASE_HEALTH + 1);
+        a.takeHit(Actor.BASE_HEALTH);
         assertEquals(false, a.isAlive());
+    }
+
+    @Test
+    public void testDyeingAndDropping() {
+        Tunnel t = new Tunnel(0);
+        a.setMyBlock(t);
+        addItem();
+        a.takeHit(Actor.BASE_HEALTH);
+        a.die(null);
+        assertEquals(1, t.getItems().size());
     }
 
     @Test
@@ -111,14 +100,18 @@ public final class ActorTest {
         Tunnel t = new Tunnel(0);
         a.setMyBlock(t);
         addItem();
-        a.takeHit(Actor.BASE_HEALTH + 1);
+        a.takeHit(Actor.BASE_HEALTH);
         a.die(null);
-        assertEquals(1, t.getItems().size());
-        /*
-         DestroyersOfDungeons game = new DestroyersOfDungeons();
-         game.addPlayer("TEST_PLAYER");
-         game.addPlayer("TEST_PLAYER_NO2");
-         game.getCurrentPlayer().takeHit(Actor.BASE_HEALTH + 1);
-         game.getCurrentPlayer().die(game);*/
+        assertEquals(false, t.getActorSet().contains(a));
+    }
+
+    @Test
+    public void testLivingDontDie() {
+        Tunnel t = new Tunnel(0);
+        a.setMyBlock(t);
+        addItem();
+        a.takeHit(Actor.BASE_HEALTH - 1);
+        a.die(null);
+        assertEquals(true, t.getActorSet().contains(a));
     }
 }

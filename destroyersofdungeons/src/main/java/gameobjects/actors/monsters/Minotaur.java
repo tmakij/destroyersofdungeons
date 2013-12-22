@@ -1,7 +1,7 @@
 package gameobjects.actors.monsters;
 
 /**
- *
+ * Minotaur monster.
  */
 public final class Minotaur extends Monster {
 

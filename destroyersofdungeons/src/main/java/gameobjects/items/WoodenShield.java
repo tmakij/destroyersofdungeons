@@ -16,7 +16,7 @@ public final class WoodenShield extends Item {
      * @param id The unique
      */
     public WoodenShield(int id) {
-        super(id, "Wooden Shield");
+        super(id, "WOODEN_SHIELD");
     }
 
     @Override

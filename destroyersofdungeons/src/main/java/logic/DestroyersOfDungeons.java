@@ -11,7 +11,7 @@ import java.util.List;
  * Main class for the game
  */
 public final class DestroyersOfDungeons {
-    
+
     private final List<Player> players = new ArrayList<>();
     private final Map map;
     private Player currentPlayer;
@@ -54,7 +54,6 @@ public final class DestroyersOfDungeons {
         }
         players.add(p);
         p.setMyBlock(map.getAStartingBlock());
-        map.getAStartingBlock().addActor(p);
     }
 
     /**
@@ -81,32 +80,30 @@ public final class DestroyersOfDungeons {
             return null;
         }
         Tunnel block = nextTo.get(to);
-        currentPlayer.getMyBlock().removeActor(currentPlayer);
         currentPlayer.setMyBlock(block);
-        currentPlayer.getMyBlock().addActor(currentPlayer);
         return block;
     }
-    
+
     public void removePlayer(Player p) {
         players.remove(p);
         if (p.equals(currentPlayer)) {
             nextPlayer();
         }
     }
-    
+
     public boolean lastMoveCreatedCollisions() {
         Tunnel t = currentPlayer.getMyBlock();
         return !t.getOtherActors(currentPlayer).isEmpty() || !t.getItems().isEmpty();
     }
-    
+
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
-    
+
     public List<Player> getPlayers() {
         return players;
     }
-    
+
     public Map getMap() {
         return map;
     }

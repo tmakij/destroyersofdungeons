@@ -15,3 +15,5 @@ OK;Ok;Ok;;;;;;
 ATTACK;Attack;Hyökkää;;;;;;
 FOUND_ITEMS;You have found items!;Olet löytänyt esineitä;;;;;;
 FOUND_ITEMS_RESUME;These will surely help!;Nämä varmasti auttavat!;;;;;;
+WOODEN_SWORD;Woodensword;Puumiekka;;;;;;
+WOODEN_SHIELD;Woodenshield;Puukilpi;;;;;;

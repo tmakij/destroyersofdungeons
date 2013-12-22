@@ -1,6 +1,5 @@
 package gameobjects;
 
-import gameobjects.GameObject;
 import gameobjects.actors.Actor;
 import gameobjects.actors.Player;
 import gameobjects.dungeon.Tunnel;

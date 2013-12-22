@@ -2,7 +2,6 @@ package gameobjects.dungeon;
 
 import gameobjects.Itemholder;
 import gameobjects.actors.Actor;
-import gameobjects.items.WoodenShield;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +21,6 @@ public final class Tunnel extends Itemholder {
      */
     public Tunnel(int id) {
         super(id, "Tunnel (" + id + ")");
-        addItem(new WoodenShield(32));
     }
 
     /**

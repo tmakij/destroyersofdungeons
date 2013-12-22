@@ -2,6 +2,7 @@ package logic;
 
 import gameobjects.dungeon.Tunnel;
 import gameobjects.actors.Player;
+import gameobjects.items.WoodenSword;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -130,5 +131,38 @@ public final class DestroyersOfDungeonsTest {
         game.nextPlayer();
         game.removePlayer(game.getCurrentPlayer());
         assertEquals(p, game.getCurrentPlayer());
+    }
+
+    @Test
+    public void testLastMoveCreatedCollisionsDefault() {
+        addAnotherPlayer();
+        assertEquals(true, game.lastMoveCreatedCollisions());
+    }
+
+    @Test
+    public void testLastMoveCreatedCollisionsAfterMove() {
+        addAnotherPlayer();
+        game.movePlayerTo(0);
+        game.nextPlayer();
+        game.movePlayerTo(0);
+        assertEquals(true, game.lastMoveCreatedCollisions());
+    }
+
+    @Test
+    public void testAloneDidNotCreateCollisions() {
+        assertEquals(false, game.lastMoveCreatedCollisions());
+    }
+
+    @Test
+    public void testLastMoveDidNotCreateCollisionsAfterMove() {
+        addAnotherPlayer();
+        game.movePlayerTo(0);
+        assertEquals(false, game.lastMoveCreatedCollisions());
+    }
+
+    @Test
+    public void testLastMoveCreatedCollisionsAfterMoveItem() {
+        game.getCurrentPlayer().getMyBlock().addItem(new WoodenSword(0));
+        assertEquals(true, game.lastMoveCreatedCollisions());
     }
 }

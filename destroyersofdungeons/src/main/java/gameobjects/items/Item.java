@@ -1,6 +1,7 @@
 package gameobjects.items;
 
 import gameobjects.GameObject;
+import localisation.Dictionary;
 
 /**
  * Items can provide different types of bonuses. Their effects are checked
@@ -12,10 +13,10 @@ public abstract class Item extends GameObject {
      * Initialize a new item.
      *
      * @param id The unique id of the item.
-     * @param name The name of the item.
+     * @param key The key to the name of the item.
      */
-    public Item(int id, String name) {
-        super(id, name);
+    public Item(int id, String key) {
+        super(id, Dictionary.getValue(key));
     }
 
     /**

@@ -3,8 +3,6 @@ package gameobjects.actors;
 import gameobjects.Itemholder;
 import gameobjects.dungeon.Tunnel;
 import gameobjects.items.Item;
-import java.util.ArrayList;
-import java.util.List;
 import logic.BattleAction;
 import logic.DestroyersOfDungeons;
 
@@ -81,13 +79,18 @@ public abstract class Actor extends Itemholder {
     public abstract boolean isPlayerControlled();
 
     /**
-     * Moves the Actor to another block. Saves the previous block.
+     * Moves the Actor to another block. Saves the previous block. Removes the
+     * actor from the previous block and adds to the new one.
      *
-     * @param myBlock Where to move.
+     * @param newBlock Where to move.
      */
-    public final void setMyBlock(Tunnel myBlock) {
-        myLastBlock = this.myBlock;
-        this.myBlock = myBlock;
+    public final void setMyBlock(Tunnel newBlock) {
+        if (myBlock != null) {
+            myBlock.removeActor(this);
+        }
+        myLastBlock = myBlock;
+        myBlock = newBlock;
+        newBlock.addActor(this);
     }
 
     /**
