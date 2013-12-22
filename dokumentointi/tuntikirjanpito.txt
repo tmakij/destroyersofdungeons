@@ -18,3 +18,7 @@
   21.12
   - 10 tuntia
   - Testej‰, javadoccia, lokalisaatiota, gui harjoittelua/suunnittelua/toteutusta
+  
+  22.12
+  - 7 tuntia
+  - Testej‰, javadoccia, guita jatkettu lis‰‰, koodin p‰‰llekk‰isyyksi‰ v‰hennetty (esim. Item holder). Uusi luokkakaavio.
