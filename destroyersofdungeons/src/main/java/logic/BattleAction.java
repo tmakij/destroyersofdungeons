@@ -5,7 +5,7 @@ package logic;
  */
 public enum BattleAction {
 
-    ATTACK(1.0D), FLEE(1.0D), DO_NOTHING(1.0D), CAST_SPELL(0.8D), DEFEND(1.2D);
+    ATTACK(1.0D), DEFEND(1.2D), CAST_SPELL(0.8D), DO_NOTHING(1.0D), FLEE(1.0D);
 
     private final double value;
 

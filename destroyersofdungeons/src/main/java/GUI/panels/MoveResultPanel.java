@@ -1,6 +1,7 @@
 package GUI.panels;
 
 import GUI.SwingGUI;
+import GUI.listeners.AttackActorListener;
 import GUI.listeners.FoundItemsListener;
 import GUI.listeners.TurnEndListener;
 import gameobjects.GameObject;
@@ -35,7 +36,7 @@ public final class MoveResultPanel extends AbstractPanel {
         Tunnel t = game.getCurrentPlayer().getMyBlock();
         List<Actor> others = t.getOtherActors(game.getCurrentPlayer());
         if (!others.isEmpty()) {
-            foundEnemies(others, layout);
+            foundEnemies(others, layout, gui);
         } else {
             foundItems(layout, game, gui);
         }
@@ -65,15 +66,16 @@ public final class MoveResultPanel extends AbstractPanel {
         panel.add(resume);
     }
 
-    private void foundEnemies(List<Actor> others, SpringLayout layout) {
+    private void foundEnemies(List<Actor> others, SpringLayout layout, SwingGUI gui) {
         addEventResult(layout, "YOU_COLLIDED");
         for (int i = 0; i < others.size(); i++) {
-            addEventResultObject(layout, others.get(i), i);
-            addAttack(layout);
+            Actor enemy = others.get(i);
+            addEventResultObject(layout, enemy, i);
+            addAttack(layout, gui, enemy);
         }
     }
 
-    private void addAttack(SpringLayout layout) {
+    private void addAttack(SpringLayout layout, SwingGUI gui, Actor enemy) {
         Component name = getLastComponent();
         JButton attack = new JButton(Dictionary.getValue("ATTACK"));
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, attack,
@@ -84,6 +86,7 @@ public final class MoveResultPanel extends AbstractPanel {
                 0,
                 SpringLayout.VERTICAL_CENTER, name
         );
+        attack.addActionListener(new AttackActorListener(gui, enemy));
         panel.add(attack);
     }
 

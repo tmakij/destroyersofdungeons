@@ -8,7 +8,7 @@ import logic.DestroyersOfDungeons;
 import localisation.Dictionary;
 
 /**
- * The GUI made with swing.
+ * The GUI made with swing. Handles the game.
  */
 public final class SwingGUI {
 

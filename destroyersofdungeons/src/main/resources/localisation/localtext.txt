@@ -17,3 +17,8 @@ FOUND_ITEMS;You have found items!;Olet löytänyt esineitä;;;;;;
 FOUND_ITEMS_RESUME;These will surely help!;Nämä varmasti auttavat!;;;;;;
 WOODEN_SWORD;Woodensword;Puumiekka;;;;;;
 WOODEN_SHIELD;Woodenshield;Puukilpi;;;;;;
+DEFEND;Defend;Puolusta;;;;;;
+CAST_SPELL;Cast Spell;Tee taika;;;;;;
+DO_NOTHING;Do nothing;Älä tee mitään;;;;;;
+FLEE;Flee;Pakene;;;;;;
+POSSIBLE_ACTS;You can do the following;Voit toimia seuraavilla tavoilla;;;;;;

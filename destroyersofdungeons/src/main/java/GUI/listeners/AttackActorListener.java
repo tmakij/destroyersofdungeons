@@ -1,6 +1,8 @@
 package GUI.listeners;
 
 import GUI.SwingGUI;
+import GUI.panels.BattlePanel;
+import gameobjects.actors.Actor;
 import java.awt.event.ActionEvent;
 
 /**
@@ -8,12 +10,15 @@ import java.awt.event.ActionEvent;
  */
 public final class AttackActorListener extends AbstractGUIListener {
 
-    public AttackActorListener(SwingGUI gui) {
+    private final Actor enemy;
+
+    public AttackActorListener(SwingGUI gui, Actor enemy) {
         super(gui);
+        this.enemy = enemy;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        gui.setPanel(new BattlePanel(gui, enemy));
     }
 }
