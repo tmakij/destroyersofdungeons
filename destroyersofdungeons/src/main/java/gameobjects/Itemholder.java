@@ -21,7 +21,7 @@ public abstract class Itemholder extends GameObject {
      *
      * @param items Collection of items.
      */
-    public void addItems(Collection<Item> items) {
+    public final void addItems(Collection<Item> items) {
         for (Item i : items) {
             addItem(i);
         }
@@ -32,7 +32,7 @@ public abstract class Itemholder extends GameObject {
      *
      * @param i Item to be added.
      */
-    public void addItem(Item i) {
+    public final void addItem(Item i) {
         items.add(i);
     }
 
@@ -41,7 +41,7 @@ public abstract class Itemholder extends GameObject {
      *
      * @return List of items in the tunnel.
      */
-    public List<Item> getItems() {
+    public final List<Item> getItems() {
         return items;
     }
 
@@ -50,14 +50,14 @@ public abstract class Itemholder extends GameObject {
      *
      * @param i Item to remove.
      */
-    public void removeItem(Item i) {
+    public final void removeItem(Item i) {
         items.remove(i);
     }
 
     /**
      * Removes all the items from the itemholder.
      */
-    public void removeAllItems() {
+    public final void removeAllItems() {
         items.clear();
     }
 }

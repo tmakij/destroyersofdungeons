@@ -101,7 +101,12 @@ public final class DestroyersOfDungeons {
     }
 
     public Player getWinner() {
-        return players.get(0);
+        for (Player p : players) {
+            if (p.hasTreasure()) {
+                return p;
+            }
+        }
+        return null;
     }
 
     public java.util.Map<Player, Integer> getDeathTimes() {

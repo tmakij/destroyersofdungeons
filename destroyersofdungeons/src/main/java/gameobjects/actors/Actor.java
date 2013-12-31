@@ -1,8 +1,12 @@
 package gameobjects.actors;
 
+import constants.IntegerConstants;
 import gameobjects.Itemholder;
 import gameobjects.dungeon.Tunnel;
 import gameobjects.items.Item;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Iterator;
 import logic.BattleAction;
 
 /**
@@ -10,30 +14,41 @@ import logic.BattleAction;
  */
 public abstract class Actor extends Itemholder {
 
-    public static final int BASE_HEALTH = 100;
-    public static final int BASE_ATTACK = 25;
-
-    private Tunnel myLastBlock;
-    private Tunnel myBlock;
+    private final Deque<Tunnel> myBlockHistory = new ArrayDeque<>();
     private int health;
 
     public Actor(int id, String name) {
         super(id, name);
-        health = BASE_HEALTH;
+        health = IntegerConstants.ACTOR_BASE_HEALTH.getValue();
+    }
+
+    /**
+     * Adds all the items on the block of the actor to his inventory.
+     */
+    public final void pickUpItems() {
+        addItems(getMyBlock().getItems());
+        getMyBlock().removeAllItems();
     }
 
     /**
      * Erases the actor from the game.
      *
-     * @return Did the actor die
+     * @return Did the actor die.
      */
     public boolean die() {
         if (!isAlive()) {
-            myBlock.removeActor(this);
-            myBlock.addItems(getItems());
+            getMyBlock().removeActor(this);
+            getMyBlock().addItems(getItems());
             return true;
         }
         return false;
+    }
+
+    public void retreat() {
+        setMyBlock(myBlockHistory.peekLast());
+        Tunnel first = getMyBlock();
+        myBlockHistory.clear();
+        myBlockHistory.addFirst(first);
     }
 
     /**
@@ -55,21 +70,12 @@ public abstract class Actor extends Itemholder {
     }
 
     /**
-     * Get the lastblock of the actor.
-     *
-     * @return The lastblock of the actor.
-     */
-    public final Tunnel getMyLastBlock() {
-        return myLastBlock;
-    }
-
-    /**
      * Returns the block on which the actor is currently on.
      *
      * @return The block on which the actor is currently on.
      */
     public final Tunnel getMyBlock() {
-        return myBlock;
+        return myBlockHistory.peekFirst();
     }
 
     /**
@@ -86,12 +92,14 @@ public abstract class Actor extends Itemholder {
      * @param newBlock Where to move.
      */
     public final void setMyBlock(Tunnel newBlock) {
-        if (myBlock != null) {
-            myBlock.removeActor(this);
+        if (getMyBlock() != null) {
+            getMyBlock().removeActor(this);
         }
-        myLastBlock = myBlock;
-        myBlock = newBlock;
+        myBlockHistory.addFirst(newBlock);
         newBlock.addActor(this);
+        if (myBlockHistory.size() > IntegerConstants.TUNNEL_HISTORY.getValue()) {
+            myBlockHistory.removeLast();
+        }
     }
 
     /**
@@ -101,7 +109,7 @@ public abstract class Actor extends Itemholder {
      * @param act Multiplies the default damage by the action.
      */
     public final void attack(Actor to, BattleAction act) {
-        int amount = (int) (BASE_ATTACK * act.actModifier());
+        int amount = (int) (IntegerConstants.ACTOR_BASE_ATTACK.getValue() * act.actModifier());
         for (Item i : getItems()) {
             amount = i.onAttack(amount);
         }

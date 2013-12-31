@@ -14,33 +14,43 @@ public enum Dictionary {
 
     ;
     private static Map<String, String> strings;
+    private static String language;
 
     /**
      * Loads all the text from localisation.txt file.
      *
      * @param language Which language is loaded.
+     * @throws java.io.IOException If the localisation is not found.
+     * @throws UnsupportedOperationException If the language is not found.
      */
-    public static void loadText(String language) {
-        strings = new HashMap<>();
-        try (InputStream localfile = Dictionary.class.getResourceAsStream("/localisation/localtext.txt"); Scanner scan = new Scanner(localfile)) {
-            int n = getLineNumber(scan.nextLine(), language);
-
-            while (scan.hasNextLine()) {
-                String line = scan.nextLine();
-                String[] lineSplit = line.split(";");
-                if (lineSplit.length > n) {
-                    strings.put(lineSplit[0], lineSplit[n]);
-                }
-            }
-        } catch (IOException ioex) {
-            System.out.println(ioex);
+    @SuppressWarnings("ConvertToTryWithResources")
+    public static void loadText(String language) throws IOException, UnsupportedOperationException {
+        InputStream localfile = Dictionary.class.getResourceAsStream("/localisation/localtext.txt");
+        Scanner scan = new Scanner(localfile);
+        Dictionary.language = language;
+        int n = getLineNumber(scan.nextLine());
+        if (n == 0) {
+            strings = null;
+            throw new UnsupportedOperationException("Invalid language, loading cannot proceed");
         }
+        strings = new HashMap<>();
+        while (scan.hasNextLine()) {
+            String line = scan.nextLine();
+            String[] lineSplit = line.split(";");
+            if (lineSplit.length > n) {
+                strings.put(lineSplit[0], lineSplit[n]);
+            }
+        }
+        scan.close();
+        localfile.close();
     }
 
-    private static int getLineNumber(String line, String language) {
+    private static int getLineNumber(String line) {
         String[] langs = line.split(";");
         for (int i = 0; i < langs.length; i++) {
-            if (langs[i].equals(language)) {
+            String lang = langs[i];
+            if (lang.equals(language)) {
+                language = lang;
                 return i;
             }
         }
@@ -57,6 +67,9 @@ public enum Dictionary {
      * is returned.
      */
     public static String getValue(String key, Object... params) {
+        if (strings == null) {
+            return "Error on loading localisation for language " + language;
+        }
         if (strings.containsKey(key)) {
             key = strings.get(key);
             for (int i = 0; i < params.length; i++) {

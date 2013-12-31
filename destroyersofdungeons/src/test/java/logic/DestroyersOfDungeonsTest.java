@@ -2,6 +2,7 @@ package logic;
 
 import gameobjects.dungeon.Tunnel;
 import gameobjects.actors.Player;
+import gameobjects.items.Treasure;
 import gameobjects.items.WoodenSword;
 import java.util.List;
 import org.junit.Test;
@@ -20,6 +21,32 @@ public final class DestroyersOfDungeonsTest {
 
     private void addAnotherPlayer() {
         game.addPlayer("TEST_PLAYER_NO2");
+    }
+
+    @Test
+    public void testIsPlayersEmpty() {
+        game = new DestroyersOfDungeons();
+        assertEquals(false, game.hasPlayers());
+    }
+
+    @Test
+    public void testIsPlayersHasPlayers() {
+        assertEquals(true, game.hasPlayers());
+    }
+
+    @Test
+    public void testDeathTimesHasPlayersSize() {
+        addAnotherPlayer();
+        game.removePlayer(game.getCurrentPlayer());
+        assertEquals(1, game.getDeathTimes().size());
+    }
+
+    @Test
+    public void testDeathTimesHasPlayersContains() {
+        addAnotherPlayer();
+        Player p = game.getCurrentPlayer();
+        game.removePlayer(p);
+        assertEquals(true, game.getDeathTimes().containsKey(p));
     }
 
     @Test
@@ -164,5 +191,19 @@ public final class DestroyersOfDungeonsTest {
     public void testLastMoveCreatedCollisionsAfterMoveItem() {
         game.getCurrentPlayer().getMyBlock().addItem(new WoodenSword(0));
         assertEquals(true, game.lastMoveCreatedCollisions());
+    }
+
+    @Test
+    public void testNullWinnerWhenTreasureNotFound() {
+        assertEquals(null, game.getWinner());
+    }
+
+    @Test
+    public void testWinnerWhenTreasureFound() {
+        addAnotherPlayer();
+        Player p = game.getCurrentPlayer();
+        p.addItem(new Treasure());
+        game.nextPlayer();
+        assertEquals(p, game.getWinner());
     }
 }

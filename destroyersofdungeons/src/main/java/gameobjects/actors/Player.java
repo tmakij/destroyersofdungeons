@@ -1,5 +1,7 @@
 package gameobjects.actors;
 
+import gameobjects.items.Treasure;
+import gameobjects.items.Item;
 import logic.DestroyersOfDungeons;
 
 /**
@@ -27,6 +29,15 @@ public final class Player extends Actor {
         if (super.die()) {
             game.removePlayer(this);
             return true;
+        }
+        return false;
+    }
+
+    public boolean hasTreasure() {
+        for (Item i : getItems()) {
+            if (i.getClass() == Treasure.class) {
+                return true;
+            }
         }
         return false;
     }

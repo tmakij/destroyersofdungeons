@@ -9,7 +9,7 @@ import javax.swing.SpringLayout;
 import localisation.Dictionary;
 
 /**
- *
+ * Appears when the turn is changed. Has only the option to start the turn.
  */
 public final class TurnPanel extends AbstractPanel {
 
@@ -21,7 +21,7 @@ public final class TurnPanel extends AbstractPanel {
     }
 
     private void addWhoseTurn(SwingGUI gui, SpringLayout layout) {
-        JLabel whoseTurn = new JLabel(Dictionary.getValue("CURRENT_TURN") + gui.getGame().getCurrentPlayer());
+        JLabel whoseTurn = new JLabel(Dictionary.getValue("CURRENT_TURN", gui.getGame().getCurrentPlayer()));
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, whoseTurn,
                 0,
                 SpringLayout.HORIZONTAL_CENTER, panel);

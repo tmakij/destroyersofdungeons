@@ -73,9 +73,13 @@ public final class BattlePanel extends AbstractPanel implements IUpdate {
 
     @Override
     public void update() {
-        attackerStatus.setText(battle.getAttacker() + " health " + battle.getAttacker().getHealth());
-        defenderStatus.setText(battle.getDefender() + " health " + battle.getDefender().getHealth());
-        turn.setText("Currently in turn " + battle.getCurrent());
+        setStatus(attackerStatus, battle.getAttacker());
+        setStatus(defenderStatus, battle.getDefender());
+        turn.setText(Dictionary.getValue("CURRENT_TURN", battle.getCurrent()));
+    }
+
+    private void setStatus(JLabel label, Actor a) {
+        label.setText(Dictionary.getValue("HEALTH", a, a.getHealth()));
     }
 
     private void listActions(SpringLayout layout) {

@@ -1,6 +1,8 @@
 package main;
 
 import GUI.SwingGUI;
+import gameobjects.actors.monsters.Monster;
+import java.io.IOException;
 import localisation.Dictionary;
 
 enum App {
@@ -8,7 +10,11 @@ enum App {
     ;
 
     public static void main(String[] args) {
-        Dictionary.loadText("english");
+        try {
+            Dictionary.loadText("english");
+        } catch (IOException | UnsupportedOperationException ex) {
+        }
+        Monster.loadRaces();
         SwingGUI sgui = new SwingGUI();
         sgui.start();
     }

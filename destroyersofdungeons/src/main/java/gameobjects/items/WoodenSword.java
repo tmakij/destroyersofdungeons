@@ -1,14 +1,11 @@
 package gameobjects.items;
 
+import constants.DoubleConstants;
+
 /**
- * Woodensword item, increases attack strength slightly. Overrides on attack.
+ * Woodensword item, increases attack strength slightly. Overrides onattack.
  */
 public final class WoodenSword extends Item {
-
-    /**
-     * The percentage of damage that is inflicted on attack.
-     */
-    public static final double ATTACK = 1.1D;
 
     /**
      * Creates the woodensword.
@@ -21,6 +18,6 @@ public final class WoodenSword extends Item {
 
     @Override
     public int onAttack(int amount) {
-        return (int) (amount * ATTACK);
+        return (int) (amount * DoubleConstants.WOODEN_SWORD_ATTACK.getValue());
     }
 }

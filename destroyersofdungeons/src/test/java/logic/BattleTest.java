@@ -1,61 +1,59 @@
 package logic;
 
 import GUI.testGUIPanel;
+import constants.DoubleConstants;
+import constants.IntegerConstants;
 import gameobjects.actors.Actor;
 import gameobjects.actors.Player;
+import gameobjects.dungeon.Tunnel;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 public final class BattleTest {
-
+    
     private Battle bt;
     private Actor att;
     private Actor def;
-
+    private Actor current;
+    
     @Before
     public void setUp() {
         att = new Player(0, "TEST_PLAYER", null);
         def = new Player(1, "TEST_PLAYER_NO2", null);
         bt = new Battle(att, def, new testGUIPanel());
+        current = bt.getCurrent();
     }
-
+    
     @Test
     public void testAttacker() {
         assertEquals(att, bt.getAttacker());
     }
-
+    
     @Test
     public void testDefender() {
         assertEquals(def, bt.getDefender());
     }
-
+    
     @Test
-    public void testNextDefault() {
-        assertEquals(false, bt.getCurrent().equals(bt.getNextActor()));
+    public void testTakeActionTurn() {
+        bt.takeAction(BattleAction.DO_NOTHING);
+        assertEquals(false, current.equals(bt.getCurrent()));
     }
-
-    @Test
-    public void testNextTurn() {
-        Actor a = bt.getCurrent();
-        bt.nextTurn();
-        assertEquals(a, bt.getNextActor());
-    }
-
+    
     @Test
     public void testNextTurnTwice() {
-        Actor a = bt.getCurrent();
-        bt.nextTurn();
-        bt.nextTurn();
-        assertEquals(false, a.equals(bt.getNextActor()));
+        bt.takeAction(BattleAction.DO_NOTHING);
+        bt.takeAction(BattleAction.DO_NOTHING);
+        assertEquals(current, bt.getCurrent());
     }
-
+    
     @Test
     public void testTakeAction() {
         bt.takeAction(BattleAction.ATTACK);
-        assertEquals(Actor.BASE_HEALTH - Actor.BASE_ATTACK, bt.getCurrent().getHealth());
+        assertEquals(IntegerConstants.ACTOR_BASE_HEALTH.getValue() - IntegerConstants.ACTOR_BASE_ATTACK.getValue(), bt.getCurrent().getHealth());
     }
-
+    
     private void testDying() {
         DestroyersOfDungeons game = new DestroyersOfDungeons();
         game.addPlayer("TEST_PLAYER");
@@ -65,19 +63,73 @@ public final class BattleTest {
         att = game.getCurrentPlayer();
         bt = new Battle(att, def, new testGUIPanel());
     }
-
+    
     @Test
     public void testDefLosersDie() {
         testDying();
-        def.takeHit(Actor.BASE_HEALTH - 1);
+        def.takeHit(IntegerConstants.ACTOR_BASE_HEALTH.getValue() - 1);
         assertEquals(true, bt.takeAction(BattleAction.ATTACK));
     }
-
+    
     @Test
     public void testAttLosersDie() {
         testDying();
-        att.takeHit(Actor.BASE_HEALTH - 1);
-        bt.nextTurn();
+        att.takeHit(IntegerConstants.ACTOR_BASE_HEALTH.getValue() - 1);
+        bt.takeAction(BattleAction.DO_NOTHING);
         assertEquals(true, bt.takeAction(BattleAction.ATTACK));
+    }
+    
+    private void emptyAction(BattleAction act, Actor a) {
+        bt.takeAction(act);
+        assertEquals(IntegerConstants.ACTOR_BASE_HEALTH.getValue(), a.getHealth());
+    }
+    
+    @Test
+    public void testTakeActionNothingAttackerLoseNothing() {
+        emptyAction(BattleAction.DO_NOTHING, att);
+    }
+    
+    @Test
+    public void testTakeActionNothingDefenderLoseNothing() {
+        emptyAction(BattleAction.DO_NOTHING, def);
+    }
+    
+    @Test
+    public void testTakeActionDefendeAttackerLoseNothing() {
+        emptyAction(BattleAction.DEFEND, att);
+    }
+    
+    @Test
+    public void testTakeActionDefendeDefenderLoseNothing() {
+        emptyAction(BattleAction.DEFEND, def);
+    }
+    
+    @Test
+    public void testTakeActionCastSpellAttackerLoses() {
+        bt.takeAction(BattleAction.CAST_SPELL);
+        assertEquals(IntegerConstants.ACTOR_BASE_HEALTH.getValue()
+                - ((int) (IntegerConstants.ACTOR_BASE_ATTACK.getValue() * DoubleConstants.BATTLEACTION_CASTSPELL.getValue())),
+                bt.getCurrent().getHealth());
+    }
+    
+    @Test
+    public void testTakeActionCastSpellDefenderDoesntLose() {
+        bt.takeAction(BattleAction.CAST_SPELL);
+        assertEquals(IntegerConstants.ACTOR_BASE_HEALTH.getValue(), current.getHealth());
+    }
+    
+    @Test
+    public void testTakeActionDefendeAttackerLoseMoreOnAttack() {
+        bt.takeAction(BattleAction.DEFEND);
+        current = bt.getCurrent();
+        bt.takeAction(BattleAction.ATTACK);
+        assertEquals(IntegerConstants.ACTOR_BASE_HEALTH.getValue()
+                - ((int) (IntegerConstants.ACTOR_BASE_ATTACK.getValue() * DoubleConstants.BATTLEACTION_DEFEND.getValue())), current.getHealth());
+    }
+    
+    @Test
+    public void testTakeActionFlee() {
+        current.setMyBlock(new Tunnel(34432));
+        assertEquals(true, bt.takeAction(BattleAction.FLEE));
     }
 }
