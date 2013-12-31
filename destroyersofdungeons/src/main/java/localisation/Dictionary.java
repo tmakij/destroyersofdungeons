@@ -13,7 +13,7 @@ import java.util.Scanner;
 public enum Dictionary {
 
     ;
-        private static final Map<String, String> strings = new HashMap<>();
+    private static Map<String, String> strings;
 
     /**
      * Loads all the text from localisation.txt file.
@@ -21,13 +21,16 @@ public enum Dictionary {
      * @param language Which language is loaded.
      */
     public static void loadText(String language) {
+        strings = new HashMap<>();
         try (InputStream localfile = Dictionary.class.getResourceAsStream("/localisation/localtext.txt"); Scanner scan = new Scanner(localfile)) {
             int n = getLineNumber(scan.nextLine(), language);
 
             while (scan.hasNextLine()) {
                 String line = scan.nextLine();
                 String[] lineSplit = line.split(";");
-                strings.put(lineSplit[0], lineSplit[n]);
+                if (lineSplit.length > n) {
+                    strings.put(lineSplit[0], lineSplit[n]);
+                }
             }
         } catch (IOException ioex) {
             System.out.println(ioex);
@@ -48,12 +51,17 @@ public enum Dictionary {
      * Get the localised value for a key.
      *
      * @param key Which string to return.
-     * @return A localised value for a key. If the value is not found, the key is
-     * returned.
+     * @param params Objects that are put into the string. Will be put in the
+     * string in the order as they are written to the localisation.
+     * @return A localised value for a key. If the value is not found, the key
+     * is returned.
      */
-    public static String getValue(String key) {
+    public static String getValue(String key, Object... params) {
         if (strings.containsKey(key)) {
-            return strings.get(key);
+            key = strings.get(key);
+            for (int i = 0; i < params.length; i++) {
+                key = key.replaceAll(("\\$" + i + "\\$"), params[i].toString());
+            }
         }
         return key;
     }

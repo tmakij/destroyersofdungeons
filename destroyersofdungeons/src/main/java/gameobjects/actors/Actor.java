@@ -4,7 +4,6 @@ import gameobjects.Itemholder;
 import gameobjects.dungeon.Tunnel;
 import gameobjects.items.Item;
 import logic.BattleAction;
-import logic.DestroyersOfDungeons;
 
 /**
  * Base class for all actors in the game. Each actor has unique id.
@@ -26,13 +25,15 @@ public abstract class Actor extends Itemholder {
     /**
      * Erases the actor from the game.
      *
-     * @param game Current instance of the game.
+     * @return Did the actor die
      */
-    public void die(DestroyersOfDungeons game) {
+    public boolean die() {
         if (!isAlive()) {
             myBlock.removeActor(this);
             myBlock.addItems(getItems());
+            return true;
         }
+        return false;
     }
 
     /**

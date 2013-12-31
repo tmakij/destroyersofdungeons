@@ -1,39 +1,40 @@
 package GUI.panels;
 
 import GUI.SwingGUI;
+import GUI.listeners.BattleActionListener;
 import gameobjects.actors.Actor;
 import java.awt.Component;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SpringLayout;
 import localisation.Dictionary;
+import logic.Battle;
 import logic.BattleAction;
 
 /**
  * The panel that handles all the battles between a player and another actor.
  */
-public final class BattlePanel extends AbstractPanel {
+public final class BattlePanel extends AbstractPanel implements IUpdate {
 
-    private final Actor defender;
-    private final Actor attacker;
-    private final SwingGUI gui;
+    private final Battle battle;
     private final JLabel attackerStatus = new JLabel();
     private final JLabel defenderStatus = new JLabel();
+    private final JLabel turn = new JLabel();
 
     public BattlePanel(SwingGUI gui, Actor defender) {
-        this.defender = defender;
-        this.attacker = gui.getGame().getCurrentPlayer();
-        this.gui = gui;
+        battle = new Battle(gui.getGame().getCurrentPlayer(), defender, this);
 
         SpringLayout layout = new SpringLayout();
         panel.setLayout(layout);
 
         setStatusFields(layout);
+        setTurn(layout);
+
         listActions(layout);
 
         BattleAction[] actions = BattleAction.values();
         for (BattleAction action : actions) {
-            createAction(action, layout);
+            createAction(action, layout, gui);
         }
     }
 
@@ -44,7 +45,7 @@ public final class BattlePanel extends AbstractPanel {
         );
         layout.putConstraint(SpringLayout.VERTICAL_CENTER, attackerStatus,
                 50,
-                SpringLayout.VERTICAL_CENTER, panel
+                SpringLayout.NORTH, panel
         );
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, defenderStatus,
                 0,
@@ -56,11 +57,25 @@ public final class BattlePanel extends AbstractPanel {
         );
         panel.add(attackerStatus);
         panel.add(defenderStatus);
+        update();
     }
 
-    private void updateStatusField() {
-        attackerStatus.setText(attacker + " health " + attacker.getHealth());
-        defenderStatus.setText(defender + " health " + defender.getHealth());
+    private void setTurn(SpringLayout layout) {
+        Component last = getLastComponent();
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, turn,
+                0,
+                SpringLayout.HORIZONTAL_CENTER, last);
+        layout.putConstraint(SpringLayout.VERTICAL_CENTER, turn,
+                40,
+                SpringLayout.VERTICAL_CENTER, last);
+        panel.add(turn);
+    }
+
+    @Override
+    public void update() {
+        attackerStatus.setText(battle.getAttacker() + " health " + battle.getAttacker().getHealth());
+        defenderStatus.setText(battle.getDefender() + " health " + battle.getDefender().getHealth());
+        turn.setText("Currently in turn " + battle.getCurrent());
     }
 
     private void listActions(SpringLayout layout) {
@@ -74,7 +89,7 @@ public final class BattlePanel extends AbstractPanel {
         panel.add(allActions);
     }
 
-    private void createAction(BattleAction b, SpringLayout layout) {
+    private void createAction(BattleAction b, SpringLayout layout, SwingGUI gui) {
         Component last = getLastComponent();
         JButton act = new JButton(Dictionary.getValue(b.toString()));
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, act,
@@ -83,6 +98,7 @@ public final class BattlePanel extends AbstractPanel {
         layout.putConstraint(SpringLayout.VERTICAL_CENTER, act,
                 25,
                 SpringLayout.VERTICAL_CENTER, last);
+        act.addActionListener(new BattleActionListener(battle, b, gui));
         panel.add(act);
     }
 }

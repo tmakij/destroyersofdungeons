@@ -7,29 +7,28 @@ import static org.junit.Assert.*;
 
 public final class PlayerTest {
 
-    private Player p;
+    private Player p, att, def;
+    private DestroyersOfDungeons game;
 
-    private DestroyersOfDungeons killPlayer() {
-        DestroyersOfDungeons game = new DestroyersOfDungeons();
+    private void killPlayer() {
+        game = new DestroyersOfDungeons();
         game.addPlayer("TEST_PLAYER");
         game.addPlayer("TEST_PLAYER_NO2");
         p = game.getCurrentPlayer();
         p.takeHit(Actor.BASE_HEALTH + 1);
-        p.die(game);
-        return game;
+        p.die();
     }
 
-    private DestroyersOfDungeons donDie() {
-        DestroyersOfDungeons game = new DestroyersOfDungeons();
+    private void dontDie() {
+        game = new DestroyersOfDungeons();
         game.addPlayer("TEST_PLAYER");
         p = game.getCurrentPlayer();
-        p.die(game);
-        return game;
+        p.die();
     }
 
     @Before
     public void setUp() {
-        p = new Player(0, "TEST_PLAYER");
+        p = new Player(0, "TEST_PLAYER", null);
     }
 
     @Test
@@ -39,19 +38,19 @@ public final class PlayerTest {
 
     @Test
     public void testDyeingAndRemovalFromGame() {
-        DestroyersOfDungeons game = killPlayer();
+        killPlayer();
         assertEquals(false, game.getPlayers().contains(p));
     }
 
     @Test
     public void testLivingKeepPlayingGame() {
-        DestroyersOfDungeons game = donDie();
+        dontDie();
         assertEquals(true, game.getPlayers().contains(p));
     }
 
     @Test
     public void testLivingStayInYourBlock() {
-        donDie();
+        dontDie();
         assertEquals(true, p.getMyBlock().getActorSet().contains(p));
     }
 
@@ -59,5 +58,29 @@ public final class PlayerTest {
     public void testDyeingAndRemovalFromMyBlock() {
         killPlayer();
         assertEquals(false, p.getMyBlock().getActorSet().contains(p));
+    }
+
+    private void setUpBattle() {
+        game = new DestroyersOfDungeons();
+        game.addPlayer("TEST_PLAYER");
+        game.addPlayer("TEST_PLAYER_NO2");
+        att = game.getPlayers().get(0);
+        def = game.getPlayers().get(1);
+    }
+
+    @Test
+    public void testDefLosersDie() {
+        setUpBattle();
+        def.takeHit(Actor.BASE_HEALTH + 1);
+        def.die();
+        assertEquals(false, game.getPlayers().contains(def));
+    }
+
+    @Test
+    public void testAttLosersDie() {
+        setUpBattle();
+        att.takeHit(Actor.BASE_HEALTH + 1);
+        att.die();
+        assertEquals(false, game.getPlayers().contains(att));
     }
 }

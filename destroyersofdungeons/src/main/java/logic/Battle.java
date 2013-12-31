@@ -1,5 +1,6 @@
 package logic;
 
+import GUI.panels.IUpdate;
 import gameobjects.actors.Actor;
 import java.util.Random;
 
@@ -9,41 +10,31 @@ import java.util.Random;
  */
 public final class Battle {
 
+    private final IUpdate gui;
     private final Actor attacker;
     private final Actor defender;
     private final Random rand;
     private Actor current;
     private BattleAction lastAction;
-    private boolean isEveryoneAlive;
 
-    public Battle(Actor attacker, Actor defender) {
+    public Battle(Actor attacker, Actor defender, IUpdate gui) {
         this.attacker = attacker;
         this.defender = defender;
         this.current = attacker;
+        this.gui = gui;
         this.rand = new Random();
         this.lastAction = BattleAction.DO_NOTHING;
-        this.isEveryoneAlive = true;
     }
 
-    public Actor getNextActor() {
+    protected Actor getNextActor() {
         return current == attacker ? defender : attacker;
     }
 
-    public void endBattle(DestroyersOfDungeons game) {
-        attacker.die(game);
-        defender.die(game);
-    }
-
-    public void nextTurn() {
+    protected void nextTurn() {
         current = getNextActor();
     }
 
-    public boolean resume() {
-        return isEveryoneAlive;
-    }
-
-    public void takeAction(int action) {
-        BattleAction act = BattleAction.values()[action];
+    public boolean takeAction(BattleAction act) {
         switch (act) {
             case ATTACK:
                 current.attack(getNextActor(), BattleAction.ATTACK);
@@ -64,7 +55,9 @@ public final class Battle {
                 throw new AssertionError(act.name());
         }
         lastAction = act;
-        isEveryoneAlive = getNextActor().isAlive() && current.isAlive();
+        nextTurn();
+        gui.update();
+        return attacker.die() || defender.die();
     }
 
     public Actor getDefender() {

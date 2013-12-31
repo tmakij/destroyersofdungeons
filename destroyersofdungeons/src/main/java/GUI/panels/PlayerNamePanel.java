@@ -9,17 +9,23 @@ import javax.swing.SpringLayout;
 import localisation.Dictionary;
 
 /**
- *
+ * The panel which asks the names of the players. Starts a new game when
+ * startgame is clicked.
  */
 public final class PlayerNamePanel extends AbstractPanel {
 
+    /**
+     * Create a new inctance of the PlayerNamePanel.
+     *
+     * @param gui The gui which holds the program.
+     */
     public PlayerNamePanel(SwingGUI gui) {
         SpringLayout layout = new SpringLayout();
         panel.setLayout(layout);
 
         JTextField[] fields = new JTextField[2];
-        fields[0] = createPlayerFields(Dictionary.getValue("PLAYER") + 1, layout, 0);
-        fields[1] = createPlayerFields(Dictionary.getValue("PLAYER") + 2, layout, 1);
+        fields[0] = createPlayerFields(Dictionary.getValue("PLAYER_N", 1), layout, 0);
+        fields[1] = createPlayerFields(Dictionary.getValue("PLAYER_N", 2), layout, 1);
         createStart(fields, layout, gui);
     }
 

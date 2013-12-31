@@ -12,25 +12,57 @@ import localisation.Dictionary;
  */
 public final class SwingGUI {
 
-    private final DestroyersOfDungeons game;
     private final JFrame frame;
+    private DestroyersOfDungeons game;
     private IDungeonPanel currentPanel;
 
+    /**
+     * Creates a new instance the gui. Localisation must be loaded before
+     * creating.
+     */
     public SwingGUI() {
-        game = new DestroyersOfDungeons();
-        frame = new JFrame(Dictionary.getValue("TITLE"));
+        frame = new JFrame();
         frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
         frame.setResizable(false);
+        updateTitle();
     }
 
+    /**
+     * Starts the game by showing the main menu.
+     */
     public void start() {
         setPanel(new MainMenuPanel(this));
         frame.setVisible(true);
     }
 
+    /**
+     * Ends the current game, by setting it to null.
+     */
+    public void endGame() {
+        game = null;
+    }
+
+    /**
+     * Creates a new game.
+     */
+    public void createNewGame() {
+        game = new DestroyersOfDungeons();
+    }
+
+    /**
+     * Updates the title to match the language in localisation.
+     */
+    public void updateTitle() {
+        frame.setTitle(Dictionary.getValue("TITLE"));
+    }
+
+    /**
+     * Sets the panel that is shown.
+     *
+     * @param panel The one that is desired to be shown.
+     */
     public void setPanel(IDungeonPanel panel) {
         frame.setContentPane(panel.getPanel());
         if (currentPanel != null) {
@@ -40,10 +72,18 @@ public final class SwingGUI {
         currentPanel = panel;
     }
 
+    /**
+     * Get the instance of the game.
+     *
+     * @return The instance of the game.
+     */
     public DestroyersOfDungeons getGame() {
         return game;
     }
 
+    /**
+     * Terminates the program and releases all resources.
+     */
     public void dispose() {
         System.exit(0);
     }

@@ -5,6 +5,7 @@ import gameobjects.dungeon.Tunnel;
 import gameobjects.actors.Player;
 import gameobjects.items.WoodenSword;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -13,10 +14,12 @@ import java.util.List;
 public final class DestroyersOfDungeons {
 
     private final List<Player> players = new ArrayList<>();
+    private final java.util.Map<Player, Integer> deathTimes = new HashMap<>();
     private final Map map;
     private Player currentPlayer;
     private int current = 0;
     private int playerIds = 0;
+    private int totalTurns = 0;
 
     /**
      * Creates a new instance of the game.
@@ -35,6 +38,7 @@ public final class DestroyersOfDungeons {
             current = current == players.size() - 1 ? 0 : current + 1;
         } else if (players.size() == 1) {
             current = 0;
+            totalTurns++;
         } else {
             throw new UnsupportedOperationException("Unsupported amount of players");
         }
@@ -47,7 +51,7 @@ public final class DestroyersOfDungeons {
      * @param name the name of the player.
      */
     public void addPlayer(String name) {
-        Player p = new Player(playerIds++, name);
+        Player p = new Player(playerIds++, name, this);
         if (players.isEmpty()) {
             currentPlayer = p;
             p.addItem(new WoodenSword(0));
@@ -86,9 +90,22 @@ public final class DestroyersOfDungeons {
 
     public void removePlayer(Player p) {
         players.remove(p);
+        deathTimes.put(p, totalTurns);
         if (p.equals(currentPlayer)) {
             nextPlayer();
         }
+    }
+
+    public boolean hasPlayers() {
+        return !players.isEmpty();
+    }
+
+    public Player getWinner() {
+        return players.get(0);
+    }
+
+    public java.util.Map<Player, Integer> getDeathTimes() {
+        return deathTimes;
     }
 
     public boolean lastMoveCreatedCollisions() {

@@ -18,7 +18,7 @@ public final class TunnelTest {
     }
 
     private Actor addDummyPlayer() {
-        Actor a = new Player(1, "TESTI_PELAAJA");
+        Actor a = new Player(1, "TEST_PLAYER", null);
         tunnel.addActor(a);
         return a;
     }
@@ -73,8 +73,8 @@ public final class TunnelTest {
 
     @Test
     public void testgetOtherActors() {
-        Actor a = new Player(34, "TESTI_PELAAJA");
-        Actor b = new Player(3334, "TESTI_PELAAJA_NO2");
+        Actor a = new Player(34, "TEST_PLAYER", null);
+        Actor b = new Player(3334, "TEST_PLAYER_NO2", null);
         tunnel.addActor(a);
         tunnel.addActor(b);
         List<Actor> others = new ArrayList<>();

@@ -3,20 +3,32 @@ package gameobjects.actors;
 import logic.DestroyersOfDungeons;
 
 /**
- * Player for the game.
+ * Player for the game. Player's die method removes him from the game and player
+ * isPlayerControlled.
  */
 public final class Player extends Actor {
 
-    public Player(int id, String name) {
+    private final DestroyersOfDungeons game;
+
+    /**
+     * Creates a new instance of the player.
+     *
+     * @param id Unique id of the player.
+     * @param name Name of the player.
+     * @param game The game instance.
+     */
+    public Player(int id, String name, DestroyersOfDungeons game) {
         super(id, name);
+        this.game = game;
     }
 
     @Override
-    public void die(DestroyersOfDungeons game) {
-        if (!isAlive()) {
-            super.die(game);
+    public boolean die() {
+        if (super.die()) {
             game.removePlayer(this);
+            return true;
         }
+        return false;
     }
 
     @Override

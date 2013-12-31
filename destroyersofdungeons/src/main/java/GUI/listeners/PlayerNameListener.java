@@ -8,7 +8,9 @@ import javax.swing.JTextField;
 /**
  * Listens startgame button on player creation. For each JTextField given to
  * this a player is created into the game. All fields must be valid, 1-32
- * characters long. Switches to TurnPanel.
+ * characters long that are from A to Z and from 0 to 9. Switches to TurnPanel.
+ * Id fields are valid and the button is clicked, a new instance of the game is
+ * created.
  */
 public final class PlayerNameListener extends AbstractGUIListener {
 
@@ -22,7 +24,7 @@ public final class PlayerNameListener extends AbstractGUIListener {
     private boolean fieldsAreValid() {
         for (JTextField field : fields) {
             String f = field.getText();
-            if (f.isEmpty() || f.length() > 32) {
+            if (f.isEmpty() || f.length() > 32 || !f.matches("[a-zA-Z0-9 ]*")) {
                 return false;
             }
         }
@@ -32,6 +34,7 @@ public final class PlayerNameListener extends AbstractGUIListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (fieldsAreValid()) {
+            gui.createNewGame();
             for (JTextField field : fields) {
                 gui.getGame().addPlayer(field.getText());
             }

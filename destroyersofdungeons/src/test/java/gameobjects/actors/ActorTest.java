@@ -41,14 +41,14 @@ public final class ActorTest {
 
     @Test
     public void testAttack() {
-        Actor b = new Player(123, "TEST_PLAYER_NO2");
+        Actor b = new Player(123, "TEST_PLAYER_NO2", null);
         a.attack(b, BattleAction.ATTACK);
         assertEquals(Actor.BASE_HEALTH - Actor.BASE_ATTACK, b.getHealth());
     }
 
     @Test
     public void testAttackWithItem() {
-        Actor b = new Player(123, "TEST_PLAYER_NO2");
+        Actor b = new Player(123, "TEST_PLAYER_NO2", null);
         addItem();
         a.attack(b, BattleAction.ATTACK);
         assertEquals(Actor.BASE_HEALTH - ((int) (Actor.BASE_ATTACK * WoodenSword.ATTACK)), b.getHealth());
@@ -56,7 +56,7 @@ public final class ActorTest {
 
     @Test
     public void testTakeHitWithItem() {
-        Actor b = new Player(123, "TEST_PLAYER_NO2");
+        Actor b = new Player(123, "TEST_PLAYER_NO2", null);
         b.addItem(new WoodenShield(1));
         a.attack(b, BattleAction.ATTACK);
         assertEquals(Actor.BASE_HEALTH - ((int) (Actor.BASE_ATTACK * WoodenShield.DEFENCE)), b.getHealth());
@@ -91,7 +91,7 @@ public final class ActorTest {
         a.setMyBlock(t);
         addItem();
         a.takeHit(Actor.BASE_HEALTH);
-        a.die(null);
+        a.die();
         assertEquals(1, t.getItems().size());
     }
 
@@ -101,7 +101,7 @@ public final class ActorTest {
         a.setMyBlock(t);
         addItem();
         a.takeHit(Actor.BASE_HEALTH);
-        a.die(null);
+        a.die();
         assertEquals(false, t.getActorSet().contains(a));
     }
 
@@ -111,7 +111,7 @@ public final class ActorTest {
         a.setMyBlock(t);
         addItem();
         a.takeHit(Actor.BASE_HEALTH - 1);
-        a.die(null);
+        a.die();
         assertEquals(true, t.getActorSet().contains(a));
     }
 }

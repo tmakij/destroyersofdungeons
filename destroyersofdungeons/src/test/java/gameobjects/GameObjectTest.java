@@ -15,7 +15,7 @@ public final class GameObjectTest {
     @Before
     public void setUp() {
         go = new Tunnel(0);
-        go2 = new Player(0, "TEST_PLAYER");
+        go2 = new Player(0, "TEST_PLAYER", null);
     }
 
     @Test
@@ -51,7 +51,7 @@ public final class GameObjectTest {
 
     @Test
     public void testEqualsOtherClassFalse() {
-        Actor a = new Player(34, "TESTI_PELAAJA");
+        Actor a = new Player(34, "TEST_PLAYER_N02", null);
         assertEquals(false, go.equals(a));
     }
 

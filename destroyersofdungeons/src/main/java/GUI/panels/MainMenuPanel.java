@@ -13,11 +13,18 @@ import javax.swing.SwingConstants;
 import localisation.Dictionary;
 
 /**
- *
+ * The panel that holds the startgame button.
  */
 public final class MainMenuPanel extends AbstractPanel {
 
+    /**
+     * Creates a new instance of the main menu. Also ends the current game
+     * defined in the SwingGUI, if any.
+     *
+     * @param gui The gui where to add the panel and to end the game.
+     */
     public MainMenuPanel(SwingGUI gui) {
+        gui.endGame();
         panel.setLayout(new GridBagLayout());
         createStart(gui);
         createQuit(gui);
