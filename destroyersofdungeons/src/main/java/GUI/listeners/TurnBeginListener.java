@@ -9,6 +9,11 @@ import java.awt.event.ActionEvent;
  */
 public final class TurnBeginListener extends AbstractGUIListener {
 
+    /**
+     * Creates a new TurnBeginListener.
+     *
+     * @param gui SwingGUI that handles the game.
+     */
     public TurnBeginListener(SwingGUI gui) {
         super(gui);
     }

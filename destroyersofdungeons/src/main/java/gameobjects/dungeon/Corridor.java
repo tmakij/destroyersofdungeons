@@ -1,24 +1,25 @@
 package gameobjects.dungeon;
 
+import gameobjects.items.Treasure;
+
 /**
- * Corridor is a line of blocks. In the end of it there are one or more
+ * Corridor is a line of tunnel blocks. In the end of it there are one or more
  * corridors or the treasure.
  */
 public final class Corridor {
-    
+
     private final int lenght;
-    private Tunnel startBlock;
-    private Tunnel endBlock;
-    
+    private final Tunnel startBlock;
+    private final Tunnel endBlock;
+
+    /**
+     * Creates a new Corridor with a certain lenght.
+     *
+     * @param lenght The lenght of the Corridor.
+     */
     public Corridor(int lenght) {
         this.lenght = lenght;
-    }
-    
-    public Tunnel getStartBlock() {
-        return startBlock;
-    }
-    
-    public void generate() {
+
         // Test dungeon
         int ids = 0;
         Tunnel previous = new Tunnel(ids++);
@@ -30,6 +31,11 @@ public final class Corridor {
             previous.addBlock(block);
             previous = block;
         }
+        startBlock.getNextTo().get(0).addItem(new Treasure());
         endBlock = block;
+    }
+
+    public Tunnel getStartBlock() {
+        return startBlock;
     }
 }

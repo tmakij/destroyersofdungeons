@@ -12,7 +12,13 @@ public abstract class Itemholder extends GameObject {
 
     private final List<Item> items = new ArrayList<>();
 
-    public Itemholder(int id, String name) {
+    /**
+     * Creates a new ItemHolder.
+     *
+     * @param id The unique id.
+     * @param name The name of the object.
+     */
+    protected Itemholder(int id, String name) {
         super(id, name);
     }
 
@@ -28,7 +34,7 @@ public abstract class Itemholder extends GameObject {
     }
 
     /**
-     * Add an item to the tunnel.
+     * Add an item to the inventory of the itemholder.
      *
      * @param i Item to be added.
      */
@@ -37,7 +43,7 @@ public abstract class Itemholder extends GameObject {
     }
 
     /**
-     * Get the list of items in the tunnel.
+     * Get the list of items in the inventory of the itemholder.
      *
      * @return List of items in the tunnel.
      */

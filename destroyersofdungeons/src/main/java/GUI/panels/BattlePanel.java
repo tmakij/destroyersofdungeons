@@ -13,6 +13,8 @@ import logic.BattleAction;
 
 /**
  * The panel that handles all the battles between a player and another actor.
+ * Implements IUpdate. Update method should be called whenever turn or actors'
+ * healths are changed.
  */
 public final class BattlePanel extends AbstractPanel implements IUpdate {
 

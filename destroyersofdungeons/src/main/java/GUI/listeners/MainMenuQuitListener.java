@@ -8,6 +8,11 @@ import java.awt.event.ActionEvent;
  */
 public final class MainMenuQuitListener extends AbstractGUIListener {
 
+    /**
+     * Creates a new MainMenuQuitListener.
+     *
+     * @param gui SwingGUI that handles the game.
+     */
     public MainMenuQuitListener(SwingGUI gui) {
         super(gui);
     }

@@ -9,13 +9,19 @@ public abstract class GameObject {
     private final int id;
     private final String name;
 
-    public GameObject(int id, String name) {
+    /**
+     * Creates a new GameObject.
+     *
+     * @param id The unique id.
+     * @param name The name of the object.
+     */
+    protected GameObject(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
     @Override
-    public final String toString() {
+    public String toString() {
         return name;
     }
 

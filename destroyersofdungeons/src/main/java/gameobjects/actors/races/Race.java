@@ -8,6 +8,11 @@ public abstract class Race {
 
     private final String name;
 
+    /**
+     * Creates a new Race.
+     *
+     * @param name The name of the Race.
+     */
     public Race(String name) {
         this.name = name;
     }

@@ -17,4 +17,9 @@ public final class MonsterTest {
     public void testIsPlayerControlled() {
         assertEquals(false, mon.isPlayerControlled());
     }
+
+    @Test
+    public void testToStringGetsRaceName() {
+        assertEquals("Minotaur", mon.toString());
+    }
 }

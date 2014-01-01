@@ -1,25 +1,31 @@
 package gameobjects.actors;
 
-import constants.IntegerConstants;
+import constants.Constants;
 import gameobjects.Itemholder;
 import gameobjects.dungeon.Tunnel;
 import gameobjects.items.Item;
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.Iterator;
 import logic.BattleAction;
 
 /**
- * Base class for all actors in the game. Each actor has unique id.
+ * Base class for all actors in the game. Actors have health and they are
+ * located in some tunnel block. They are also itemholders.
  */
 public abstract class Actor extends Itemholder {
 
     private final Deque<Tunnel> myBlockHistory = new ArrayDeque<>();
     private int health;
 
+    /**
+     * Create a new Actor.
+     *
+     * @param id The unique id.
+     * @param name The name of the object.
+     */
     public Actor(int id, String name) {
         super(id, name);
-        health = IntegerConstants.ACTOR_BASE_HEALTH.getValue();
+        health = Constants.ACTOR_BASE_HEALTH;
     }
 
     /**
@@ -31,7 +37,7 @@ public abstract class Actor extends Itemholder {
     }
 
     /**
-     * Erases the actor from the game.
+     * Erases the actor from the game, if the actor is dead.
      *
      * @return Did the actor die.
      */
@@ -44,7 +50,10 @@ public abstract class Actor extends Itemholder {
         return false;
     }
 
-    public void retreat() {
+    /**
+     * Makes the actor retreat to the last tunnel block he remembers.
+     */
+    public final void retreat() {
         setMyBlock(myBlockHistory.peekLast());
         Tunnel first = getMyBlock();
         myBlockHistory.clear();
@@ -52,7 +61,8 @@ public abstract class Actor extends Itemholder {
     }
 
     /**
-     * Determines, wheter the actor has health > 0.
+     * Determines, wheter the actor has is alive. Actor is alive when he has
+     * positive health.
      *
      * @return Is the actor alive or not.
      */
@@ -87,7 +97,8 @@ public abstract class Actor extends Itemholder {
 
     /**
      * Moves the Actor to another block. Saves the previous block. Removes the
-     * actor from the previous block and adds to the new one.
+     * actor from the previous block and adds to the new one. The amount of
+     * blocks remembered is defined in constants.
      *
      * @param newBlock Where to move.
      */
@@ -97,7 +108,7 @@ public abstract class Actor extends Itemholder {
         }
         myBlockHistory.addFirst(newBlock);
         newBlock.addActor(this);
-        if (myBlockHistory.size() > IntegerConstants.TUNNEL_HISTORY.getValue()) {
+        if (myBlockHistory.size() > Constants.TUNNEL_HISTORY) {
             myBlockHistory.removeLast();
         }
     }
@@ -109,7 +120,7 @@ public abstract class Actor extends Itemholder {
      * @param act Multiplies the default damage by the action.
      */
     public final void attack(Actor to, BattleAction act) {
-        int amount = (int) (IntegerConstants.ACTOR_BASE_ATTACK.getValue() * act.actModifier());
+        int amount = (int) (Constants.ACTOR_BASE_ATTACK * act.actModifier());
         for (Item i : getItems()) {
             amount = i.onAttack(amount);
         }

@@ -40,9 +40,6 @@ public final class BattleActionListener extends AbstractGUIListener {
         if (battle.takeAction(act)) {
             if (attacker.isAlive() && current.equals(attacker) && !defender.isAlive()) {
                 gui.setPanel(new MoveResultPanel(gui));
-            } else if (defender.isAlive() && current.equals(defender) && !attacker.isAlive()) {
-                game.nextPlayer();
-                gui.setPanel(new TurnPanel(gui));
             } else {
                 game.nextPlayer();
                 gui.setPanel(new TurnPanel(gui));

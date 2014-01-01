@@ -1,7 +1,6 @@
 package gameobjects.items;
 
-import constants.DoubleConstants;
-import constants.IntegerConstants;
+import constants.Constants;
 import gameobjects.actors.Actor;
 import gameobjects.actors.monsters.Minotaur;
 import logic.BattleAction;
@@ -24,7 +23,7 @@ public final class WoodenShieldTest {
         Actor b = new Minotaur(1);
         b.addItem(i);
         a.attack(b, BattleAction.ATTACK);
-        assertEquals(IntegerConstants.ACTOR_BASE_HEALTH.getValue()
-                - ((int) (IntegerConstants.ACTOR_BASE_ATTACK.getValue() * DoubleConstants.WOODEN_SHIELD_DEFENSE.getValue())), b.getHealth());
+        assertEquals(Constants.ACTOR_BASE_HEALTH
+                - ((int) (Constants.ACTOR_BASE_ATTACK * Constants.WOODEN_SHIELD_DEFENSE)), b.getHealth());
     }
 }

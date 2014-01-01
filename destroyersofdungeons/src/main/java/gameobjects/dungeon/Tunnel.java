@@ -15,7 +15,7 @@ public final class Tunnel extends Itemholder {
     private final List<Actor> actors = new ArrayList<>();
 
     /**
-     * Create a new tunnel with a unnique id.
+     * Create a new tunnel with a unique id.
      *
      * @param id Unique id.
      */
@@ -35,7 +35,7 @@ public final class Tunnel extends Itemholder {
     /**
      * Get the list of neighbouring tunnel blocks.
      *
-     * @return List of neighbouring tunnel blocks
+     * @return List of neighbouring tunnel blocks.
      */
     public List<Tunnel> getNextTo() {
         return nextTo;

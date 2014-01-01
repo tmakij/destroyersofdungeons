@@ -19,7 +19,7 @@ public final class PlayerNamePanel extends AbstractPanel {
     /**
      * Create a new instance of the PlayerNamePanel.
      *
-     * @param gui The gui which holds the program.
+     * @param gui The SwingGUI which holds the program.
      */
     public PlayerNamePanel(SwingGUI gui) {
         SpringLayout layout = new SpringLayout();

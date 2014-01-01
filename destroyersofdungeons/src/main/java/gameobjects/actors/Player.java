@@ -33,6 +33,11 @@ public final class Player extends Actor {
         return false;
     }
 
+    /**
+     * Determines whether the Player has a tresure type item.
+     *
+     * @return Has the player the Treasure.
+     */
     public boolean hasTreasure() {
         for (Item i : getItems()) {
             if (i.getClass() == Treasure.class) {

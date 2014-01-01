@@ -15,10 +15,16 @@ import javax.swing.SpringLayout;
 import localisation.Dictionary;
 
 /**
- *
+ * Panel for the player, it shows player status and items, and the possible
+ * locations to move into.
  */
 public final class MainPanel extends AbstractPanel {
 
+    /**
+     * Create a new instance of the MainPanel.
+     *
+     * @param gui The SwingGUI which holds the program.
+     */
     public MainPanel(SwingGUI gui) {
         SpringLayout layout = new SpringLayout();
         panel.setLayout(layout);

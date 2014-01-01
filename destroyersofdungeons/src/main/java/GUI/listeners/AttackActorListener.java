@@ -12,6 +12,12 @@ public final class AttackActorListener extends AbstractGUIListener {
 
     private final Actor enemy;
 
+    /**
+     * Creates a new AttackActorListener.
+     *
+     * @param gui SwingGUI that handles the game.
+     * @param enemy The enemy against which the battle will be created.
+     */
     public AttackActorListener(SwingGUI gui, Actor enemy) {
         super(gui);
         this.enemy = enemy;

@@ -1,6 +1,6 @@
 package gameobjects.items;
 
-import constants.DoubleConstants;
+import constants.Constants;
 
 /**
  * Woodenshield item, decrease damage taken. Overrides onDamageReceived.
@@ -18,6 +18,6 @@ public final class WoodenShield extends Item {
 
     @Override
     public int onDamageReceived(int amount) {
-        return (int) (amount * DoubleConstants.WOODEN_SHIELD_DEFENSE.getValue());
+        return (int) (amount * Constants.WOODEN_SHIELD_DEFENSE);
     }
 }

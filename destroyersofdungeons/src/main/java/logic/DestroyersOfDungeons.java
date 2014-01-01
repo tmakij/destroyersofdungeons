@@ -5,11 +5,13 @@ import gameobjects.dungeon.Tunnel;
 import gameobjects.actors.Player;
 import gameobjects.items.WoodenSword;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
 /**
- * Main class for the game
+ * Main class for the game. Holds players and their deathtimes, the game map and
+ * handles the turns.
  */
 public final class DestroyersOfDungeons {
 
@@ -22,16 +24,14 @@ public final class DestroyersOfDungeons {
     private int totalTurns = 0;
 
     /**
-     * Creates a new instance of the game.
+     * Creates a new instance of the game, and a new dungeon for it.
      */
     public DestroyersOfDungeons() {
         map = new Map(0, 10);
-        map.generate();
     }
 
     /**
      * Selects next player.
-     *
      */
     public void nextPlayer() {
         if (players.size() == 2) {
@@ -46,9 +46,9 @@ public final class DestroyersOfDungeons {
     }
 
     /**
-     * Adds a new player to the game.
+     * Adds a new player to the game. Currently supports only 2 players!
      *
-     * @param name the name of the player.
+     * @param name The name of the player.
      */
     public void addPlayer(String name) {
         Player p = new Player(playerIds++, name, this);
@@ -61,11 +61,11 @@ public final class DestroyersOfDungeons {
     }
 
     /**
-     * Starts the turn.
+     * Gets the tunnel blocks next to current player's block.
      *
      * @return Blocks next to player's current block.
      */
-    public List<Tunnel> play() {
+    public List<Tunnel> getMovingPossibilities() {
         Tunnel nextBlock = currentPlayer.getMyBlock();
         List<Tunnel> nextTo = nextBlock.getNextTo();
         return nextTo;
@@ -88,6 +88,11 @@ public final class DestroyersOfDungeons {
         return block;
     }
 
+    /**
+     * Delets player from the game, and marks his death time.
+     *
+     * @param p Player to be removed.
+     */
     public void removePlayer(Player p) {
         players.remove(p);
         deathTimes.put(p, totalTurns);
@@ -96,10 +101,11 @@ public final class DestroyersOfDungeons {
         }
     }
 
-    public boolean hasPlayers() {
-        return !players.isEmpty();
-    }
-
+    /**
+     * Get the winning player.
+     *
+     * @return The winner. Returns null if there is none.
+     */
     public Player getWinner() {
         for (Player p : players) {
             if (p.hasTreasure()) {
@@ -109,24 +115,62 @@ public final class DestroyersOfDungeons {
         return null;
     }
 
+    /**
+     * Get the player death times.
+     *
+     * @return The player death times.
+     */
     public java.util.Map<Player, Integer> getDeathTimes() {
         return deathTimes;
     }
 
+    /**
+     * Checks if the last move moved player to a block with other actors or
+     * items.
+     *
+     * @return Whether collisions were created.
+     */
     public boolean lastMoveCreatedCollisions() {
         Tunnel t = currentPlayer.getMyBlock();
         return !t.getOtherActors(currentPlayer).isEmpty() || !t.getItems().isEmpty();
     }
 
+    /**
+     * Get the player currently in turn.
+     *
+     * @return The player currently in turn.
+     */
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
 
+    /**
+     * Get all other players in the game, even the dead ones.
+     *
+     * @param me The player who to ignore.
+     * @return The list of other players.
+     */
+    public List<Player> getAllOtherPlayers(Player me) {
+        List<Player> others = new ArrayList<>();
+        addOtherPlayers(others, players, me);
+        addOtherPlayers(others, deathTimes.keySet(), me);
+        return others;
+    }
+
+    /**
+     * Get the list of living players in the game.
+     *
+     * @return List of living players in the game.
+     */
     public List<Player> getPlayers() {
         return players;
     }
 
-    public Map getMap() {
-        return map;
+    private void addOtherPlayers(List<Player> list, Collection<Player> where, Player ignore) {
+        for (Player p : where) {
+            if (!p.equals(ignore)) {
+                list.add(p);
+            }
+        }
     }
 }

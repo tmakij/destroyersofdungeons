@@ -9,6 +9,11 @@ import java.awt.event.ActionEvent;
  */
 public final class MainMenuStartListener extends AbstractGUIListener {
 
+    /**
+     * Creates a new MainMenuStartListener.
+     *
+     * @param gui SwingGUI that handles the game.
+     */
     public MainMenuStartListener(SwingGUI gui) {
         super(gui);
     }

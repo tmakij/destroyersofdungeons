@@ -40,6 +40,7 @@
                 <configuration>
                     <instrumentation>
                         <excludes>
+                            <exclude>constants/*.class</exclude>
                             <exclude>main/*.class</exclude>
                             <exclude>GUI/*.class</exclude>
                             <exclude>GUI/listeners/*.class</exclude>

@@ -10,6 +10,11 @@ import java.awt.event.ActionEvent;
  */
 public final class TurnEndListener extends AbstractGUIListener {
 
+    /**
+     * Creates a new TurnEndListener.
+     *
+     * @param gui SwingGUI that handles the game.
+     */
     public TurnEndListener(SwingGUI gui) {
         super(gui);
     }

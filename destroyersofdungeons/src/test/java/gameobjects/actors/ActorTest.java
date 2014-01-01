@@ -1,7 +1,6 @@
 package gameobjects.actors;
 
-import constants.DoubleConstants;
-import constants.IntegerConstants;
+import constants.Constants;
 import gameobjects.actors.monsters.Minotaur;
 import gameobjects.actors.monsters.Monster;
 import gameobjects.dungeon.Tunnel;
@@ -55,7 +54,7 @@ public final class ActorTest {
     public void testAttack() {
         Actor b = new Player(123, "TEST_PLAYER_NO2", null);
         a.attack(b, BattleAction.ATTACK);
-        assertEquals(IntegerConstants.ACTOR_BASE_HEALTH.getValue() - IntegerConstants.ACTOR_BASE_ATTACK.getValue(), b.getHealth());
+        assertEquals(Constants.ACTOR_BASE_HEALTH - Constants.ACTOR_BASE_ATTACK, b.getHealth());
     }
 
     @Test
@@ -63,8 +62,8 @@ public final class ActorTest {
         Actor b = new Player(123, "TEST_PLAYER_NO2", null);
         addItem();
         a.attack(b, BattleAction.ATTACK);
-        assertEquals(IntegerConstants.ACTOR_BASE_HEALTH.getValue()
-                - ((int) (IntegerConstants.ACTOR_BASE_ATTACK.getValue() * DoubleConstants.WOODEN_SWORD_ATTACK.getValue())), b.getHealth());
+        assertEquals(Constants.ACTOR_BASE_HEALTH
+                - ((int) (Constants.ACTOR_BASE_ATTACK * Constants.WOODEN_SWORD_ATTACK)), b.getHealth());
     }
 
     @Test
@@ -72,8 +71,8 @@ public final class ActorTest {
         Actor b = new Player(123, "TEST_PLAYER_NO2", null);
         b.addItem(new WoodenShield(1));
         a.attack(b, BattleAction.ATTACK);
-        assertEquals(IntegerConstants.ACTOR_BASE_HEALTH.getValue()
-                - ((int) (IntegerConstants.ACTOR_BASE_ATTACK.getValue() * DoubleConstants.WOODEN_SHIELD_DEFENSE.getValue())), b.getHealth());
+        assertEquals(Constants.ACTOR_BASE_HEALTH
+                - ((int) (Constants.ACTOR_BASE_ATTACK * Constants.WOODEN_SHIELD_DEFENSE)), b.getHealth());
     }
 
     @Test
@@ -83,7 +82,7 @@ public final class ActorTest {
 
     @Test
     public void testDyeingAndNotAlive() {
-        a.takeHit(IntegerConstants.ACTOR_BASE_HEALTH.getValue());
+        a.takeHit(Constants.ACTOR_BASE_HEALTH);
         assertEquals(false, a.isAlive());
     }
 
@@ -91,7 +90,7 @@ public final class ActorTest {
     public void testDyeingAndDropping() {
         setTunnel();
         addItem();
-        a.takeHit(IntegerConstants.ACTOR_BASE_HEALTH.getValue());
+        a.takeHit(Constants.ACTOR_BASE_HEALTH);
         a.die();
         assertEquals(1, t.getItems().size());
     }
@@ -99,7 +98,7 @@ public final class ActorTest {
     @Test
     public void testDyeingAndRemovalLeaveFromBlock() {
         setTunnel();
-        a.takeHit(IntegerConstants.ACTOR_BASE_HEALTH.getValue());
+        a.takeHit(Constants.ACTOR_BASE_HEALTH);
         a.die();
         assertEquals(false, t.getActorSet().contains(a));
     }
@@ -107,7 +106,7 @@ public final class ActorTest {
     @Test
     public void testLivingDontDieStayOnBlock() {
         setTunnel();
-        a.takeHit(IntegerConstants.ACTOR_BASE_HEALTH.getValue() - 1);
+        a.takeHit(Constants.ACTOR_BASE_HEALTH - 1);
         a.die();
         assertEquals(true, t.getActorSet().contains(a));
     }
@@ -119,7 +118,7 @@ public final class ActorTest {
 
     @Test
     public void testDyeingIfTryingToDie() {
-        a.takeHit(IntegerConstants.ACTOR_BASE_HEALTH.getValue());
+        a.takeHit(Constants.ACTOR_BASE_HEALTH);
         setTunnel();
         assertEquals(true, a.die());
     }
@@ -143,7 +142,7 @@ public final class ActorTest {
 
     private Tunnel TunnelHistoryWorks(int addedToMax, int returnN) {
         Tunnel first = null;
-        for (int i = 0; i < IntegerConstants.TUNNEL_HISTORY.getValue() + addedToMax; i++) {
+        for (int i = 0; i < Constants.TUNNEL_HISTORY + addedToMax; i++) {
             t = new Tunnel((i + 1) * 12);
             if (i == returnN) {
                 first = t;

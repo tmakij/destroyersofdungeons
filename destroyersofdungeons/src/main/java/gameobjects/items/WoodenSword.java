@@ -1,6 +1,6 @@
 package gameobjects.items;
 
-import constants.DoubleConstants;
+import constants.Constants;
 
 /**
  * Woodensword item, increases attack strength slightly. Overrides onattack.
@@ -18,6 +18,6 @@ public final class WoodenSword extends Item {
 
     @Override
     public int onAttack(int amount) {
-        return (int) (amount * DoubleConstants.WOODEN_SWORD_ATTACK.getValue());
+        return (int) (amount * Constants.WOODEN_SWORD_ATTACK);
     }
 }

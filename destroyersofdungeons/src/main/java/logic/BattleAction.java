@@ -1,15 +1,15 @@
 package logic;
 
-import constants.DoubleConstants;
+import constants.Constants;
 
 /**
  * Defines possible actions that one can take in a battle.
  */
 public enum BattleAction {
 
-    ATTACK(DoubleConstants.BATTLEACTION_ATTACK.getValue()),
-    DEFEND(DoubleConstants.BATTLEACTION_DEFEND.getValue()),
-    CAST_SPELL(DoubleConstants.BATTLEACTION_CASTSPELL.getValue()),
+    ATTACK(Constants.BATTLEACTION_ATTACK),
+    DEFEND(Constants.BATTLEACTION_DEFEND),
+    CAST_SPELL(Constants.BATTLEACTION_CASTSPELL),
     DO_NOTHING(1.0D),
     FLEE(1.0D);
 
@@ -19,6 +19,11 @@ public enum BattleAction {
         this.value = value;
     }
 
+    /**
+     * Get the value associated with the BattleAct.
+     *
+     * @return The value.
+     */
     public double actModifier() {
         return value;
     }

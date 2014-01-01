@@ -1,6 +1,7 @@
 package GUI.panels;
 
 import GUI.SwingGUI;
+import GUI.listeners.GoToMainMenuListener;
 import gameobjects.actors.Player;
 import java.awt.Component;
 import java.util.Map;
@@ -10,16 +11,26 @@ import javax.swing.SpringLayout;
 import localisation.Dictionary;
 import logic.DestroyersOfDungeons;
 
+/**
+ * The panel that shows end game results. Should be created when the game is
+ * wanted to be ended.
+ */
 public final class EndGamePanel extends AbstractPanel {
 
+    /**
+     * Create a new instance of the EndGamePanel.
+     *
+     * @param gui The SwingGUI which holds the program.
+     */
     public EndGamePanel(SwingGUI gui) {
         DestroyersOfDungeons game = gui.getGame();
         SpringLayout layout = new SpringLayout();
         panel.setLayout(layout);
 
         addEnd(layout);
-        addWinner(layout, game);
-        makePlayerList(game, layout);
+        Player winner = game.getWinner();
+        addWinner(layout, winner);
+        makePlayerList(game, layout, winner);
         addReturn(layout, gui);
     }
 
@@ -34,14 +45,15 @@ public final class EndGamePanel extends AbstractPanel {
                 50,
                 SpringLayout.VERTICAL_CENTER, last
         );
+        returnMainMenu.addActionListener(new GoToMainMenuListener(gui));
         panel.add(returnMainMenu);
     }
 
     private void addEnd(SpringLayout layout) {
         JLabel end = new JLabel(Dictionary.getValue("GAME_END"));
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, end,
-                50,
-                SpringLayout.NORTH, panel
+                -250,
+                SpringLayout.HORIZONTAL_CENTER, panel
         );
         layout.putConstraint(SpringLayout.VERTICAL_CENTER, end,
                 -50,
@@ -50,30 +62,32 @@ public final class EndGamePanel extends AbstractPanel {
         panel.add(end);
     }
 
-    private void addWinner(SpringLayout layout, DestroyersOfDungeons game) {
-        JLabel winner = new JLabel();
-        if (game.hasPlayers()) {
-            winner.setText(Dictionary.getValue("WINNER", game.getWinner()));
+    private void addWinner(SpringLayout layout, Player winner) {
+        JLabel winnerAnnounce = new JLabel();
+        if (winner != null) {
+            winnerAnnounce.setText(Dictionary.getValue("WINNER", winner));
         } else {
-            winner.setText(Dictionary.getValue("ALL_LOST"));
+            winnerAnnounce.setText(Dictionary.getValue("ALL_LOST"));
         }
         Component last = getLastComponent();
-        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, winner,
-                0,
-                SpringLayout.NORTH, last
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, winnerAnnounce,
+                150,
+                SpringLayout.HORIZONTAL_CENTER, last
         );
-        layout.putConstraint(SpringLayout.VERTICAL_CENTER, winner,
-                25,
+        layout.putConstraint(SpringLayout.VERTICAL_CENTER, winnerAnnounce,
+                30,
                 SpringLayout.VERTICAL_CENTER, last
         );
-        panel.add(winner);
+        panel.add(winnerAnnounce);
     }
 
-    private void makePlayerList(DestroyersOfDungeons game, SpringLayout layout) {
+    private void makePlayerList(DestroyersOfDungeons game, SpringLayout layout, Player winner) {
         Map<Player, Integer> deaths = game.getDeathTimes();
-        for (Player p : game.getPlayers()) {
-            int turn = deaths.containsKey(p) ? deaths.get(p) : -1;
-            listPlayer(p, turn, layout);
+        for (Player p : game.getAllOtherPlayers(winner)) {
+            if (!p.equals(winner)) {
+                int turn = deaths.containsKey(p) ? deaths.get(p) : -1;
+                listPlayer(p, turn, layout);
+            }
         }
     }
 
@@ -84,18 +98,18 @@ public final class EndGamePanel extends AbstractPanel {
 
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, player,
                 0,
-                SpringLayout.NORTH, last
+                SpringLayout.WEST, last
         );
         layout.putConstraint(SpringLayout.VERTICAL_CENTER, player,
-                25,
+                40,
                 SpringLayout.VERTICAL_CENTER, last
         );
-        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, status,
-                0,
-                SpringLayout.NORTH, player
+        layout.putConstraint(SpringLayout.WEST, status,
+                20,
+                SpringLayout.EAST, player
         );
         layout.putConstraint(SpringLayout.VERTICAL_CENTER, status,
-                25,
+                0,
                 SpringLayout.VERTICAL_CENTER, player
         );
 

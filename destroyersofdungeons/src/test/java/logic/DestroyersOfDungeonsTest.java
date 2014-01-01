@@ -4,6 +4,7 @@ import gameobjects.dungeon.Tunnel;
 import gameobjects.actors.Player;
 import gameobjects.items.Treasure;
 import gameobjects.items.WoodenSword;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -21,17 +22,6 @@ public final class DestroyersOfDungeonsTest {
 
     private void addAnotherPlayer() {
         game.addPlayer("TEST_PLAYER_NO2");
-    }
-
-    @Test
-    public void testIsPlayersEmpty() {
-        game = new DestroyersOfDungeons();
-        assertEquals(false, game.hasPlayers());
-    }
-
-    @Test
-    public void testIsPlayersHasPlayers() {
-        assertEquals(true, game.hasPlayers());
     }
 
     @Test
@@ -102,11 +92,10 @@ public final class DestroyersOfDungeonsTest {
     }
 
     @Test
-    public void testPlay() {
-        addAnotherPlayer();
-        Tunnel firstBlock = game.getMap().getAStartingBlock();
+    public void testgetMovingPossibilities() {
+        Tunnel firstBlock = game.getCurrentPlayer().getMyBlock();
         List<Tunnel> nextTo = firstBlock.getNextTo();
-        assertEquals(nextTo, game.play());
+        assertEquals(nextTo, game.getMovingPossibilities());
     }
 
     @Test
@@ -183,6 +172,9 @@ public final class DestroyersOfDungeonsTest {
     @Test
     public void testLastMoveDidNotCreateCollisionsAfterMove() {
         addAnotherPlayer();
+        List<Tunnel> nextTo = game.getCurrentPlayer().getMyBlock().getNextTo();
+        nextTo.clear();
+        nextTo.add(new Tunnel(0));
         game.movePlayerTo(0);
         assertEquals(false, game.lastMoveCreatedCollisions());
     }
@@ -205,5 +197,29 @@ public final class DestroyersOfDungeonsTest {
         p.addItem(new Treasure());
         game.nextPlayer();
         assertEquals(p, game.getWinner());
+    }
+
+    private List<Player> createOthers() {
+        addAnotherPlayer();
+        Player p = game.getCurrentPlayer();
+        game.nextPlayer();
+        List<Player> others = new ArrayList<>();
+        others.add(p);
+        return others;
+    }
+
+    @Test
+    public void testGetOtherPlayersWork() {
+        List<Player> others = createOthers();
+        assertEquals(others, game.getAllOtherPlayers(game.getCurrentPlayer()));
+    }
+
+    @Test
+    public void testGetOtherPlayersWorkWithDeath() {
+        List<Player> others = createOthers();
+        Player p3 = new Player(0, "TEST_PLAYER_NO3", game);
+        others.add(p3);
+        game.getDeathTimes().put(p3, Integer.SIZE);
+        assertEquals(others, game.getAllOtherPlayers(game.getCurrentPlayer()));
     }
 }

@@ -1,6 +1,6 @@
 package gameobjects.actors;
 
-import constants.IntegerConstants;
+import constants.Constants;
 import logic.DestroyersOfDungeons;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +16,7 @@ public final class PlayerTest {
         game.addPlayer("TEST_PLAYER");
         game.addPlayer("TEST_PLAYER_NO2");
         p = game.getCurrentPlayer();
-        p.takeHit(IntegerConstants.ACTOR_BASE_HEALTH.getValue());
+        p.takeHit(Constants.ACTOR_BASE_HEALTH);
         p.die();
     }
 
@@ -72,7 +72,7 @@ public final class PlayerTest {
     @Test
     public void testDefLosersDie() {
         setUpBattle();
-        def.takeHit(IntegerConstants.ACTOR_BASE_HEALTH.getValue());
+        def.takeHit(Constants.ACTOR_BASE_HEALTH);
         def.die();
         assertEquals(false, game.getPlayers().contains(def));
     }
@@ -80,7 +80,7 @@ public final class PlayerTest {
     @Test
     public void testAttLosersDie() {
         setUpBattle();
-        att.takeHit(IntegerConstants.ACTOR_BASE_HEALTH.getValue());
+        att.takeHit(Constants.ACTOR_BASE_HEALTH);
         att.die();
         assertEquals(false, game.getPlayers().contains(att));
     }

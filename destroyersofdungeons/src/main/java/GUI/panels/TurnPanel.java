@@ -9,10 +9,16 @@ import javax.swing.SpringLayout;
 import localisation.Dictionary;
 
 /**
- * Appears when the turn is changed. Has only the option to start the turn.
+ * Appears when the turn is changed. Tells whose turn it is and allows to start
+ * it.
  */
 public final class TurnPanel extends AbstractPanel {
 
+    /**
+     * Create a new instance of the TurnPanel.
+     *
+     * @param gui The SwingGUI which holds the program.
+     */
     public TurnPanel(SwingGUI gui) {
         SpringLayout layout = new SpringLayout();
         panel.setLayout(layout);

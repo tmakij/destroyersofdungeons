@@ -13,6 +13,13 @@ public final class MoveToListener extends AbstractGUIListener {
 
     private final int moveTo;
 
+    /**
+     * Creates a new MoveToListener.
+     *
+     * @param gui SwingGUI that handles the game.
+     * @param moveTo The tunnel where to move. Will be picked from the player's
+     * block's nextTo list of tunnels.
+     */
     public MoveToListener(SwingGUI gui, int moveTo) {
         super(gui);
         this.moveTo = moveTo;

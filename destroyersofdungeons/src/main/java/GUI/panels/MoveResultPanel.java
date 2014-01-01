@@ -17,10 +17,16 @@ import localisation.Dictionary;
 import logic.DestroyersOfDungeons;
 
 /**
- *
+ * Is created when the actor moves. Shows the results of the move, such as found
+ * items and enemies.
  */
 public final class MoveResultPanel extends AbstractPanel {
 
+    /**
+     * Create a new instance of the MoveResultPanel.
+     *
+     * @param gui The SwingGUI which holds the program.
+     */
     public MoveResultPanel(SwingGUI gui) {
         DestroyersOfDungeons game = gui.getGame();
         SpringLayout layout = new SpringLayout();
