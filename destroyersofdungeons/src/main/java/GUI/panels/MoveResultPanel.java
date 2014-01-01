@@ -141,7 +141,7 @@ public final class MoveResultPanel extends AbstractPanel {
     }
 
     private void addYouMoved(DestroyersOfDungeons game, SpringLayout layout) {
-        JLabel youMovedTo = new JLabel(Dictionary.getValue("YOU_MOVED_TO") + game.getCurrentPlayer().getMyBlock());
+        JLabel youMovedTo = new JLabel(Dictionary.getValue("YOU_MOVED_TO", game.getCurrentPlayer().getMyBlock()));
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, youMovedTo,
                 0,
                 SpringLayout.HORIZONTAL_CENTER, panel);

@@ -22,18 +22,30 @@ public final class TurnPanel extends AbstractPanel {
     public TurnPanel(SwingGUI gui) {
         SpringLayout layout = new SpringLayout();
         panel.setLayout(layout);
+        addTurnNumber(gui, layout);
         addWhoseTurn(gui, layout);
         addStartTurn(gui, layout);
+    }
+
+    private void addTurnNumber(SwingGUI gui, SpringLayout layout) {
+        JLabel number = new JLabel(Dictionary.getValue("TURN_N", gui.getGame().getTotalTurns()));
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, number,
+                0,
+                SpringLayout.HORIZONTAL_CENTER, panel);
+        layout.putConstraint(SpringLayout.VERTICAL_CENTER, number,
+                -20,
+                SpringLayout.VERTICAL_CENTER, panel);
+        panel.add(number);
     }
 
     private void addWhoseTurn(SwingGUI gui, SpringLayout layout) {
         JLabel whoseTurn = new JLabel(Dictionary.getValue("CURRENT_TURN", gui.getGame().getCurrentPlayer()));
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, whoseTurn,
                 0,
-                SpringLayout.HORIZONTAL_CENTER, panel);
+                SpringLayout.HORIZONTAL_CENTER, getLastComponent());
         layout.putConstraint(SpringLayout.VERTICAL_CENTER, whoseTurn,
-                0,
-                SpringLayout.VERTICAL_CENTER, panel);
+                40,
+                SpringLayout.VERTICAL_CENTER, getLastComponent());
         panel.add(whoseTurn);
     }
 

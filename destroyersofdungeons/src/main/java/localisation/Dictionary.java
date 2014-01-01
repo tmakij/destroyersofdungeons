@@ -1,7 +1,9 @@
 package localisation;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -26,16 +28,12 @@ public enum Dictionary {
     @SuppressWarnings("ConvertToTryWithResources")
     public static void loadText(String language) throws IOException, UnsupportedOperationException {
         InputStream localfile = Dictionary.class.getResourceAsStream("/localisation/localtext.txt");
-        Scanner scan = new Scanner(localfile);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(localfile, "UTF-8"));
         Dictionary.language = language;
-        int n = getLineNumber(scan.nextLine());
-        if (n == 0) {
-            strings = null;
-            throw new UnsupportedOperationException("Invalid language, loading cannot proceed");
-        }
+        int n = getLineNumber(reader.readLine());
         strings = new HashMap<>();
-        while (scan.hasNextLine()) {
-            String line = scan.nextLine();
+        String line;
+        while ((line = reader.readLine()) != null) {
             String[] lineSplit = line.split(";");
             if (lineSplit.length > n) {
                 strings.put(lineSplit[0], lineSplit[n]);
@@ -52,7 +50,8 @@ public enum Dictionary {
                 return i;
             }
         }
-        return 0;
+        strings = null;
+        throw new UnsupportedOperationException("Invalid language, loading cannot proceed");
     }
 
     /**

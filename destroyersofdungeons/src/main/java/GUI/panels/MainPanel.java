@@ -65,7 +65,7 @@ public final class MainPanel extends AbstractPanel {
     }
 
     private JLabel setMyLocation(SwingGUI gui, SpringLayout layout) {
-        JLabel myLocation = new JLabel(Dictionary.getValue("MY_LOCATION") + gui.getGame().getCurrentPlayer().getMyBlock());
+        JLabel myLocation = new JLabel(Dictionary.getValue("MY_LOCATION", gui.getGame().getCurrentPlayer().getMyBlock()));
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, myLocation,
                 0,
                 SpringLayout.HORIZONTAL_CENTER, panel);

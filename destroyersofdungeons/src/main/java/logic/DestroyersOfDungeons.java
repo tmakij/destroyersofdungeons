@@ -20,7 +20,7 @@ public final class DestroyersOfDungeons {
     private Player currentPlayer;
     private int current = 0;
     private int playerIds = 0;
-    private int totalTurns = 0;
+    private int totalTurns = 1;
     private int playerTurns = 0;
 
     /**

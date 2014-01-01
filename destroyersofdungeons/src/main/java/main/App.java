@@ -11,7 +11,7 @@ enum App {
 
     public static void main(String[] args) {
         try {
-            Dictionary.loadText("english");
+            Dictionary.loadText("finnish");
         } catch (IOException | UnsupportedOperationException ex) {
         }
         Monster.loadRaces();
