@@ -30,38 +30,38 @@ public final class MainPanel extends AbstractPanel {
         panel.setLayout(layout);
 
         JLabel myLocation = setMyLocation(gui, layout);
-        JLabel itemsTitle = setItemsTitle(layout, myLocation);
+        createHealthStatus(layout, gui);
+        setItemsTitle(layout, myLocation);
 
-        createItemList(gui, layout, itemsTitle);
+        createItemList(gui, layout);
 
         JLabel titleLabel = setMoveToTitle(layout);
         createButtonsForTunnels(gui, layout, titleLabel);
     }
 
-    private void createItemList(SwingGUI gui, SpringLayout layout, JLabel itemsTitle) {
+    private void createItemList(SwingGUI gui, SpringLayout layout) {
         List<Item> p_items = gui.getGame().getCurrentPlayer().getItems();
         JList items = new JList(p_items.toArray());
         JScrollPane scroll = new JScrollPane(items);
         layout.putConstraint(SpringLayout.NORTH, scroll,
                 0,
-                SpringLayout.SOUTH, itemsTitle);
+                SpringLayout.SOUTH, getLastComponent());
         layout.putConstraint(SpringLayout.EAST, scroll,
                 0,
                 SpringLayout.VERTICAL_CENTER, panel);
         layout.putConstraint(SpringLayout.WEST, scroll,
                 0,
-                SpringLayout.VERTICAL_CENTER, itemsTitle);
+                SpringLayout.VERTICAL_CENTER, getLastComponent());
         items.setMaximumSize(new Dimension(50, 50));
         panel.add(scroll);
     }
 
-    private JLabel setItemsTitle(SpringLayout layout, JLabel myLocation) {
+    private void setItemsTitle(SpringLayout layout, JLabel myLocation) {
         JLabel itemsTitle = new JLabel(Dictionary.getValue("ITEMS_TITLE"));
         layout.putConstraint(SpringLayout.NORTH, itemsTitle,
                 0,
                 SpringLayout.SOUTH, myLocation);
         panel.add(itemsTitle);
-        return itemsTitle;
     }
 
     private JLabel setMyLocation(SwingGUI gui, SpringLayout layout) {
@@ -83,6 +83,17 @@ public final class MainPanel extends AbstractPanel {
                 SpringLayout.EAST, panel);
         panel.add(label);
         return label;
+    }
+
+    private void createHealthStatus(SpringLayout layout, SwingGUI gui) {
+        JLabel status = new JLabel(Dictionary.getValue("MY_HEALTH", gui.getGame().getCurrentPlayer().getHealth()));
+        layout.putConstraint(SpringLayout.NORTH, status,
+                5,
+                SpringLayout.SOUTH, getLastComponent());
+        layout.putConstraint(SpringLayout.WEST, status,
+                0,
+                SpringLayout.WEST, getLastComponent());
+        panel.add(status);
     }
 
     private void createButtonsForTunnels(SwingGUI gui, SpringLayout layout, Component c) {

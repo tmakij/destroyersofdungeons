@@ -1,12 +1,15 @@
 package logic;
 
-import gameobjects.dungeon.Map;
+import gameobjects.dungeon.Dungeon;
 import gameobjects.dungeon.Tunnel;
 import gameobjects.actors.Player;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Main class for the game. Holds players and their deathtimes, the game map and
@@ -14,44 +17,42 @@ import java.util.List;
  */
 public final class DestroyersOfDungeons {
 
+    private final Set<Player> playedTurn = new HashSet<>();
     private final List<Player> players = new ArrayList<>();
-    private final java.util.Map<Player, Integer> deathTimes = new HashMap<>();
-    private final Map map;
+    private final Map<Player, Integer> deathTimes = new HashMap<>();
+    private final Dungeon map;
     private Player currentPlayer;
     private int current = 0;
     private int playerIds = 0;
     private int totalTurns = 1;
-    private int playerTurns = 0;
 
     /**
      * Creates a new instance of the game, and a new dungeon for it.
      */
     public DestroyersOfDungeons() {
-        map = new Map(0, 10);
+        map = new Dungeon(0, 10);
     }
 
     /**
-     * Selects next player.
+     * Selects next player, and increments the turncounter if necessary.
      */
     public void nextPlayer() {
-        playerTurns++;
-        if (players.size() == 2) {
-            current = current == players.size() - 1 ? 0 : current + 1;
-        } else if (players.size() == 1) {
-            current = 0;
-        } else {
-            throw new UnsupportedOperationException("Unsupported amount of players");
+        playedTurn.add(currentPlayer);
+        if (current < players.size() && playedTurn.contains(players.get(current))) {
+            current++;
         }
-        if (playerTurns == players.size()) {
-            totalTurns++;
-            playerTurns = 0;
+        if (current >= players.size()) {
+            current = 0;
         }
         currentPlayer = players.get(current);
-
+        if (playedTurn.size() >= players.size() && playedTurn.contains(currentPlayer)) {
+            totalTurns++;
+            playedTurn.clear();
+        }
     }
 
     /**
-     * Adds a new player to the game. Currently supports only 2 players!
+     * Adds a new player to the game.
      *
      * @param name The name of the player.
      */
@@ -124,7 +125,7 @@ public final class DestroyersOfDungeons {
      *
      * @return The player death times.
      */
-    public java.util.Map<Player, Integer> getDeathTimes() {
+    public Map<Player, Integer> getDeathTimes() {
         return deathTimes;
     }
 

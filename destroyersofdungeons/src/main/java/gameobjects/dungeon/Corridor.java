@@ -1,5 +1,6 @@
 package gameobjects.dungeon;
 
+import gameobjects.actors.monsters.Minotaur;
 import gameobjects.items.Treasure;
 
 /**
@@ -31,7 +32,9 @@ public final class Corridor {
             previous.addBlock(block);
             previous = block;
         }
-        startBlock.getNextTo().get(0).addItem(new Treasure());
+        Minotaur m = new Minotaur(0);
+        //m.setMyBlock(startBlock.getNextTo().get(0));
+        startBlock.getNextTo().get(0).getNextTo().get(1).addItem(new Treasure());
         endBlock = block;
     }
 

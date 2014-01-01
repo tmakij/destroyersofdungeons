@@ -66,18 +66,6 @@ public final class DestroyersOfDungeonsTest {
     }
 
     @Test
-    public void testNextIfTooManyPlayers() {
-        addAnotherPlayer();
-        addAnotherPlayer();
-        try {
-            game.nextPlayer();
-            fail("You can add too many players.");
-        } catch (UnsupportedOperationException ex) {
-            assertEquals(ex.getClass(), UnsupportedOperationException.class);
-        }
-    }
-
-    @Test
     public void test2NextPlayer() {
         addAnotherPlayer();
         game.nextPlayer();
@@ -225,7 +213,7 @@ public final class DestroyersOfDungeonsTest {
 
     @Test
     public void testTotalTurnDefault() {
-        assertEquals(0, game.getTotalTurns());
+        assertEquals(1, game.getTotalTurns());
     }
 
     @Test
@@ -235,6 +223,6 @@ public final class DestroyersOfDungeonsTest {
         for (int i = 0; i < 7 * playerCount; i++) {
             game.nextPlayer();
         }
-        assertEquals(7, game.getTotalTurns());
+        assertEquals(8, game.getTotalTurns());
     }
 }

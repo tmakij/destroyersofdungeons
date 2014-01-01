@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The map holds all the corridors.
+ * The Dungeon holds all the corridors.
  */
-public final class Map {
+public final class Dungeon {
 
     private final int minSize;
     private final int maxSize;
@@ -15,10 +15,10 @@ public final class Map {
     /**
      * Initialize a new Dungeon, that is randomly generated.
      *
-     * @param minSize Minimium amount of corridors in the map.
-     * @param maxSize Maximium amount of corridors in the map.
+     * @param minSize Minimium amount of corridors in the Dungeon.
+     * @param maxSize Maximium amount of corridors in the Dungeon.
      */
-    public Map(int minSize, int maxSize) {
+    public Dungeon(int minSize, int maxSize) {
         this.minSize = minSize;
         this.maxSize = maxSize;
         Corridor c = new Corridor(10);

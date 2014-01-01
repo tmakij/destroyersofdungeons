@@ -29,8 +29,12 @@ public final class Battle {
         this.defender = defender;
         this.current = attacker;
         this.gui = gui;
-        this.rand = new Random();
         this.lastAction = BattleAction.DO_NOTHING;
+        Random r = null;
+        if (!attacker.isPlayerControlled() || !defender.isPlayerControlled()) {
+            r = new Random();
+        }
+        rand = r;
     }
 
     /**
@@ -62,8 +66,27 @@ public final class Battle {
         }
         lastAction = act;
         current = nextActor;
+
+        boolean abortBattle = attacker.die() || defender.die();
+        if (!abortBattle && !current.isPlayerControlled()) {
+            abortBattle = takeAction(aiChooseAction());
+        }
         gui.update();
-        return attacker.die() || defender.die();
+        return abortBattle;
+    }
+
+    private BattleAction aiChooseAction() {
+        BattleAction act;
+        double c = rand.nextDouble();
+        if (c <= 0.33D) {
+            act = BattleAction.ATTACK;
+        } else if (c > 0.33D && c <= 0.67D) {
+            act = BattleAction.DEFEND;
+        } else {
+            act = BattleAction.CAST_SPELL;
+        }
+        //There is no retreat!
+        return act;
     }
 
     /**

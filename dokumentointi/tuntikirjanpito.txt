@@ -15,10 +15,22 @@
   - 5 tuntia
   - Testejä, taisteluja jatkettu, lokalisaatiota.
   
-  21.12
+  21.12.2013
   - 10 tuntia
   - Testejä, javadoccia, lokalisaatiota, gui harjoittelua/suunnittelua/toteutusta
   
-  22.12
+  22.12.2013
   - 7 tuntia
   - Testejä, javadoccia, guita jatkettu lisää, koodin päällekkäisyyksiä vähennetty (esim. Item holder). Uusi luokkakaavio.
+  
+  30.12.2013
+  - 3 tuntia
+  - javadoccia, taisteluita, guita(lopetus + listenereitä)
+  
+  31.12.2013
+  - 9 tuntia
+  - testejä, javadoccia, constants, retreat, treasure, voittajat, paljon aikaa kulutettu coberturan bugien selvitykseen.
+  
+  1.1.2014
+  - 7 tuntia
+  - Javadoccia, testejä, gui, vuorot ja laskut, teoriassa yli 2 pelaajan tuki, monsterit lyövät takaisin!

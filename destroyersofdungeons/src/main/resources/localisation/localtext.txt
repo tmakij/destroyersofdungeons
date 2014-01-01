@@ -31,6 +31,6 @@ DIED_TURN;Died on turn ;Kuoli vuorolla ;;;;;;
 HEALTH;$0$ has $1$ health left;Pelaajan $0$ elinvoima: $1$;;;;;;
 TREASURE;The Dungeon treasure;Tyrmän aarre;;;;;;
 TURN_N;Turn $0$;Vuoro $0$;;;;;;
-XXX;;;;;;;;
+MY_HEALTH;My health: $0$;Elinvoimani: $0$;;;;;;
 XXX;;;;;;;;
 XXX;;;;;;;;
