@@ -126,9 +126,9 @@ public final class DestroyersOfDungeonsTest {
     }
 
     @Test
-    public void testMovePlayerToInvalidBlockString() {
-        Player p = game.getCurrentPlayer();
-        assertEquals(null, game.movePlayerTo(23434));
+    public void testMovePlayerToInvalidBlockNull() {
+        int nextToUnderThis = game.getCurrentPlayer().getMyBlock().getNextTo().size();
+        assertEquals(null, game.movePlayerTo(nextToUnderThis));
     }
 
     @Test
@@ -221,5 +221,20 @@ public final class DestroyersOfDungeonsTest {
         others.add(p3);
         game.getDeathTimes().put(p3, Integer.SIZE);
         assertEquals(others, game.getAllOtherPlayers(game.getCurrentPlayer()));
+    }
+
+    @Test
+    public void testTotalTurnDefault() {
+        assertEquals(0, game.getTotalTurns());
+    }
+
+    @Test
+    public void testWhen7TurnsPass() {
+        addAnotherPlayer();
+        int playerCount = game.getPlayers().size();
+        for (int i = 0; i < 7 * playerCount; i++) {
+            game.nextPlayer();
+        }
+        assertEquals(7, game.getTotalTurns());
     }
 }

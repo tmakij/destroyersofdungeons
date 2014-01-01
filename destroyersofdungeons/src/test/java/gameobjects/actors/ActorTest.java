@@ -155,19 +155,37 @@ public final class ActorTest {
 
     @Test
     public void testTunnelHistoryAndRetreatWhenWithinLimit() {
-        Tunnel t = TunnelHistoryWorks(0, 0);
+        t = TunnelHistoryWorks(0, 0);
         assertEquals(t, a.getMyBlock());
     }
 
     @Test
     public void testTunnelHistoryAndRetreatWhenOverLimit() {
-        Tunnel t = TunnelHistoryWorks(1, 0);
+        t = TunnelHistoryWorks(1, 0);
         assertEquals(false, a.getMyBlock().equals(t));
     }
 
     @Test
     public void testTunnelHistoryAndRetreatReturnCorrectTunnel() {
-        Tunnel t = TunnelHistoryWorks(1, 1);
+        t = TunnelHistoryWorks(1, 1);
         assertEquals(t, a.getMyBlock());
+    }
+
+    @Test
+    public void testTunnelHistoryAndRetreatHistoryClears() {
+        t = TunnelHistoryWorks(0, 0);
+        for (int i = 0; i < Constants.TUNNEL_HISTORY / 2; i++) {
+            a.setMyBlock(new Tunnel(566 + i));
+        }
+        a.retreat();
+        assertEquals(t, a.getMyBlock());
+    }
+
+    @Test
+    public void testSetMyBlockClearsPreviousMemory() {
+        setTunnel();
+        Tunnel t2 = new Tunnel(555);
+        a.setMyBlock(t2);
+        assertEquals(true, t.getActorSet().isEmpty());
     }
 }

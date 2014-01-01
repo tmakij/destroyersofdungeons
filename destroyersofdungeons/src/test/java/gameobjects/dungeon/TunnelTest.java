@@ -2,6 +2,7 @@ package gameobjects.dungeon;
 
 import gameobjects.actors.Actor;
 import gameobjects.actors.Player;
+import gameobjects.items.WoodenSword;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -80,5 +81,14 @@ public final class TunnelTest {
         List<Actor> others = new ArrayList<>();
         others.add(b);
         assertEquals(others, tunnel.getOtherActors(a));
+    }
+
+    @Test
+    public void testClearTunnelItemsWhenPicked() {
+        Actor a = addDummyPlayer();
+        a.setMyBlock(tunnel);
+        tunnel.addItem(new WoodenSword(0));
+        a.pickUpItems();
+        assertEquals(true, tunnel.getItems().isEmpty());
     }
 }

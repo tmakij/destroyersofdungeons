@@ -41,8 +41,6 @@ public enum Dictionary {
                 strings.put(lineSplit[0], lineSplit[n]);
             }
         }
-        scan.close();
-        localfile.close();
     }
 
     private static int getLineNumber(String line) {

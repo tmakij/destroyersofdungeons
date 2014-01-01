@@ -3,7 +3,6 @@ package logic;
 import gameobjects.dungeon.Map;
 import gameobjects.dungeon.Tunnel;
 import gameobjects.actors.Player;
-import gameobjects.items.WoodenSword;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -22,6 +21,7 @@ public final class DestroyersOfDungeons {
     private int current = 0;
     private int playerIds = 0;
     private int totalTurns = 0;
+    private int playerTurns = 0;
 
     /**
      * Creates a new instance of the game, and a new dungeon for it.
@@ -34,15 +34,20 @@ public final class DestroyersOfDungeons {
      * Selects next player.
      */
     public void nextPlayer() {
+        playerTurns++;
         if (players.size() == 2) {
             current = current == players.size() - 1 ? 0 : current + 1;
         } else if (players.size() == 1) {
             current = 0;
-            totalTurns++;
         } else {
             throw new UnsupportedOperationException("Unsupported amount of players");
         }
+        if (playerTurns == players.size()) {
+            totalTurns++;
+            playerTurns = 0;
+        }
         currentPlayer = players.get(current);
+
     }
 
     /**
@@ -51,10 +56,9 @@ public final class DestroyersOfDungeons {
      * @param name The name of the player.
      */
     public void addPlayer(String name) {
-        Player p = new Player(playerIds++, name, this);
+        Player p = new Player(++playerIds, name, this);
         if (players.isEmpty()) {
             currentPlayer = p;
-            p.addItem(new WoodenSword(0));
         }
         players.add(p);
         p.setMyBlock(map.getAStartingBlock());
@@ -164,6 +168,16 @@ public final class DestroyersOfDungeons {
      */
     public List<Player> getPlayers() {
         return players;
+    }
+
+    /**
+     * Get the total amount of turns played. A turn is passed when everyone has
+     * moved once.
+     *
+     * @return The total amount of turns played
+     */
+    public int getTotalTurns() {
+        return totalTurns;
     }
 
     private void addOtherPlayers(List<Player> list, Collection<Player> where, Player ignore) {

@@ -15,12 +15,14 @@ public final class BattleTest {
     private Actor att;
     private Actor def;
     private Actor current;
+    private testGUIPanel gui;
 
     @Before
     public void setUp() {
         att = new Player(0, "TEST_PLAYER", null);
         def = new Player(1, "TEST_PLAYER_NO2", null);
-        bt = new Battle(att, def, new testGUIPanel());
+        gui = new testGUIPanel();
+        bt = new Battle(att, def, gui);
         current = bt.getCurrent();
     }
 
@@ -130,5 +132,25 @@ public final class BattleTest {
     public void testTakeActionFlee() {
         current.setMyBlock(new Tunnel(34432));
         assertEquals(true, bt.takeAction(BattleAction.FLEE));
+    }
+
+    @Test
+    public void testTakeActionFleeRetreats() {
+        Tunnel original = new Tunnel(34432);
+        current.setMyBlock(original);
+        current.setMyBlock(new Tunnel(3223));
+        bt.takeAction(BattleAction.FLEE);
+        assertEquals(original, current.getMyBlock());
+    }
+
+    @Test
+    public void testTestGUINotUpdatedFirst() {
+        assertEquals(false, gui.isUpdated());
+    }
+
+    @Test
+    public void testGUIGetsUpdated() {
+        bt.takeAction(BattleAction.DO_NOTHING);
+        assertEquals(true, gui.isUpdated());
     }
 }
