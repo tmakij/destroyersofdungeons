@@ -120,12 +120,22 @@ public final class BattleTest {
     }
 
     @Test
-    public void testTakeActionDefendeAttackerLoseMoreOnAttack() {
+    public void testTakeActionDefendAttackerLoseMoreOnAttack() {
         bt.takeAction(BattleAction.DEFEND);
         current = bt.getCurrent();
         bt.takeAction(BattleAction.ATTACK);
         assertEquals(Constants.ACTOR_BASE_HEALTH
                 - ((int) (Constants.ACTOR_BASE_ATTACK * Constants.BATTLEACTION_DEFEND)), current.getHealth());
+    }
+
+    @Test
+    public void testTakeActionDefendAttackerLoseNothingIfDefenderDiesOnAttack() {
+        testDying();
+        bt.getCurrent().takeHit(Constants.ACTOR_BASE_HEALTH - 1);
+        bt.takeAction(BattleAction.DEFEND);
+        current = bt.getCurrent();
+        bt.takeAction(BattleAction.ATTACK);
+        assertEquals(Constants.ACTOR_BASE_HEALTH, current.getHealth());
     }
 
     @Test

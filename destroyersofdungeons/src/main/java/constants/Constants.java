@@ -19,6 +19,14 @@ public enum Constants {
      */
     public static final int ACTOR_BASE_ATTACK = 25;
     /**
+     * Minimium amount of corridors in the dungeon.
+     */
+    public static final int DUNGEON_MIN_CORRIDORS = 6;
+    /**
+     * Maximium amount of corridors in the dungeon.
+     */
+    public static final int DUNGEON_MAX_CORRIDORS = 12;
+    /**
      * The percentage of damage that is inflicted on attack by a wooden sword.
      */
     public static final double WOODEN_SWORD_ATTACK = 1.1D;

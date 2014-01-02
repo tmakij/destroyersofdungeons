@@ -29,11 +29,7 @@ public final class Battle {
         this.current = attacker;
         this.gui = gui;
         this.lastAction = BattleAction.DO_NOTHING;
-        Random r = null;
-        if (!attacker.isPlayerControlled() || !defender.isPlayerControlled()) {
-            r = new Random();
-        }
-        rand = r;
+        this.rand = new Random();
     }
 
     /**

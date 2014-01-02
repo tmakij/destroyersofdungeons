@@ -67,4 +67,32 @@ public final class DictionaryTest {
             assertEquals("Player 4345fmfsdkfjsdkf", key);
         }
     }
+
+    @Test
+    public void testGetValueWhenLanguageFoundParamNull() {
+        try {
+            Dictionary.loadText("english");
+        } catch (UnsupportedOperationException | IOException ex) {
+        } finally {
+            String key = Dictionary.getValue("PLAYER_N", null);
+            assertEquals("Player $0$", key);
+        }
+    }
+
+    @Test
+    public void testGetValueWhenLanguageFoundKeyNull() {
+        try {
+            Dictionary.loadText("english");
+        } catch (UnsupportedOperationException | IOException ex) {
+        } finally {
+            String key = Dictionary.getValue(null);
+            assertEquals(null, key);
+        }
+    }
+
+    @Test
+    public void testGetLanguageWhenLoaded() {
+        assertEquals(true, Dictionary.getLanguages().length > 0);
+
+    }
 }

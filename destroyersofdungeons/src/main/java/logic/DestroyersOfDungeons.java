@@ -30,7 +30,7 @@ public final class DestroyersOfDungeons {
      * Creates a new instance of the game, and a new dungeon for it.
      */
     public DestroyersOfDungeons() {
-        map = new Dungeon(0, 10);
+        map = new Dungeon();
     }
 
     /**
