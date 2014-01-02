@@ -21,7 +21,7 @@ public abstract class GameObject {
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return name;
     }
 

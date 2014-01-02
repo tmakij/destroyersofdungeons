@@ -37,9 +37,4 @@ public abstract class Monster extends Actor {
     public static void loadRaces() {
         races.put(Minotaur.class, new MinotaurRace());
     }
-
-    @Override
-    public final String toString() {
-        return race.toString();
-    }
 }
