@@ -96,7 +96,7 @@ public final class MainPanel extends AbstractPanel {
     }
 
     private void createButtonsForTunnels(Component c) {
-        List<Tunnel> tunnels = gui.getGame().getCurrentPlayer().getMyBlock().getNextTo();
+        List<Tunnel> tunnels = gui.getGame().getMovingPossibilities();
         for (int i = 0; i < tunnels.size(); i++) {
             JButton move = new JButton(tunnels.get(i).toString());
             layout.putConstraint(SpringLayout.NORTH, move,

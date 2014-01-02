@@ -34,3 +34,7 @@
   1.1.2014
   - 7 tuntia
   - Javadoccia, testejä, gui, vuorot ja laskut, teoriassa yli 2 pelaajan tuki, monsterit lyövät takaisin!
+  
+  2.1.2014
+  - 7 tuntia
+  - Testejä, kielenvaihto/settings, paljon aikaa että sai rakennettua toimivan JARin, GUI käyttää SpringLayouttia aina, Sekvenssi ja luokkakaavioiden teko.
