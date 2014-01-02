@@ -23,18 +23,17 @@ public final class EndGamePanel extends AbstractPanel {
      * @param gui The SwingGUI which holds the program.
      */
     public EndGamePanel(SwingGUI gui) {
+        super(gui);
         DestroyersOfDungeons game = gui.getGame();
-        SpringLayout layout = new SpringLayout();
-        panel.setLayout(layout);
 
-        addEnd(layout);
+        addEnd();
         Player winner = game.getWinner();
-        addWinner(layout, winner);
-        makePlayerList(game, layout, winner);
-        addReturn(layout, gui);
+        addWinner(winner);
+        makePlayerList(game, winner);
+        addReturn();
     }
 
-    private void addReturn(SpringLayout layout, SwingGUI gui) {
+    private void addReturn() {
         JButton returnMainMenu = new JButton(Dictionary.getValue("RETURN_MAINMENU"));
         Component last = getLastComponent();
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, returnMainMenu,
@@ -49,7 +48,7 @@ public final class EndGamePanel extends AbstractPanel {
         panel.add(returnMainMenu);
     }
 
-    private void addEnd(SpringLayout layout) {
+    private void addEnd() {
         JLabel end = new JLabel(Dictionary.getValue("GAME_END"));
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, end,
                 -250,
@@ -62,7 +61,7 @@ public final class EndGamePanel extends AbstractPanel {
         panel.add(end);
     }
 
-    private void addWinner(SpringLayout layout, Player winner) {
+    private void addWinner(Player winner) {
         JLabel winnerAnnounce = new JLabel();
         if (winner != null) {
             winnerAnnounce.setText(Dictionary.getValue("WINNER", winner));
@@ -81,17 +80,17 @@ public final class EndGamePanel extends AbstractPanel {
         panel.add(winnerAnnounce);
     }
 
-    private void makePlayerList(DestroyersOfDungeons game, SpringLayout layout, Player winner) {
+    private void makePlayerList(DestroyersOfDungeons game, Player winner) {
         Map<Player, Integer> deaths = game.getDeathTimes();
         for (Player p : game.getAllOtherPlayers(winner)) {
             if (!p.equals(winner)) {
                 int turn = deaths.containsKey(p) ? deaths.get(p) : -1;
-                listPlayer(p, turn, layout);
+                listPlayer(p, turn);
             }
         }
     }
 
-    private void listPlayer(Player p, int turn, SpringLayout layout) {
+    private void listPlayer(Player p, int turn) {
         Component last = getLastComponent();
         JLabel player = new JLabel(p.toString());
         JLabel status = new JLabel((turn == -1 ? Dictionary.getValue("ALIVE_END") : Dictionary.getValue("DIED_TURN") + turn));

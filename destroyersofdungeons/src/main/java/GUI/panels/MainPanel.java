@@ -26,20 +26,19 @@ public final class MainPanel extends AbstractPanel {
      * @param gui The SwingGUI which holds the program.
      */
     public MainPanel(SwingGUI gui) {
-        SpringLayout layout = new SpringLayout();
-        panel.setLayout(layout);
+        super(gui);
 
-        JLabel myLocation = setMyLocation(gui, layout);
-        createHealthStatus(layout, gui);
-        setItemsTitle(layout, myLocation);
+        JLabel myLocation = setMyLocation();
+        createHealthStatus();
+        setItemsTitle(myLocation);
 
-        createItemList(gui, layout);
+        createItemList();
 
-        JLabel titleLabel = setMoveToTitle(layout);
-        createButtonsForTunnels(gui, layout, titleLabel);
+        JLabel titleLabel = setMoveToTitle();
+        createButtonsForTunnels(titleLabel);
     }
 
-    private void createItemList(SwingGUI gui, SpringLayout layout) {
+    private void createItemList() {
         List<Item> p_items = gui.getGame().getCurrentPlayer().getItems();
         JList items = new JList(p_items.toArray());
         JScrollPane scroll = new JScrollPane(items);
@@ -56,7 +55,7 @@ public final class MainPanel extends AbstractPanel {
         panel.add(scroll);
     }
 
-    private void setItemsTitle(SpringLayout layout, JLabel myLocation) {
+    private void setItemsTitle(JLabel myLocation) {
         JLabel itemsTitle = new JLabel(Dictionary.getValue("ITEMS_TITLE"));
         layout.putConstraint(SpringLayout.NORTH, itemsTitle,
                 0,
@@ -64,7 +63,7 @@ public final class MainPanel extends AbstractPanel {
         panel.add(itemsTitle);
     }
 
-    private JLabel setMyLocation(SwingGUI gui, SpringLayout layout) {
+    private JLabel setMyLocation() {
         JLabel myLocation = new JLabel(Dictionary.getValue("MY_LOCATION", gui.getGame().getCurrentPlayer().getMyBlock()));
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, myLocation,
                 0,
@@ -73,7 +72,7 @@ public final class MainPanel extends AbstractPanel {
         return myLocation;
     }
 
-    private JLabel setMoveToTitle(SpringLayout layout) {
+    private JLabel setMoveToTitle() {
         JLabel label = new JLabel(Dictionary.getValue("MOVE_TO"));
         layout.putConstraint(SpringLayout.NORTH, label,
                 5,
@@ -85,7 +84,7 @@ public final class MainPanel extends AbstractPanel {
         return label;
     }
 
-    private void createHealthStatus(SpringLayout layout, SwingGUI gui) {
+    private void createHealthStatus() {
         JLabel status = new JLabel(Dictionary.getValue("MY_HEALTH", gui.getGame().getCurrentPlayer().getHealth()));
         layout.putConstraint(SpringLayout.NORTH, status,
                 5,
@@ -96,7 +95,7 @@ public final class MainPanel extends AbstractPanel {
         panel.add(status);
     }
 
-    private void createButtonsForTunnels(SwingGUI gui, SpringLayout layout, Component c) {
+    private void createButtonsForTunnels(Component c) {
         List<Tunnel> tunnels = gui.getGame().getCurrentPlayer().getMyBlock().getNextTo();
         for (int i = 0; i < tunnels.size(); i++) {
             JButton move = new JButton(tunnels.get(i).toString());

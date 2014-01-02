@@ -28,36 +28,35 @@ public final class MoveResultPanel extends AbstractPanel {
      * @param gui The SwingGUI which holds the program.
      */
     public MoveResultPanel(SwingGUI gui) {
+        super(gui);
         DestroyersOfDungeons game = gui.getGame();
-        SpringLayout layout = new SpringLayout();
-        panel.setLayout(layout);
         if (game.lastMoveCreatedCollisions()) {
-            collisions(game, layout, gui);
+            collisions(game);
         } else {
-            noCollisions(game, gui, layout);
+            noCollisions(game);
         }
     }
 
-    private void collisions(DestroyersOfDungeons game, SpringLayout layout, SwingGUI gui) {
+    private void collisions(DestroyersOfDungeons game) {
         Tunnel t = game.getCurrentPlayer().getMyBlock();
         List<Actor> others = t.getOtherActors(game.getCurrentPlayer());
         if (!others.isEmpty()) {
-            foundEnemies(others, layout, gui);
+            foundEnemies(others);
         } else {
-            foundItems(layout, game, gui);
+            foundItems(game);
         }
     }
 
-    private void foundItems(SpringLayout layout, DestroyersOfDungeons game, SwingGUI gui) {
-        addEventResult(layout, "FOUND_ITEMS");
+    private void foundItems(DestroyersOfDungeons game) {
+        addEventResult("FOUND_ITEMS");
         List<Item> items = game.getCurrentPlayer().getMyBlock().getItems();
         for (int i = 0; i < items.size(); i++) {
-            addEventResultObject(layout, items.get(i), i);
+            addEventResultObject(items.get(i), i);
         }
-        addResume(layout, gui);
+        addResume();
     }
 
-    private void addResume(SpringLayout layout, SwingGUI gui) {
+    private void addResume() {
         JButton resume = new JButton(Dictionary.getValue("FOUND_ITEMS_RESUME"));
         Component lastItem = getLastComponent();
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, resume,
@@ -72,16 +71,16 @@ public final class MoveResultPanel extends AbstractPanel {
         panel.add(resume);
     }
 
-    private void foundEnemies(List<Actor> others, SpringLayout layout, SwingGUI gui) {
-        addEventResult(layout, "YOU_COLLIDED");
+    private void foundEnemies(List<Actor> others) {
+        addEventResult("YOU_COLLIDED");
         for (int i = 0; i < others.size(); i++) {
             Actor enemy = others.get(i);
-            addEventResultObject(layout, enemy, i);
-            addAttack(layout, gui, enemy);
+            addEventResultObject(enemy, i);
+            addAttack(enemy);
         }
     }
 
-    private void addAttack(SpringLayout layout, SwingGUI gui, Actor enemy) {
+    private void addAttack(Actor enemy) {
         Component name = getLastComponent();
         JButton attack = new JButton(Dictionary.getValue("ATTACK"));
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, attack,
@@ -96,7 +95,7 @@ public final class MoveResultPanel extends AbstractPanel {
         panel.add(attack);
     }
 
-    private void addEventResultObject(SpringLayout layout, GameObject obj, int iter) {
+    private void addEventResultObject(GameObject obj, int iter) {
         JLabel name = new JLabel(obj.toString());
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, name,
                 0,
@@ -109,7 +108,7 @@ public final class MoveResultPanel extends AbstractPanel {
         panel.add(name);
     }
 
-    private void addEventResult(SpringLayout layout, String key) {
+    private void addEventResult(String key) {
         JLabel youCollided = new JLabel(Dictionary.getValue(key));
         panel.add(youCollided);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, youCollided,
@@ -122,12 +121,12 @@ public final class MoveResultPanel extends AbstractPanel {
         );
     }
 
-    private void noCollisions(DestroyersOfDungeons game, SwingGUI gui, SpringLayout layout) {
-        addYouMoved(game, layout);
-        addOK(gui, layout);
+    private void noCollisions(DestroyersOfDungeons game) {
+        addYouMoved(game);
+        addOK();
     }
 
-    private void addOK(SwingGUI gui, SpringLayout layout) {
+    private void addOK() {
         Component youMovedTo = getLastComponent();
         JButton ok = new JButton(Dictionary.getValue("OK"));
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, ok,
@@ -140,7 +139,7 @@ public final class MoveResultPanel extends AbstractPanel {
         panel.add(ok);
     }
 
-    private void addYouMoved(DestroyersOfDungeons game, SpringLayout layout) {
+    private void addYouMoved(DestroyersOfDungeons game) {
         JLabel youMovedTo = new JLabel(Dictionary.getValue("YOU_MOVED_TO", game.getCurrentPlayer().getMyBlock()));
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, youMovedTo,
                 0,

@@ -1,5 +1,6 @@
 package GUI.panels;
 
+import logic.IUpdate;
 import GUI.SwingGUI;
 import GUI.listeners.BattleActionListener;
 import gameobjects.actors.Actor;
@@ -24,23 +25,20 @@ public final class BattlePanel extends AbstractPanel implements IUpdate {
     private final JLabel turn = new JLabel();
 
     public BattlePanel(SwingGUI gui, Actor defender) {
+        super(gui);
         battle = new Battle(gui.getGame().getCurrentPlayer(), defender, this);
+        setStatusFields();
+        setTurn();
 
-        SpringLayout layout = new SpringLayout();
-        panel.setLayout(layout);
-
-        setStatusFields(layout);
-        setTurn(layout);
-
-        listActions(layout);
+        listActions();
 
         BattleAction[] actions = BattleAction.values();
         for (BattleAction action : actions) {
-            createAction(action, layout, gui);
+            createAction(action);
         }
     }
 
-    private void setStatusFields(SpringLayout layout) {
+    private void setStatusFields() {
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, attackerStatus,
                 -125,
                 SpringLayout.HORIZONTAL_CENTER, panel
@@ -62,7 +60,7 @@ public final class BattlePanel extends AbstractPanel implements IUpdate {
         update();
     }
 
-    private void setTurn(SpringLayout layout) {
+    private void setTurn() {
         Component last = getLastComponent();
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, turn,
                 0,
@@ -84,7 +82,7 @@ public final class BattlePanel extends AbstractPanel implements IUpdate {
         label.setText(Dictionary.getValue("HEALTH", a, a.getHealth()));
     }
 
-    private void listActions(SpringLayout layout) {
+    private void listActions() {
         JLabel allActions = new JLabel(Dictionary.getValue("POSSIBLE_ACTS"));
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, allActions,
                 -75,
@@ -95,7 +93,7 @@ public final class BattlePanel extends AbstractPanel implements IUpdate {
         panel.add(allActions);
     }
 
-    private void createAction(BattleAction b, SpringLayout layout, SwingGUI gui) {
+    private void createAction(BattleAction b) {
         Component last = getLastComponent();
         JButton act = new JButton(Dictionary.getValue(b.toString()));
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, act,

@@ -1,6 +1,5 @@
 package logic;
 
-import GUI.panels.IUpdate;
 import gameobjects.actors.Actor;
 import java.util.Random;
 
@@ -49,7 +48,7 @@ public final class Battle {
         switch (act) {
             case ATTACK:
                 current.attack(nextActor, BattleAction.ATTACK);
-                if (lastAction == BattleAction.DEFEND) {
+                if (lastAction == BattleAction.DEFEND && nextActor.isAlive()) {
                     nextActor.attack(current, lastAction);
                 }
                 break;

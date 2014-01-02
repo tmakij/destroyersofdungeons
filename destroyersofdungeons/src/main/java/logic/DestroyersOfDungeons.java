@@ -80,17 +80,14 @@ public final class DestroyersOfDungeons {
      * Moves the player.
      *
      * @param to Which block to move into.
-     * @return The block where player moved into.
      */
-    public Tunnel movePlayerTo(int to) {
+    public void movePlayerTo(int to) {
         Tunnel nextBlock = currentPlayer.getMyBlock();
         List<Tunnel> nextTo = nextBlock.getNextTo();
-        if (to > nextTo.size() - 1) {
-            return null;
+        if (to < nextTo.size()) {
+            Tunnel block = nextTo.get(to);
+            currentPlayer.setMyBlock(block);
         }
-        Tunnel block = nextTo.get(to);
-        currentPlayer.setMyBlock(block);
-        return block;
     }
 
     /**

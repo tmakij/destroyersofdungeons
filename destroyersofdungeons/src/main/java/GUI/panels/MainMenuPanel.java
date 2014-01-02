@@ -3,13 +3,12 @@ package GUI.panels;
 import GUI.SwingGUI;
 import GUI.listeners.MainMenuQuitListener;
 import GUI.listeners.MainMenuStartListener;
+import GUI.listeners.SettingsListener;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+import javax.swing.SpringLayout;
 import localisation.Dictionary;
 
 /**
@@ -24,41 +23,36 @@ public final class MainMenuPanel extends AbstractPanel {
      * @param gui The gui where to add the panel and to end the game.
      */
     public MainMenuPanel(SwingGUI gui) {
+        super(gui);
         gui.endGame();
-        panel.setLayout(new GridBagLayout());
-        createStart(gui);
-        createQuit(gui);
+
         createMainTitle();
+        addMainOption("START_GAME", new MainMenuStartListener(gui));
+        addMainOption("SETTINGS", new SettingsListener(gui));
+        addMainOption("QUIT_GAME", new MainMenuQuitListener(gui));
     }
 
-    private void createStart(SwingGUI gui) {
-        GridBagConstraints sConstrain = new GridBagConstraints();
-        sConstrain.gridy = 1;
-        sConstrain.fill = GridBagConstraints.VERTICAL;
-        sConstrain.insets = new Insets(15, 0, 15, 0);
-        JButton start = new JButton(Dictionary.getValue("START_GAME"));
-        MainMenuStartListener mListener = new MainMenuStartListener(gui);
-        start.addActionListener(mListener);
-        panel.add(start, sConstrain);
-    }
-
-    private void createQuit(SwingGUI gui) {
-        GridBagConstraints qConstrain = new GridBagConstraints();
-        qConstrain.gridy = 2;
-        qConstrain.ipadx = 40;
-        qConstrain.fill = GridBagConstraints.VERTICAL;
-        MainMenuQuitListener qListener = new MainMenuQuitListener(gui);
-        JButton quit = new JButton(Dictionary.getValue("QUIT_GAME"));
-        quit.addActionListener(qListener);
-        panel.add(quit, qConstrain);
+    private void addMainOption(String text, ActionListener al) {
+        JButton opt = new JButton(Dictionary.getValue(text));
+        layout.putConstraint(SpringLayout.NORTH, opt,
+                15,
+                SpringLayout.SOUTH, getLastComponent());
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, opt,
+                0,
+                SpringLayout.HORIZONTAL_CENTER, getLastComponent());
+        opt.addActionListener(al);
+        panel.add(opt);
     }
 
     private void createMainTitle() {
-        GridBagConstraints mmConstrain = new GridBagConstraints();
-        mmConstrain.gridy = 0;
         JLabel mainmenu = new JLabel(Dictionary.getValue("MAIN_MENU"));
         mainmenu.setFont(new Font("Arail", Font.PLAIN, 40));
-        mainmenu.setHorizontalAlignment(SwingConstants.CENTER);
-        panel.add(mainmenu, mmConstrain);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, mainmenu,
+                0,
+                SpringLayout.HORIZONTAL_CENTER, panel);
+        layout.putConstraint(SpringLayout.VERTICAL_CENTER, mainmenu,
+                -50,
+                SpringLayout.VERTICAL_CENTER, panel);
+        panel.add(mainmenu);
     }
 }

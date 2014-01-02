@@ -1,9 +1,11 @@
 package GUI.panels;
 
+import GUI.SwingGUI;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.SpringLayout;
 
 /**
  * Base class for all panels. Implements IDungeonPanel.
@@ -11,7 +13,14 @@ import javax.swing.JPanel;
 public abstract class AbstractPanel implements IDungeonPanel {
 
     protected final JPanel panel = new JPanel();
+    protected final SpringLayout layout = new SpringLayout();
+    protected final SwingGUI gui;
     private boolean disposed = false;
+
+    protected AbstractPanel(SwingGUI gui) {
+        this.gui = gui;
+        panel.setLayout(layout);
+    }
 
     @Override
     public final void dispose() {
@@ -38,9 +47,9 @@ public abstract class AbstractPanel implements IDungeonPanel {
     @Override
     @SuppressWarnings("FinalizeDeclaration")
     protected final void finalize() throws Throwable {
-        super.finalize();
         if (!disposed) {
             dispose();
         }
+        super.finalize();
     }
 }

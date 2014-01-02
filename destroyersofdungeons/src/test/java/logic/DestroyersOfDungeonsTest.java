@@ -97,26 +97,12 @@ public final class DestroyersOfDungeonsTest {
     }
 
     @Test
-    public void testMovePlayerToString() {
-        Player p = game.getCurrentPlayer();
-        Tunnel t = p.getMyBlock();
-        Tunnel movingTo = t.getNextTo().get(0);
-        assertEquals(movingTo, game.movePlayerTo(0));
-    }
-
-    @Test
     public void testMovePlayerToInvalidBlock() {
         Player p = game.getCurrentPlayer();
         Tunnel original = p.getMyBlock();
         game.movePlayerTo(23434);
         Tunnel newBlock = p.getMyBlock();
         assertEquals(original, newBlock);
-    }
-
-    @Test
-    public void testMovePlayerToInvalidBlockNull() {
-        int nextToUnderThis = game.getCurrentPlayer().getMyBlock().getNextTo().size();
-        assertEquals(null, game.movePlayerTo(nextToUnderThis));
     }
 
     @Test

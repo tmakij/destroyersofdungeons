@@ -22,17 +22,16 @@ public final class PlayerNamePanel extends AbstractPanel {
      * @param gui The SwingGUI which holds the program.
      */
     public PlayerNamePanel(SwingGUI gui) {
-        SpringLayout layout = new SpringLayout();
-        panel.setLayout(layout);
+        super(gui);
 
         JTextField[] fields = new JTextField[2];
-        createPlayerFields(Dictionary.getValue("PLAYER_N", 1), layout, 0, fields);
-        createPlayerFields(Dictionary.getValue("PLAYER_N", 2), layout, 1, fields);
-        createStart(fields, layout, gui);
-        createBack(layout, gui);
+        createPlayerFields(Dictionary.getValue("PLAYER_N", 1), 0, fields);
+        createPlayerFields(Dictionary.getValue("PLAYER_N", 2), 1, fields);
+        createStart(fields);
+        createBack();
     }
 
-    private void createStart(JTextField[] fields, SpringLayout layout, SwingGUI gui) {
+    private void createStart(JTextField[] fields) {
         JButton start = new JButton(Dictionary.getValue("START_GAME"));
         PlayerNameListener al = new PlayerNameListener(gui, fields);
         start.addActionListener(al);
@@ -45,13 +44,13 @@ public final class PlayerNamePanel extends AbstractPanel {
         panel.add(start);
     }
 
-    private void createPlayerFields(String text, SpringLayout layout, int m, JTextField[] fields) {
+    private void createPlayerFields(String text, int m, JTextField[] fields) {
         int ver = (50 * m) - 50;
-        createPlayerField(text, layout, ver);
-        fields[m] = createNameField(text, layout, ver);
+        createPlayerField(text, ver);
+        fields[m] = createNameField(text, ver);
     }
 
-    private void createPlayerField(String text, SpringLayout layout, int ver) {
+    private void createPlayerField(String text, int ver) {
         JLabel fieldPlayer = new JLabel(text);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, fieldPlayer,
                 0,
@@ -62,7 +61,7 @@ public final class PlayerNamePanel extends AbstractPanel {
         panel.add(fieldPlayer);
     }
 
-    private JTextField createNameField(String text, SpringLayout layout, int ver) {
+    private JTextField createNameField(String text, int ver) {
         JTextField nameFieldPlayer = new JTextField(text);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, nameFieldPlayer,
                 75,
@@ -75,7 +74,7 @@ public final class PlayerNamePanel extends AbstractPanel {
         return nameFieldPlayer;
     }
 
-    private void createBack(SpringLayout layout, SwingGUI gui) {
+    private void createBack() {
         JButton backToMainMenu = new JButton(Dictionary.getValue("RETURN_MAINMENU"));
         Component last = getLastComponent();
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, backToMainMenu,

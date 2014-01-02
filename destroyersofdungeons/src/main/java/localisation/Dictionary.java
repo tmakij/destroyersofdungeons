@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 /**
  * Holds all the text of Destroyers of Dungeons. Cannot be created or inherited.
@@ -17,6 +16,8 @@ public enum Dictionary {
     ;
     private static Map<String, String> strings;
     private static String language;
+    private static String languages[];// = new ArrayList<>();
+    private static boolean loadedLanguages = false;
 
     /**
      * Loads all the text from localisation.txt file.
@@ -43,15 +44,30 @@ public enum Dictionary {
 
     private static int getLineNumber(String line) {
         String[] langs = line.split(";");
-        for (int i = 0; i < langs.length; i++) {
+        int ret = 0;
+        for (int i = 1; i < langs.length; i++) {
             String lang = langs[i];
+            if (!loadedLanguages) {
+                if (languages == null) {
+                    languages = new String[langs.length - 1];
+                }
+                languages[i - 1] = lang;
+            }
             if (lang.equals(language)) {
                 language = lang;
-                return i;
+                ret = i;
             }
+        }
+        loadedLanguages = true;
+        if (ret > 0) {
+            return ret;
         }
         strings = null;
         throw new UnsupportedOperationException("Invalid language, loading cannot proceed");
+    }
+
+    public static String[] getLanguages() {
+        return languages;
     }
 
     /**
@@ -67,10 +83,12 @@ public enum Dictionary {
         if (strings == null) {
             return "Error on loading localisation for language " + language;
         }
-        if (strings.containsKey(key)) {
+        if (key != null && strings.containsKey(key)) {
             key = strings.get(key);
-            for (int i = 0; i < params.length; i++) {
-                key = key.replaceAll(("\\$" + i + "\\$"), params[i].toString());
+            if (params != null) {
+                for (int i = 0; i < params.length; i++) {
+                    key = key.replaceAll(("\\$" + i + "\\$"), params[i].toString());
+                }
             }
         }
         return key;

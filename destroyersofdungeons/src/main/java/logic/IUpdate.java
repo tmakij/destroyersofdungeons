@@ -1,4 +1,4 @@
-package GUI.panels;
+package logic;
 
 /**
  * Interface for GUI panels. It is used by battles to update the gui acordingly

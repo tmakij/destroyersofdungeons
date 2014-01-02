@@ -1,6 +1,6 @@
 package GUI;
 
-import GUI.panels.IUpdate;
+import logic.IUpdate;
 
 public final class testGUIPanel implements IUpdate {
 

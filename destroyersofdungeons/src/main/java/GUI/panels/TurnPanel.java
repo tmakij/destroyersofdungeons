@@ -20,14 +20,13 @@ public final class TurnPanel extends AbstractPanel {
      * @param gui The SwingGUI which holds the program.
      */
     public TurnPanel(SwingGUI gui) {
-        SpringLayout layout = new SpringLayout();
-        panel.setLayout(layout);
-        addTurnNumber(gui, layout);
-        addWhoseTurn(gui, layout);
-        addStartTurn(gui, layout);
+        super(gui);
+        addTurnNumber();
+        addWhoseTurn();
+        addStartTurn();
     }
 
-    private void addTurnNumber(SwingGUI gui, SpringLayout layout) {
+    private void addTurnNumber() {
         JLabel number = new JLabel(Dictionary.getValue("TURN_N", gui.getGame().getTotalTurns()));
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, number,
                 0,
@@ -38,7 +37,7 @@ public final class TurnPanel extends AbstractPanel {
         panel.add(number);
     }
 
-    private void addWhoseTurn(SwingGUI gui, SpringLayout layout) {
+    private void addWhoseTurn() {
         JLabel whoseTurn = new JLabel(Dictionary.getValue("CURRENT_TURN", gui.getGame().getCurrentPlayer()));
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, whoseTurn,
                 0,
@@ -49,7 +48,7 @@ public final class TurnPanel extends AbstractPanel {
         panel.add(whoseTurn);
     }
 
-    private void addStartTurn(SwingGUI gui, SpringLayout layout) {
+    private void addStartTurn() {
         JButton beginTurn = new JButton(Dictionary.getValue("START_TURN"));
         Component whoseTurn = getLastComponent();
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, beginTurn,
