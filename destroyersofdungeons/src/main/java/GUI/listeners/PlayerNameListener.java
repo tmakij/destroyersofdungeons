@@ -27,24 +27,13 @@ public final class PlayerNameListener extends AbstractGUIListener {
         this.fields = fields;
     }
 
-    private boolean fieldsAreValid() {
-        for (JTextComponent field : fields) {
-            String f = field.getText();
-            if (f.isEmpty() || f.length() > 32 || !f.matches("[a-zA-Z0-9 ]*")) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (fieldsAreValid()) {
-            gui.createNewGame();
-            for (JTextComponent field : fields) {
-                gui.getGame().addPlayer(field.getText());
+        for (JTextComponent field : fields) {
+            if (!gui.getGame().addPlayer(field.getText())) {
+                return;
             }
-            gui.setPanel(new TurnPanel(gui));
         }
+        gui.setPanel(new TurnPanel(gui));
     }
 }

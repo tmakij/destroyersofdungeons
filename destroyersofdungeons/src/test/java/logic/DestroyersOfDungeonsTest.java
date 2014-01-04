@@ -1,5 +1,6 @@
 package logic;
 
+import constants.Constants;
 import gameobjects.dungeon.Tunnel;
 import gameobjects.actors.Player;
 import gameobjects.items.Treasure;
@@ -210,5 +211,47 @@ public final class DestroyersOfDungeonsTest {
             game.nextPlayer();
         }
         assertEquals(8, game.getTotalTurns());
+    }
+
+    @Test
+    public void testAddPlayerReturnTrue() {
+        assertEquals(true, game.addPlayer("TEST_PLAYER_NO3"));
+    }
+
+    private String getNameWithLenght(int l) {
+        String n = "";
+        for (int i = 0; i < l; i++) {
+            n += "a";
+        }
+        return n;
+    }
+
+    @Test
+    public void testAddPlayerTooShort() {
+        assertEquals(false, game.addPlayer(getNameWithLenght(Constants.PLAYER_NAME_MIN_LENGHT - 1)));
+    }
+
+    @Test
+    public void testAddPlayerTooLong() {
+        assertEquals(false, game.addPlayer(getNameWithLenght(Constants.PLAYER_NAME_MAX_LENGHT + 1)));
+    }
+
+    @Test
+    public void testAddInvalidPlayerDeletesOthers() {
+        game.addPlayer(getNameWithLenght(Constants.PLAYER_NAME_MAX_LENGHT + 1));
+        assertEquals(true, game.getPlayers().isEmpty());
+    }
+
+    @Test
+    public void testAddInvalidPlayerSomeInvalidChars() {
+        boolean added = false;
+        for (int i = 0; i < 1024; i++) {
+            String name = Character.toString((char) i);
+            if (!name.matches("[" + Constants.ALLOWED_CHARACTERS + "]") && game.addPlayer(name)) {
+                added = true;
+                System.out.println("Added regardless: " + name);
+            }
+        }
+        assertEquals(false, added);
     }
 }

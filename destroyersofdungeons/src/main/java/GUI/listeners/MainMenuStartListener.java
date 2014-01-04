@@ -20,6 +20,7 @@ public final class MainMenuStartListener extends AbstractGUIListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        gui.createNewGame();
         gui.setPanel(new PlayerNamePanel(gui));
     }
 }

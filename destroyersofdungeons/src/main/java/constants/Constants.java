@@ -19,11 +19,11 @@ public enum Constants {
      */
     public static final int ACTOR_BASE_ATTACK = 25;
     /**
-     * Minimium amount of corridors in the dungeon.
+     * Minimum amount of corridors in the dungeon.
      */
     public static final int DUNGEON_MIN_CORRIDORS = 6;
     /**
-     * Maximium amount of corridors in the dungeon.
+     * Maximum amount of corridors in the dungeon.
      */
     public static final int DUNGEON_MAX_CORRIDORS = 12;
     /**
@@ -46,5 +46,16 @@ public enum Constants {
      * The multiplier for the damage that is inflicted when a spell is casted.
      */
     public static final double BATTLEACTION_CASTSPELL = 0.8D;
-
+    /**
+     * The maximum length of player's name.
+     */
+    public static final int PLAYER_NAME_MAX_LENGHT = 32;
+    /**
+     * The minimum length of player's name.
+     */
+    public static final int PLAYER_NAME_MIN_LENGHT = 1;
+    /**
+     * Allowed characters in the player's name.
+     */
+    public static final String ALLOWED_CHARACTERS = "a-zA-Z0-9 _";
 }

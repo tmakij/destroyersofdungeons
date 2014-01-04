@@ -1,5 +1,6 @@
 package logic;
 
+import constants.Constants;
 import gameobjects.dungeon.Dungeon;
 import gameobjects.dungeon.Tunnel;
 import gameobjects.actors.Player;
@@ -55,14 +56,21 @@ public final class DestroyersOfDungeons {
      * Adds a new player to the game.
      *
      * @param name The name of the player.
+     * @return
      */
-    public void addPlayer(String name) {
+    public boolean addPlayer(String name) {
+        if (!name.matches("[" + Constants.ALLOWED_CHARACTERS + "]{" + Constants.PLAYER_NAME_MIN_LENGHT
+                + "," + Constants.PLAYER_NAME_MAX_LENGHT + "}")) {
+            players.clear();
+            return false;
+        }
         Player p = new Player(++playerIds, name, this);
         if (players.isEmpty()) {
             currentPlayer = p;
         }
         players.add(p);
         p.setMyBlock(map.getAStartingBlock());
+        return true;
     }
 
     /**
