@@ -58,4 +58,12 @@ public enum Constants {
      * Allowed characters in the player's name.
      */
     public static final String ALLOWED_CHARACTERS = "a-zA-Z0-9 _";
+    /**
+     * The minimum length of a corridor.
+     */
+    public static int CORRIDOR_MIN_LENGTH = 6;
+    /**
+     * The maximum length of a corridor.
+     */
+    public static int CORRIDOR_MAX_LENGTH = 12;
 }

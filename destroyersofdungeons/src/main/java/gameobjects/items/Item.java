@@ -39,4 +39,13 @@ public abstract class Item extends GameObject {
     public int onDamageReceived(int amount) {
         return amount;
     }
+
+    /**
+     * Check if this item wins the game.
+     *
+     * @return Does this item win the game.
+     */
+    public boolean winsGame() {
+        return false;
+    }
 }

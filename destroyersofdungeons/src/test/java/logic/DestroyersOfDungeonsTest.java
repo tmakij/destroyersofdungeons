@@ -41,9 +41,20 @@ public final class DestroyersOfDungeonsTest {
     }
 
     @Test
-    public void testStartblockcount() {
-        addAnotherPlayer();
-        assertEquals(2, game.getCurrentPlayer().getMyBlock().getActorSet().size());
+    public void testStartBlockIsEmptyFromActorAndItems() {
+        boolean isEmpty = true;
+        final int rounds = 1000;
+        
+        for (int i = 0; i < rounds; i++) {
+            game = new DestroyersOfDungeons();
+            game.addPlayer("TEST_PLAYER");
+            game.addPlayer("TEST_PLAYER_NO2");
+            Tunnel myBlock = game.getCurrentPlayer().getMyBlock();
+            if (myBlock.getActors().size() > 1 || !myBlock.getItems().isEmpty()) {
+                isEmpty = false;
+            }
+        }
+        assertEquals(true, isEmpty);
     }
 
     @Test
@@ -126,13 +137,19 @@ public final class DestroyersOfDungeonsTest {
 
     @Test
     public void testLastMoveCreatedCollisionsDefault() {
-        addAnotherPlayer();
+        game.getCurrentPlayer().getMyBlock().addActor(new Player(32, "TEST_PLAYER_NO2", null));
         assertEquals(true, game.lastMoveCreatedCollisions());
     }
 
     @Test
     public void testLastMoveCreatedCollisionsAfterMove() {
+        Tunnel myNewBlock = new Tunnel(3244);
+        Tunnel myNewBlock2 = new Tunnel(324456);
+        myNewBlock.addBlock(myNewBlock2);
+        game.getCurrentPlayer().setMyBlock(myNewBlock);
         addAnotherPlayer();
+        game.nextPlayer();
+        game.getCurrentPlayer().setMyBlock(myNewBlock);
         game.movePlayerTo(0);
         game.nextPlayer();
         game.movePlayerTo(0);

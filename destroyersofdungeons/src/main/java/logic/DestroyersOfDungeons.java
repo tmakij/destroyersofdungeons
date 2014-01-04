@@ -56,7 +56,7 @@ public final class DestroyersOfDungeons {
      * Adds a new player to the game.
      *
      * @param name The name of the player.
-     * @return
+     * @return Was the name according to the regex pattern.
      */
     public boolean addPlayer(String name) {
         if (!name.matches("[" + Constants.ALLOWED_CHARACTERS + "]{" + Constants.PLAYER_NAME_MIN_LENGHT

@@ -1,12 +1,10 @@
 package gameobjects;
 
 /**
- * Default class for gameobjects, holds ID, Name, hashcode, equals and toString
- * methods.
+ * Default class for gameobjects, Name and toString methods.
  */
-public abstract class GameObject {
+public abstract class GameObject extends UniqueObject {
 
-    private final int id;
     private final String name;
 
     /**
@@ -16,31 +14,12 @@ public abstract class GameObject {
      * @param name The name of the object.
      */
     protected GameObject(int id, String name) {
-        this.id = id;
+        super(id);
         this.name = name;
     }
 
     @Override
     public final String toString() {
         return name;
-    }
-
-    @Override
-    public final int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + this.id;
-        return hash;
-    }
-
-    @Override
-    public final boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final GameObject other = (GameObject) obj;
-        return this.id == other.id;
     }
 }

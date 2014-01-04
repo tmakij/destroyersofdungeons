@@ -27,7 +27,7 @@ public final class TunnelTest {
     @Test
     public void testAddBlock() {
         final int amount = 29;
-        for (int i = 0; i < amount; i++) {
+        for (int i = 1; i < amount + 1; i++) {
             tunnel.addBlock(new Tunnel(i));
         }
         assertEquals(amount, tunnel.getNextTo().size());
@@ -45,31 +45,31 @@ public final class TunnelTest {
         tunnel.addBlock(second);
         second.addBlock(third);
         third.addBlock(tunnel);
-        assertEquals(tunnel, tunnel.getNextTo().get(0).getNextTo().get(0).getNextTo().get(0));
+        assertEquals(tunnel, tunnel.getNextTo().get(0).getNextTo().get(1).getNextTo().get(1));
     }
 
     @Test
     public void testAddActor() {
         Actor a = addDummyPlayer();
-        assertEquals(true, tunnel.getActorSet().contains(a));
+        assertEquals(true, tunnel.getActors().contains(a));
     }
 
     @Test
     public void testRemoveActor() {
         Actor a = addDummyPlayer();
         tunnel.removeActor(a);
-        assertEquals(false, tunnel.getActorSet().contains(a));
+        assertEquals(false, tunnel.getActors().contains(a));
     }
 
     @Test
     public void testgetActorSetWhenZero() {
-        assertEquals(0, tunnel.getActorSet().size());
+        assertEquals(0, tunnel.getActors().size());
     }
 
     @Test
     public void testgetActorSetWhenAdded() {
         addDummyPlayer();
-        assertEquals(1, tunnel.getActorSet().size());
+        assertEquals(1, tunnel.getActors().size());
     }
 
     @Test

@@ -40,7 +40,7 @@ public final class Player extends Actor {
      */
     public boolean hasTreasure() {
         for (Item i : getItems()) {
-            if (i.getClass() == Treasure.class) {
+            if (i.winsGame()) {
                 return true;
             }
         }

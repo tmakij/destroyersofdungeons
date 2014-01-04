@@ -100,7 +100,7 @@ public final class ActorTest {
         setTunnel();
         a.takeHit(Constants.ACTOR_BASE_HEALTH);
         a.die();
-        assertEquals(false, t.getActorSet().contains(a));
+        assertEquals(false, t.getActors().contains(a));
     }
 
     @Test
@@ -108,7 +108,7 @@ public final class ActorTest {
         setTunnel();
         a.takeHit(Constants.ACTOR_BASE_HEALTH - 1);
         a.die();
-        assertEquals(true, t.getActorSet().contains(a));
+        assertEquals(true, t.getActors().contains(a));
     }
 
     @Test
@@ -186,6 +186,6 @@ public final class ActorTest {
         setTunnel();
         Tunnel t2 = new Tunnel(555);
         a.setMyBlock(t2);
-        assertEquals(true, t.getActorSet().isEmpty());
+        assertEquals(true, t.getActors().isEmpty());
     }
 }

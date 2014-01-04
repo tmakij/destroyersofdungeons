@@ -54,13 +54,13 @@ public final class PlayerTest {
     @Test
     public void testLivingStayInYourBlock() {
         dontDie();
-        assertEquals(true, p.getMyBlock().getActorSet().contains(p));
+        assertEquals(true, p.getMyBlock().getActors().contains(p));
     }
     
     @Test
     public void testDyeingAndRemovalFromMyBlock() {
         killPlayer();
-        assertEquals(false, p.getMyBlock().getActorSet().contains(p));
+        assertEquals(false, p.getMyBlock().getActors().contains(p));
     }
     
     private void setUpBattle() {

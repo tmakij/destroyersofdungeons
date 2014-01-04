@@ -3,13 +3,15 @@ package gameobjects.dungeon;
 import gameobjects.Itemholder;
 import gameobjects.actors.Actor;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import localisation.Dictionary;
 
 /**
  * The basic block from which the dungeon is build. Can contain actors and
  * items. Knows the blocks that are next to it.
  */
-public final class Tunnel extends Itemholder {
+public class Tunnel extends Itemholder {
 
     private final List<Tunnel> nextTo = new ArrayList<>();
     private final List<Actor> actors = new ArrayList<>();
@@ -17,19 +19,61 @@ public final class Tunnel extends Itemholder {
     /**
      * Create a new tunnel with a unique id.
      *
-     * @param id Unique id.
+     * @param id The unique id.
      */
     public Tunnel(int id) {
-        super(id, "Tunnel (" + id + ")");
+        super(id, Dictionary.getValue("TUNNEL", id));
     }
 
     /**
-     * Adds a new block to the list of known neighbours.
+     * Creates a new tunnel with name and id specified.
+     *
+     * @param id The unique id.
+     * @param name The name of the tunnel.
+     */
+    protected Tunnel(int id, String name) {
+        super(id, name);
+    }
+
+    /**
+     * Checks if the tunnel is a end or start block.
+     *
+     * @return Does the block start or end an tunnel.
+     */
+    protected boolean isEndBlock() {
+        return false;
+    }
+
+    /**
+     * Adds a new block to the list of known neighbours. Does nothing if the
+     * block equals this or if the block is already in the list.
      *
      * @param t The tunnel block to be added.
      */
-    public void addBlock(Tunnel t) {
-        nextTo.add(t);
+    public final void addBlock(Tunnel t) {
+        if (!t.equals(this) && !nextTo.contains(t)) {
+            nextTo.add(t);
+            if (isEndBlock() && t.isEndBlock()) {
+                for (int i = 0; i < nextTo.size(); i++) {
+                    Tunnel t2 = nextTo.get(i);
+                    if (t2.isEndBlock()) {
+                        addBlock(t2);
+                    }
+                }
+            }
+            t.addBlock(this);
+        }
+    }
+
+    /**
+     * Adds a collection of tunnel blocks to the list of neighbours.
+     *
+     * @param blocks The block collection.
+     */
+    public final void addBlocks(Collection<Tunnel> blocks) {
+        for (Tunnel t : blocks) {
+            addBlock(t);
+        }
     }
 
     /**
@@ -37,8 +81,17 @@ public final class Tunnel extends Itemholder {
      *
      * @return List of neighbouring tunnel blocks.
      */
-    public List<Tunnel> getNextTo() {
+    public final List<Tunnel> getNextTo() {
         return nextTo;
+    }
+
+    /**
+     * Checks if there are items or actors in the tunnel.
+     *
+     * @return Returns true if the tunnel is empty.
+     */
+    public final boolean isEmpty() {
+        return getItems().isEmpty() && actors.isEmpty();
     }
 
     /**
@@ -46,7 +99,7 @@ public final class Tunnel extends Itemholder {
      *
      * @param a Actor to be added.
      */
-    public void addActor(Actor a) {
+    public final void addActor(Actor a) {
         actors.add(a);
     }
 
@@ -55,7 +108,7 @@ public final class Tunnel extends Itemholder {
      *
      * @param a Actor to be removed.
      */
-    public void removeActor(Actor a) {
+    public final void removeActor(Actor a) {
         actors.remove(a);
     }
 
@@ -66,7 +119,7 @@ public final class Tunnel extends Itemholder {
      * @param me The actor who is looking for other actors.
      * @return List of other actors in the tunnel.
      */
-    public List<Actor> getOtherActors(Actor me) {
+    public final List<Actor> getOtherActors(Actor me) {
         List<Actor> others = new ArrayList<>();
         for (Actor enemy : actors) {
             if (!enemy.equals(me)) {
@@ -81,7 +134,7 @@ public final class Tunnel extends Itemholder {
      *
      * @return List of all actors in the tunnel.
      */
-    public List<Actor> getActorSet() {
+    public final List<Actor> getActors() {
         return actors;
     }
 }

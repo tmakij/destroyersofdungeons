@@ -11,4 +11,9 @@ public final class Treasure extends Item {
     public Treasure() {
         super(-1, "TREASURE");
     }
+
+    @Override
+    public boolean winsGame() {
+        return true;
+    }
 }
