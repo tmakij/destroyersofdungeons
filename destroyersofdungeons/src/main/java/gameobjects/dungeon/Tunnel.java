@@ -51,7 +51,7 @@ public class Tunnel extends Itemholder {
      * @param t The tunnel block to be added.
      */
     public final void addBlock(Tunnel t) {
-        if (!t.equals(this) && !nextTo.contains(t)) {
+        if (t != null && !t.equals(this) && !nextTo.contains(t)) {
             nextTo.add(t);
             if (isEndBlock() && t.isEndBlock()) {
                 for (int i = 0; i < nextTo.size(); i++) {
@@ -89,7 +89,9 @@ public class Tunnel extends Itemholder {
      * @param a Actor to be added.
      */
     public final void addActor(Actor a) {
-        actors.add(a);
+        if (a != null) {
+            actors.add(a);
+        }
     }
 
     /**

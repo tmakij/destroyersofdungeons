@@ -1,12 +1,24 @@
 package gameobjects.actors.monsters;
 
+import localisation.Dictionary;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 
 public final class MonsterTest {
 
     private Monster mon;
+
+    @BeforeClass
+    @SuppressWarnings("UseSpecificCatch")
+    public static void setUpOnce() {
+        try {
+            Dictionary.loadText("english");
+        } catch (Exception ex) {
+        }
+        Monster.loadRaces();
+    }
 
     @Before
     public void setUp() {
@@ -19,7 +31,7 @@ public final class MonsterTest {
     }
 
     @Test
-    public void testToStringGetsRaceName() {
+    public void testToString() {
         assertEquals("Minotaur", mon.toString());
     }
 }

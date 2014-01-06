@@ -39,7 +39,9 @@ public abstract class Itemholder extends GameObject {
      * @param i Item to be added.
      */
     public final void addItem(Item i) {
-        items.add(i);
+        if (i != null) {
+            items.add(i);
+        }
     }
 
     /**
@@ -57,7 +59,9 @@ public abstract class Itemholder extends GameObject {
      * @param i Item to remove.
      */
     public final void removeItem(Item i) {
-        items.remove(i);
+        if (i != null) {
+            items.remove(i);
+        }
     }
 
     /**

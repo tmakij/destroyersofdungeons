@@ -16,7 +16,7 @@ public enum Dictionary {
     ;
     private static Map<String, String> strings;
     private static String language;
-    private static String languages[];// = new ArrayList<>();
+    private static String languages[];
     private static boolean loadedLanguages = false;
 
     /**

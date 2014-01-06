@@ -1,6 +1,5 @@
 package gameobjects.actors;
 
-import gameobjects.items.Treasure;
 import gameobjects.items.Item;
 import logic.DestroyersOfDungeons;
 

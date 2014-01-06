@@ -3,6 +3,7 @@ package gameobjects.actors.monsters;
 import gameobjects.actors.races.MinotaurRace;
 import gameobjects.actors.races.Race;
 import gameobjects.actors.Actor;
+import gameobjects.actors.races.SpiderRace;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +14,6 @@ import java.util.Map;
 public abstract class Monster extends Actor {
 
     private static final Map<Type, Race> races = new HashMap<>();
-    private final Race race;
 
     /**
      * Creates a new Monster.
@@ -23,7 +23,6 @@ public abstract class Monster extends Actor {
      */
     protected Monster(int id, Type race) {
         super(id, races.get(race).toString());
-        this.race = races.get(race);
     }
 
     @Override
@@ -36,5 +35,6 @@ public abstract class Monster extends Actor {
      */
     public static void loadRaces() {
         races.put(Minotaur.class, new MinotaurRace());
+        races.put(Spider.class, new SpiderRace());
     }
 }

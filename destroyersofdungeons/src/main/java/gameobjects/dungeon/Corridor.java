@@ -2,6 +2,7 @@ package gameobjects.dungeon;
 
 import gameobjects.UniqueObject;
 import gameobjects.actors.monsters.Minotaur;
+import gameobjects.items.Item;
 import gameobjects.items.Treasure;
 import gameobjects.items.WoodenShield;
 import gameobjects.items.WoodenSword;
@@ -44,11 +45,8 @@ final class Corridor extends UniqueObject {
                 Minotaur m = new Minotaur(d.getGameID());
                 m.setMyBlock(block);
             }
-            if (rand.nextDouble() <= 0.03D) {
-                block.addItem(new WoodenSword());
-            }
-            if (rand.nextDouble() <= 0.02D) {
-                block.addItem(new WoodenShield());
+            if (rand.nextDouble() <= 0.06D) {
+                block.addItem(Item.getRandomItem(rand));
             }
             previous = block;
             if (i == lenght - 1) {

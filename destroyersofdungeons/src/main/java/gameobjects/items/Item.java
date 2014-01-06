@@ -3,9 +3,15 @@ package gameobjects.items;
 import gameobjects.items.types.ItemType;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.reflections.Reflections;
 
 /**
@@ -16,6 +22,7 @@ public abstract class Item {
 
     private final ItemType type;
     private static final Map<Type, ItemType> itemTypesMap = new HashMap<>();
+    private static final List<String> names = new ArrayList<>();
 
     /**
      * Initialize a new item.
@@ -24,9 +31,35 @@ public abstract class Item {
      */
     protected Item(Type type) {
         this.type = itemTypesMap.get(type);
-        if (this.type == null) {
-            System.out.println("ERROR " + type);
+    }
+
+    public static Item getRandomItem(Random rand) {
+        Item i;
+        try {
+            do {
+                Class<? extends Item> cls = (Class<? extends Item>) Class.forName(names.get(rand.nextInt(names.size())));
+                i = cls.getConstructor().newInstance();
+            } while (i.winsGame());
+        } catch (Exception ex) {
+            i = null;
         }
+        return i;
+    }
+
+    private static String getReflectingName(String name) {
+        String[] split = name.split("\\.");
+        name = "";
+        for (int i = 0; i < split.length; i++) {
+            if (i == split.length - 1) {
+                name += "types.";
+            }
+            name += split[i];
+            if (i != split.length - 1) {
+                name += ".";
+            }
+        }
+        name += "Type";
+        return name;
     }
 
     @SuppressWarnings("UseSpecificCatch")
@@ -36,24 +69,12 @@ public abstract class Item {
         int ids = 0;
         for (Class<? extends Item> c : itemInstancesClasses) {
             try {
-                String name = c.getName();
-                String[] split = name.split("\\.");
-                name = "";
-                for (int i = 0; i < split.length; i++) {
-                    if (i == split.length - 1) {
-                        name += "types.";
-                    }
-                    name += split[i];
-                    if (i != split.length - 1) {
-                        name += ".";
-                    }
-                }
-                name += "Type";
+                String name = getReflectingName(c.getName());
                 Class cl = Class.forName(name);
                 Constructor ctor = cl.getConstructor(Integer.TYPE);
+                names.add(name.replace("types.", "").replace("Type", ""));
                 itemTypesMap.put(c, (ItemType) ctor.newInstance(++ids));
             } catch (Exception ex) {
-                System.out.println(ex);
             }
         }
     }
