@@ -3,7 +3,6 @@ package gameobjects.dungeon;
 import gameobjects.Itemholder;
 import gameobjects.actors.Actor;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import localisation.Dictionary;
 

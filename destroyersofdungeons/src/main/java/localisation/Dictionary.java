@@ -1,5 +1,7 @@
 package localisation;
 
+import gameobjects.actors.monsters.Monster;
+import gameobjects.items.Item;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,6 +42,8 @@ public enum Dictionary {
                 strings.put(lineSplit[0], lineSplit[n]);
             }
         }
+        Monster.loadRaces();
+        Item.loadItemTypes();
     }
 
     private static int getLineNumber(String line) {

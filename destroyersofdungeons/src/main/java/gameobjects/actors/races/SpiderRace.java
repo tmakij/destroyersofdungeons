@@ -1,7 +1,13 @@
 package gameobjects.actors.races;
 
-public final class SpiderRace extends Race {
+/**
+ * The race of spiders.
+ */
+final class SpiderRace extends Race {
 
+    /**
+     * Creates the The race of spiders.
+     */
     public SpiderRace() {
         super("SPIDER");
     }

@@ -17,7 +17,6 @@ public final class MonsterTest {
             Dictionary.loadText("english");
         } catch (Exception ex) {
         }
-        Monster.loadRaces();
     }
 
     @Before

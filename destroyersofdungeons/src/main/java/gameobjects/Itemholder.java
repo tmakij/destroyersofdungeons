@@ -3,7 +3,6 @@ package gameobjects;
 import gameobjects.items.Item;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 
 /**
  * Baseclass for all itemowners, actors and tunnels.

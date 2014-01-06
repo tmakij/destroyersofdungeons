@@ -2,7 +2,7 @@ package gameobjects.items;
 
 import constants.Constants;
 import gameobjects.actors.Actor;
-import gameobjects.actors.monsters.Minotaur;
+import gameobjects.actors.Player;
 import logic.BattleAction;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,8 +25,8 @@ public final class WoodenShieldTest {
 
     @Test
     public void testOnDamageReceived() {
-        Actor a = new Minotaur(0);
-        Actor b = new Minotaur(1);
+        Actor a = new Player(0, "", null);
+        Actor b = new Player(1, "", null);
         b.addItem(i);
         a.attack(b, BattleAction.ATTACK);
         assertEquals(Constants.ACTOR_BASE_HEALTH

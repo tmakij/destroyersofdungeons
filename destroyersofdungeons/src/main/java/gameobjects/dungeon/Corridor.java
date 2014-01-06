@@ -1,11 +1,9 @@
 package gameobjects.dungeon;
 
 import gameobjects.UniqueObject;
-import gameobjects.actors.monsters.Minotaur;
+import gameobjects.actors.monsters.Monster;
 import gameobjects.items.Item;
 import gameobjects.items.Treasure;
-import gameobjects.items.WoodenShield;
-import gameobjects.items.WoodenSword;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -41,12 +39,13 @@ final class Corridor extends UniqueObject {
         for (int i = 0; i < lenght; i++) {
             block = new Tunnel(d.getGameID());
             block.addBlock(previous);
-            if (rand.nextDouble() <= 0.04D) {
-                Minotaur m = new Minotaur(d.getGameID());
-                m.setMyBlock(block);
-            }
             if (rand.nextDouble() <= 0.06D) {
                 block.addItem(Item.getRandomItem(rand));
+            }
+            if (rand.nextDouble() <= 0.06D) {
+                Monster m = Monster.getRandomMonster(rand, d.getGameID());
+                m.setMyBlock(block);
+                m.pickUpItems();
             }
             previous = block;
             if (i == lenght - 1) {

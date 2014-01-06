@@ -1,12 +1,12 @@
 package gameobjects.actors;
 
 import constants.Constants;
-import gameobjects.actors.monsters.Minotaur;
 import gameobjects.actors.monsters.Monster;
 import gameobjects.dungeon.Tunnel;
 import gameobjects.items.Item;
 import gameobjects.items.WoodenShield;
 import gameobjects.items.WoodenSword;
+import java.util.Random;
 import logic.BattleAction;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,15 +18,15 @@ public final class ActorTest {
     private Actor a;
     private Tunnel t;
 
-    @Before
-    public void setUp() {
-        a = new Minotaur(0);
-    }
-
     @BeforeClass
     public static void onlyOnce() {
         Item.loadItemTypes();
         Monster.loadRaces();
+    }
+
+    @Before
+    public void setUp() {
+        a = Monster.getRandomMonster(new Random(), 0);
     }
 
     private Item addItem() {

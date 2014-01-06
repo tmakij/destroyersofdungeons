@@ -106,7 +106,7 @@ public final class DestroyersOfDungeons {
     public void removePlayer(Player p) {
         players.remove(p);
         deathTimes.put(p, totalTurns);
-        if (p.equals(currentPlayer)) {
+        if (!players.isEmpty() && p.equals(currentPlayer)) {
             nextPlayer();
         }
     }
