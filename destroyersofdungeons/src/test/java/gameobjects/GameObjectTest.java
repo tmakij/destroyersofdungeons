@@ -3,14 +3,25 @@ package gameobjects;
 import gameobjects.actors.Actor;
 import gameobjects.actors.Player;
 import gameobjects.dungeon.Tunnel;
+import localisation.Dictionary;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 
 public final class GameObjectTest {
 
     private GameObject go;
     private GameObject go2;
+
+    @BeforeClass
+    @SuppressWarnings({"BroadCatchBlock", "TooBroadCatch", "UseSpecificCatch"})
+    public static void setUpStatic() {
+        try {
+            Dictionary.loadText("english");
+        } catch (Exception ex) {
+        }
+    }
 
     @Before
     public void setUp() {
@@ -57,7 +68,7 @@ public final class GameObjectTest {
 
     @Test
     public void testToString() {
-        assertEquals("Tunnel (0)", go.toString());
+        assertEquals("Tunnel 0", go.toString());
     }
 
     @Test

@@ -66,17 +66,6 @@ public class Tunnel extends Itemholder {
     }
 
     /**
-     * Adds a collection of tunnel blocks to the list of neighbours.
-     *
-     * @param blocks The block collection.
-     */
-    public final void addBlocks(Collection<Tunnel> blocks) {
-        for (Tunnel t : blocks) {
-            addBlock(t);
-        }
-    }
-
-    /**
      * Get the list of neighbouring tunnel blocks.
      *
      * @return List of neighbouring tunnel blocks.

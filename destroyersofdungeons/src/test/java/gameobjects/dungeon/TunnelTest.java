@@ -91,4 +91,19 @@ public final class TunnelTest {
         a.pickUpItems();
         assertEquals(true, tunnel.getItems().isEmpty());
     }
+
+    @Test
+    public void testCantAddTunnelNextToItself() {
+        Tunnel t2 = new Tunnel(0);
+        tunnel.addBlock(t2);
+        assertEquals(true, tunnel.getNextTo().isEmpty());
+    }
+
+    @Test
+    public void testCantAddTunnelNextToTwice() {
+        Tunnel t2 = new Tunnel(1);
+        tunnel.addBlock(t2);
+        tunnel.addBlock(t2);
+        assertEquals(1, tunnel.getNextTo().size());
+    }
 }

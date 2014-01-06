@@ -2,7 +2,6 @@ package gameobjects.dungeon;
 
 import constants.Constants;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
@@ -32,7 +31,7 @@ public final class Dungeon {
                 while (c.neighboursTotal() < amountOfNeighbours) {
                     int n = rand.nextInt(corridors.size() - 2) + 1;
                     Corridor friend = corridors.get(n);
-                    if (friend.neighboursTotal() < 0 || count > 30) {
+                    if (friend.neighboursTotal() < 1 || count > 30) {
                         c.makeNeighbour(friend);
                     }
                     count++;

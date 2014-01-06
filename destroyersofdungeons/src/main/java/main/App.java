@@ -9,12 +9,15 @@ enum App {
     ;
     @SuppressWarnings({"UseSpecificCatch", "BroadCatchBlock", "TooBroadCatch"})
     public static void main(String[] args) {
+        final SwingGUI sgui;
         try {
             Dictionary.loadText("finnish");
             Monster.loadRaces();
-            SwingGUI sgui = new SwingGUI();
-            sgui.start();
+            sgui = new SwingGUI();
         } catch (Exception ex) {
+            System.exit(-1);
+            return;
         }
+        sgui.start();
     }
 }

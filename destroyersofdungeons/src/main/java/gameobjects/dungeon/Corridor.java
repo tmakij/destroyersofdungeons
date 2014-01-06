@@ -16,7 +16,7 @@ import java.util.Set;
  */
 final class Corridor extends UniqueObject {
 
-    private final Tunnel startBlock;
+    protected final Tunnel startBlock;
     private final Tunnel endBlock;
     private final boolean hasTreasure;
     private final Set<Corridor> nextTo = new HashSet<>();
@@ -38,7 +38,7 @@ final class Corridor extends UniqueObject {
 
         Tunnel block;
         for (int i = 0; i < lenght; i++) {
-            block = i < lenght - 1 ? new Tunnel(d.getGameID()) : new TunnelEnd(d.getGameID());
+            block = new Tunnel(d.getGameID());
             block.addBlock(previous);
             if (rand.nextDouble() <= 0.04D) {
                 Minotaur m = new Minotaur(d.getGameID());
@@ -78,10 +78,9 @@ final class Corridor extends UniqueObject {
     }
 
     Tunnel getStartingBlock() {
-        Tunnel intoCorridor;
         for (Tunnel t : startBlock.getNextTo()) {
             if (!t.isEndBlock()) {
-                intoCorridor = t;
+                Tunnel intoCorridor = t;
                 Random rand = new Random();
                 while (!intoCorridor.isEmpty()) {
                     List<Tunnel> nextTunnels = intoCorridor.getNextTo();
@@ -90,6 +89,6 @@ final class Corridor extends UniqueObject {
                 return intoCorridor;
             }
         }
-        throw new IllegalStateException("The corridor hasn't been initialized properly!");
+        return startBlock;
     }
 }

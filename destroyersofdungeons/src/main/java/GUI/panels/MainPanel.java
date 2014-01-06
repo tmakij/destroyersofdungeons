@@ -34,8 +34,8 @@ public final class MainPanel extends AbstractPanel {
 
         createItemList();
 
-        JLabel titleLabel = setMoveToTitle();
-        createButtonsForTunnels(titleLabel);
+        setMoveToTitle();
+        createButtonsForTunnels();
     }
 
     private void createItemList() {
@@ -72,16 +72,15 @@ public final class MainPanel extends AbstractPanel {
         return myLocation;
     }
 
-    private JLabel setMoveToTitle() {
+    private void setMoveToTitle() {
         JLabel label = new JLabel(Dictionary.getValue("MOVE_TO"));
         layout.putConstraint(SpringLayout.NORTH, label,
                 5,
                 SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.EAST, label,
-                -25,
+                -50,
                 SpringLayout.EAST, panel);
         panel.add(label);
-        return label;
     }
 
     private void createHealthStatus() {
@@ -95,7 +94,8 @@ public final class MainPanel extends AbstractPanel {
         panel.add(status);
     }
 
-    private void createButtonsForTunnels(Component c) {
+    private void createButtonsForTunnels() {
+        Component c = getLastComponent();
         List<Tunnel> tunnels = gui.getGame().getMovingPossibilities();
         for (int i = 0; i < tunnels.size(); i++) {
             JButton move = new JButton(tunnels.get(i).toString());
