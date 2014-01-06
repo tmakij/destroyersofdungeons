@@ -13,7 +13,7 @@ public abstract class Race {
      *
      * @param name The name of the Race.
      */
-    public Race(String name) {
+    protected Race(String name) {
         this.name = name;
     }
 

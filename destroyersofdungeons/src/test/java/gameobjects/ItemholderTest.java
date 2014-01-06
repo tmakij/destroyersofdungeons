@@ -4,21 +4,27 @@ import gameobjects.actors.Player;
 import gameobjects.items.Item;
 import gameobjects.items.WoodenShield;
 import gameobjects.items.WoodenSword;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 
 public final class ItemholderTest {
 
     private Itemholder h;
 
     private Collection<Item> getItems() {
-        Collection<Item> items = new ArrayList<>();
-        items.add(new WoodenShield(0));
-        items.add(new WoodenSword(0));
+        Collection<Item> items = new HashSet<>();
+        items.add(new WoodenShield());
+        items.add(new WoodenSword());
         return items;
+    }
+
+    @BeforeClass
+    public static void onlyOnce() {
+        Item.loadItemTypes();
     }
 
     @Before
@@ -33,7 +39,7 @@ public final class ItemholderTest {
 
     @Test
     public void testAddItem() {
-        h.addItem(new WoodenShield(0));
+        h.addItem(new WoodenShield());
         assertEquals(1, h.getItems().size());
     }
 
@@ -52,7 +58,7 @@ public final class ItemholderTest {
 
     @Test
     public void testRemoveItem() {
-        Item i = new WoodenSword(0);
+        Item i = new WoodenSword();
         h.addItem(i);
         h.removeItem(i);
         assertEquals(true, h.getItems().isEmpty());

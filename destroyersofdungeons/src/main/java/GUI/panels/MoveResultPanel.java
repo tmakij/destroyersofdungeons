@@ -4,11 +4,11 @@ import GUI.SwingGUI;
 import GUI.listeners.AttackActorListener;
 import GUI.listeners.FoundItemsListener;
 import GUI.listeners.TurnEndListener;
-import gameobjects.GameObject;
 import gameobjects.actors.Actor;
 import gameobjects.dungeon.Tunnel;
 import gameobjects.items.Item;
 import java.awt.Component;
+import java.util.Collection;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -49,9 +49,11 @@ public final class MoveResultPanel extends AbstractPanel {
 
     private void foundItems(DestroyersOfDungeons game) {
         addEventResult("FOUND_ITEMS");
-        List<Item> items = game.getCurrentPlayer().getMyBlock().getItems();
-        for (int i = 0; i < items.size(); i++) {
-            addEventResultObject(items.get(i), i);
+        Collection<Item> items = game.getCurrentPlayer().getMyBlock().getItems();
+        int iter = 0;
+        for (Item i : items) {
+            addEventResultObject(i, iter);
+            iter++;
         }
         addResume();
     }
@@ -95,7 +97,7 @@ public final class MoveResultPanel extends AbstractPanel {
         panel.add(attack);
     }
 
-    private void addEventResultObject(GameObject obj, int iter) {
+    private void addEventResultObject(Object obj, int iter) {
         JLabel name = new JLabel(obj.toString());
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, name,
                 0,

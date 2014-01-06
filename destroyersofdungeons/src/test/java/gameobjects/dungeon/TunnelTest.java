@@ -2,12 +2,14 @@ package gameobjects.dungeon;
 
 import gameobjects.actors.Actor;
 import gameobjects.actors.Player;
+import gameobjects.items.Item;
 import gameobjects.items.WoodenSword;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
+import org.junit.BeforeClass;
 
 public final class TunnelTest {
 
@@ -16,6 +18,11 @@ public final class TunnelTest {
     @Before
     public void setUp() {
         tunnel = new Tunnel(0);
+    }
+
+    @BeforeClass
+    public static void onlyOnce() {
+        Item.loadItemTypes();
     }
 
     private Actor addDummyPlayer() {
@@ -87,7 +94,7 @@ public final class TunnelTest {
     public void testClearTunnelItemsWhenPicked() {
         Actor a = addDummyPlayer();
         a.setMyBlock(tunnel);
-        tunnel.addItem(new WoodenSword(0));
+        tunnel.addItem(new WoodenSword());
         a.pickUpItems();
         assertEquals(true, tunnel.getItems().isEmpty());
     }

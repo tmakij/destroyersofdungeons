@@ -23,7 +23,7 @@ public abstract class Actor extends Itemholder {
      * @param id The unique id.
      * @param name The name of the object.
      */
-    public Actor(int id, String name) {
+    protected Actor(int id, String name) {
         super(id, name);
         health = Constants.ACTOR_BASE_HEALTH;
     }

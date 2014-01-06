@@ -3,6 +3,7 @@ package logic;
 import constants.Constants;
 import gameobjects.dungeon.Tunnel;
 import gameobjects.actors.Player;
+import gameobjects.items.Item;
 import gameobjects.items.Treasure;
 import gameobjects.items.WoodenSword;
 import java.util.ArrayList;
@@ -10,10 +11,16 @@ import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
+import org.junit.BeforeClass;
 
 public final class DestroyersOfDungeonsTest {
 
     private DestroyersOfDungeons game;
+
+    @BeforeClass
+    public static void onlyOnce() {
+        Item.loadItemTypes();
+    }
 
     @Before
     public void setUp() {
@@ -173,7 +180,7 @@ public final class DestroyersOfDungeonsTest {
 
     @Test
     public void testLastMoveCreatedCollisionsAfterMoveItem() {
-        game.getCurrentPlayer().getMyBlock().addItem(new WoodenSword(0));
+        game.getCurrentPlayer().getMyBlock().addItem(new WoodenSword());
         assertEquals(true, game.lastMoveCreatedCollisions());
     }
 

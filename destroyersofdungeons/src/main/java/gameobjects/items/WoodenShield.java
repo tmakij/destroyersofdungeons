@@ -8,12 +8,10 @@ import constants.Constants;
 public final class WoodenShield extends Item {
 
     /**
-     * Creates the woodenshield.
-     *
-     * @param id The unique
+     * Creates a woodenshield.
      */
-    public WoodenShield(int id) {
-        super(id, "WOODEN_SHIELD");
+    public WoodenShield() {
+        super(WoodenShield.class);
     }
 
     @Override

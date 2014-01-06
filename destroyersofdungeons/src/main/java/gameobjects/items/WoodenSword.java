@@ -8,12 +8,10 @@ import constants.Constants;
 public final class WoodenSword extends Item {
 
     /**
-     * Creates the woodensword.
-     *
-     * @param id The unique
+     * Creates a woodensword.
      */
-    public WoodenSword(int id) {
-        super(id, "WOODEN_SWORD");
+    public WoodenSword() {
+        super(WoodenSword.class);
     }
 
     @Override

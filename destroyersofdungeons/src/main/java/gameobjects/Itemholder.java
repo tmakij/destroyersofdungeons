@@ -1,8 +1,8 @@
 package gameobjects;
 
 import gameobjects.items.Item;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -10,7 +10,7 @@ import java.util.List;
  */
 public abstract class Itemholder extends GameObject {
 
-    private final List<Item> items = new ArrayList<>();
+    private final Collection<Item> items = new HashSet<>();
 
     /**
      * Creates a new ItemHolder.
@@ -43,11 +43,11 @@ public abstract class Itemholder extends GameObject {
     }
 
     /**
-     * Get the list of items in the inventory of the itemholder.
+     * Get the collection of items in the inventory of the itemholder.
      *
-     * @return List of items in the tunnel.
+     * @return Collection of items in the tunnel.
      */
-    public final List<Item> getItems() {
+    public final Collection<Item> getItems() {
         return items;
     }
 

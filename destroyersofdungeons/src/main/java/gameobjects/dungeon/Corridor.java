@@ -45,10 +45,10 @@ final class Corridor extends UniqueObject {
                 m.setMyBlock(block);
             }
             if (rand.nextDouble() <= 0.03D) {
-                block.addItem(new WoodenSword(d.getGameID()));
+                block.addItem(new WoodenSword());
             }
             if (rand.nextDouble() <= 0.02D) {
-                block.addItem(new WoodenShield(d.getGameID()));
+                block.addItem(new WoodenShield());
             }
             previous = block;
             if (i == lenght - 1) {

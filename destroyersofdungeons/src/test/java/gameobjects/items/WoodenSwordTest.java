@@ -7,14 +7,20 @@ import logic.BattleAction;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 
 public final class WoodenSwordTest {
 
     private Item i;
 
+    @BeforeClass
+    public static void onlyOnce() {
+        Item.loadItemTypes();
+    }
+
     @Before
     public void setUp() {
-        i = new WoodenSword(0);
+        i = new WoodenSword();
     }
 
     @Test

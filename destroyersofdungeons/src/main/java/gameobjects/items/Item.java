@@ -1,22 +1,81 @@
 package gameobjects.items;
 
-import gameobjects.GameObject;
-import localisation.Dictionary;
+import gameobjects.items.types.ItemType;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import org.reflections.Reflections;
 
 /**
  * Items can provide different types of bonuses. Their effects are checked
  * before actions.
  */
-public abstract class Item extends GameObject {
+public abstract class Item {
+
+    private final ItemType type;
+    private static final Map<Type, ItemType> itemTypesMap = new HashMap<>();
 
     /**
      * Initialize a new item.
      *
-     * @param id The unique id of the item.
-     * @param key The key to the name of the item.
+     * @param type The type of the item.
      */
-    public Item(int id, String key) {
-        super(id, Dictionary.getValue(key));
+    protected Item(Type type) {
+        this.type = itemTypesMap.get(type);
+        if (this.type == null) {
+            System.out.println("ERROR " + type);
+        }
+    }
+
+    @SuppressWarnings("UseSpecificCatch")
+    public static void loadItemTypes() {
+        Reflections itemInstances = new Reflections("gameobjects.items");
+        Set<Class<? extends Item>> itemInstancesClasses = itemInstances.getSubTypesOf(Item.class);
+        int ids = 0;
+        for (Class<? extends Item> c : itemInstancesClasses) {
+            try {
+                String name = c.getName();
+                String[] split = name.split("\\.");
+                name = "";
+                for (int i = 0; i < split.length; i++) {
+                    if (i == split.length - 1) {
+                        name += "types.";
+                    }
+                    name += split[i];
+                    if (i != split.length - 1) {
+                        name += ".";
+                    }
+                }
+                name += "Type";
+                Class cl = Class.forName(name);
+                Constructor ctor = cl.getConstructor(Integer.TYPE);
+                itemTypesMap.put(c, (ItemType) ctor.newInstance(++ids));
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+        }
+    }
+
+    @Override
+    public final int hashCode() {
+        return type.hashCode();
+    }
+
+    @Override
+    public final String toString() {
+        return type.toString();
+    }
+
+    @Override
+    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
+    public final boolean equals(Object obj) {
+        if (obj == null || obj.getClass() != getClass()) {
+            return false;
+        }
+        final Item i = (Item) obj;
+        return type.equals(i.type);
     }
 
     /**

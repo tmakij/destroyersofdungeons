@@ -21,7 +21,7 @@ public abstract class Monster extends Actor {
      * @param id The unique id.
      * @param race The race of the monster.
      */
-    public Monster(int id, Type race) {
+    protected Monster(int id, Type race) {
         super(id, races.get(race).toString());
         this.race = races.get(race);
     }

@@ -6,6 +6,7 @@ import gameobjects.dungeon.Tunnel;
 import gameobjects.items.Item;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.util.Collection;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -39,7 +40,7 @@ public final class MainPanel extends AbstractPanel {
     }
 
     private void createItemList() {
-        List<Item> p_items = gui.getGame().getCurrentPlayer().getItems();
+        Collection<Item> p_items = gui.getGame().getCurrentPlayer().getItems();
         JList items = new JList(p_items.toArray());
         JScrollPane scroll = new JScrollPane(items);
         layout.putConstraint(SpringLayout.NORTH, scroll,

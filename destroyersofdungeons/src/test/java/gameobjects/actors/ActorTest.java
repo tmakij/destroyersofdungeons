@@ -25,11 +25,12 @@ public final class ActorTest {
 
     @BeforeClass
     public static void onlyOnce() {
+        Item.loadItemTypes();
         Monster.loadRaces();
     }
 
     private Item addItem() {
-        Item i = new WoodenSword(0);
+        Item i = new WoodenSword();
         a.addItem(i);
         return i;
     }
@@ -69,7 +70,7 @@ public final class ActorTest {
     @Test
     public void testTakeHitWithItem() {
         Actor b = new Player(123, "TEST_PLAYER_NO2", null);
-        b.addItem(new WoodenShield(1));
+        b.addItem(new WoodenShield());
         a.attack(b, BattleAction.ATTACK);
         assertEquals(Constants.ACTOR_BASE_HEALTH
                 - ((int) (Constants.ACTOR_BASE_ATTACK * Constants.WOODEN_SHIELD_DEFENSE)), b.getHealth());
@@ -134,7 +135,7 @@ public final class ActorTest {
     @Test
     public void testPickItemsFromTunnelWithItems() {
         setTunnel();
-        Item i = new WoodenSword(1920);
+        Item i = new WoodenSword();
         t.addItem(i);
         a.pickUpItems();
         assertEquals(true, a.getItems().contains(i));
