@@ -49,7 +49,7 @@ public final class EndGamePanel extends AbstractPanel {
     }
 
     private void addEnd() {
-        JLabel end = new JLabel(Dictionary.getValue("GAME_END"));
+        JLabel end = new JLabel(Dictionary.getValue("GAME_END", gui.getGame().getTotalTurns()));
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, end,
                 -250,
                 SpringLayout.HORIZONTAL_CENTER, panel

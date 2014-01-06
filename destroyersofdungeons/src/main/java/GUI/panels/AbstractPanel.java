@@ -6,9 +6,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
+import localisation.Dictionary;
 
 /**
- * Base class for all panels. Implements IDungeonPanel.
+ * Base class for all panels. Implements IDungeonPanel. Contains the JPanel,
+ * SpringLayout.
  */
 public abstract class AbstractPanel implements IDungeonPanel {
 
@@ -51,5 +53,17 @@ public abstract class AbstractPanel implements IDungeonPanel {
             dispose();
         }
         super.finalize();
+    }
+
+    protected final void createBack(String back, ActionListener al) {
+        JButton backTo = new JButton(Dictionary.getValue(back));
+        layout.putConstraint(SpringLayout.WEST, backTo,
+                50,
+                SpringLayout.WEST, panel);
+        layout.putConstraint(SpringLayout.SOUTH, backTo,
+                -50,
+                SpringLayout.SOUTH, panel);
+        backTo.addActionListener(al);
+        panel.add(backTo);
     }
 }

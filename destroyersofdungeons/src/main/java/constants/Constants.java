@@ -66,4 +66,12 @@ public enum Constants {
      * The maximum length of a corridor.
      */
     public static int CORRIDOR_MAX_LENGTH = 12;
+    /**
+     * Minimum amount of players in the game.
+     */
+    public static int MINIMUM_PLAYER_COUNT = 1;
+    /**
+     * Maximum amount of players in the game.
+     */
+    public static int MAXIMUM_PLAYER_COUNT = 12;
 }

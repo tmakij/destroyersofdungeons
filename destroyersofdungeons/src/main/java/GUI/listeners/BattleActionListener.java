@@ -1,6 +1,7 @@
 package GUI.listeners;
 
 import GUI.SwingGUI;
+import GUI.panels.EndGamePanel;
 import GUI.panels.MoveResultPanel;
 import GUI.panels.TurnPanel;
 import gameobjects.actors.Actor;
@@ -14,7 +15,7 @@ import logic.DestroyersOfDungeons;
  * of a battle in the BattlePanel.
  */
 public final class BattleActionListener extends AbstractGUIListener {
-
+    
     private final Battle battle;
     private final BattleAction act;
 
@@ -30,7 +31,7 @@ public final class BattleActionListener extends AbstractGUIListener {
         this.battle = battle;
         this.act = act;
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         DestroyersOfDungeons game = gui.getGame();
@@ -40,9 +41,11 @@ public final class BattleActionListener extends AbstractGUIListener {
         if (battle.takeAction(act)) {
             if (attacker.isAlive() && current.equals(attacker) && !defender.isAlive()) {
                 gui.setPanel(new MoveResultPanel(gui));
-            } else {
+            } else if (!game.getPlayers().isEmpty()) {
                 game.nextPlayer();
                 gui.setPanel(new TurnPanel(gui));
+            } else {
+                gui.setPanel(new EndGamePanel(gui));
             }
         }
     }

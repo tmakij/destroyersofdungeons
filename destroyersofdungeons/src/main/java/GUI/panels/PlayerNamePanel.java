@@ -1,7 +1,7 @@
 package GUI.panels;
 
 import GUI.SwingGUI;
-import GUI.listeners.GoToMainMenuListener;
+import GUI.listeners.MainMenuStartListener;
 import GUI.listeners.PlayerNameListener;
 import java.awt.Component;
 import javax.swing.JButton;
@@ -20,15 +20,14 @@ public final class PlayerNamePanel extends AbstractPanel {
      * Create a new instance of the PlayerNamePanel.
      *
      * @param gui The SwingGUI which holds the program.
+     * @param PlayerCount The amount of players in the game.
      */
-    public PlayerNamePanel(SwingGUI gui) {
+    public PlayerNamePanel(SwingGUI gui, int PlayerCount) {
         super(gui);
-
-        JTextField[] fields = new JTextField[2];
-        createPlayerFields(Dictionary.getValue("PLAYER_N", 1), 0, fields);
-        createPlayerFields(Dictionary.getValue("PLAYER_N", 2), 1, fields);
+        JTextField[] fields = new JTextField[PlayerCount];
+        createPlayerFields(PlayerCount, fields);
         createStart(fields);
-        createBack();
+        createBack("RETURN_PLAYER_COUNT", new MainMenuStartListener(gui));
     }
 
     private void createStart(JTextField[] fields) {
@@ -44,46 +43,51 @@ public final class PlayerNamePanel extends AbstractPanel {
         panel.add(start);
     }
 
-    private void createPlayerFields(String text, int m, JTextField[] fields) {
-        int ver = (50 * m) - 50;
-        createPlayerField(text, ver);
-        fields[m] = createNameField(text, ver);
+    private void createPlayerFields(int count, JTextField[] fields) {
+        createPlayers(50 - (count * 20));
+        Component last = getLastComponent();
+        for (int i = 0; i < count; i++) {
+            String text = Dictionary.getValue("PLAYER_N", i + 1);
+            createPlayerField(text, 50 * i, last);
+            last = getLastComponent();
+            fields[i] = createNameField(text);
+        }
     }
 
-    private void createPlayerField(String text, int ver) {
+    private void createPlayers(int m) {
+        JLabel lab = new JLabel(Dictionary.getValue("PLAYER_NAMES"));
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, lab,
+                -50,
+                SpringLayout.HORIZONTAL_CENTER, panel);
+        layout.putConstraint(SpringLayout.VERTICAL_CENTER, lab,
+                m,
+                SpringLayout.VERTICAL_CENTER, panel);
+        panel.add(lab);
+    }
+
+    private void createPlayerField(String text, int ver, Component last) {
         JLabel fieldPlayer = new JLabel(text);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, fieldPlayer,
                 0,
-                SpringLayout.HORIZONTAL_CENTER, panel);
-        layout.putConstraint(SpringLayout.VERTICAL_CENTER, fieldPlayer,
-                ver,
-                SpringLayout.VERTICAL_CENTER, panel);
+                SpringLayout.HORIZONTAL_CENTER, last);
+        layout.putConstraint(SpringLayout.NORTH, fieldPlayer,
+                30,
+                SpringLayout.NORTH, last);
         panel.add(fieldPlayer);
     }
 
-    private JTextField createNameField(String text, int ver) {
+    private JTextField createNameField(String text) {
         JTextField nameFieldPlayer = new JTextField(text);
-        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, nameFieldPlayer,
-                75,
-                SpringLayout.HORIZONTAL_CENTER, getLastComponent());
-        layout.putConstraint(SpringLayout.VERTICAL_CENTER, nameFieldPlayer,
-                ver,
-                SpringLayout.VERTICAL_CENTER, panel);
-
+        layout.putConstraint(SpringLayout.WEST, nameFieldPlayer,
+                15,
+                SpringLayout.EAST, getLastComponent());
+        layout.putConstraint(SpringLayout.NORTH, nameFieldPlayer,
+                0,
+                SpringLayout.NORTH, getLastComponent());
+        layout.putConstraint(SpringLayout.EAST, nameFieldPlayer,
+                -25,
+                SpringLayout.EAST, panel);
         panel.add(nameFieldPlayer);
         return nameFieldPlayer;
-    }
-
-    private void createBack() {
-        JButton backToMainMenu = new JButton(Dictionary.getValue("RETURN_MAINMENU"));
-        Component last = getLastComponent();
-        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, backToMainMenu,
-                -175,
-                SpringLayout.HORIZONTAL_CENTER, last);
-        layout.putConstraint(SpringLayout.VERTICAL_CENTER, backToMainMenu,
-                0,
-                SpringLayout.VERTICAL_CENTER, last);
-        backToMainMenu.addActionListener(new GoToMainMenuListener(gui));
-        panel.add(backToMainMenu);
     }
 }

@@ -44,7 +44,7 @@ public final class DestroyersOfDungeonsTest {
     public void testStartBlockIsEmptyFromActorAndItems() {
         boolean isEmpty = true;
         final int rounds = 1000;
-        
+
         for (int i = 0; i < rounds; i++) {
             game = new DestroyersOfDungeons();
             game.addPlayer("TEST_PLAYER");
@@ -270,5 +270,29 @@ public final class DestroyersOfDungeonsTest {
             }
         }
         assertEquals(false, added);
+    }
+
+    @Test
+    public void testPlayerDeathCorrectTurnWhenSecondLast() {
+        addAnotherPlayer();
+        game.addPlayer("TEST_PLAYER_NO3");
+        game.nextPlayer();
+        game.nextPlayer();
+        Player p = game.getCurrentPlayer();
+        game.nextPlayer();
+        game.nextPlayer();
+        game.removePlayer(game.getCurrentPlayer());
+        assertEquals(p, game.getCurrentPlayer());
+    }
+
+    @Test
+    public void testPlayerDeathCorrectTurnWhenLast() {
+        addAnotherPlayer();
+        game.addPlayer("TEST_PLAYER_NO3");
+        Player p = game.getCurrentPlayer();
+        game.nextPlayer();
+        game.nextPlayer();
+        game.removePlayer(game.getCurrentPlayer());
+        assertEquals(p, game.getCurrentPlayer());
     }
 }

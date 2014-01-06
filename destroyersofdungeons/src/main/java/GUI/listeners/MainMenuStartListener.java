@@ -1,11 +1,12 @@
 package GUI.listeners;
 
 import GUI.SwingGUI;
-import GUI.panels.PlayerNamePanel;
+import GUI.panels.SetPlayerCountPanel;
 import java.awt.event.ActionEvent;
 
 /**
- * Listen start game button on main menu. Switches to player creation on click.
+ * Listen start game button on main menu. Switches to player count selection on
+ * click. Calls the SwingGUI to create a new game.
  */
 public final class MainMenuStartListener extends AbstractGUIListener {
 
@@ -21,6 +22,6 @@ public final class MainMenuStartListener extends AbstractGUIListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         gui.createNewGame();
-        gui.setPanel(new PlayerNamePanel(gui));
+        gui.setPanel(new SetPlayerCountPanel(gui));
     }
 }

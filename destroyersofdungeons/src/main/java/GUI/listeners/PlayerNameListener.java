@@ -9,8 +9,6 @@ import javax.swing.text.JTextComponent;
  * Listens startgame button on player creation. For each JTextComponent given to
  * this a player is created into the game. All fields must be valid, 1-32
  * characters long that are from A to Z and from 0 to 9. Switches to TurnPanel.
- * Id fields are valid and the button is clicked, a new instance of the game is
- * created.
  */
 public final class PlayerNameListener extends AbstractGUIListener {
 
