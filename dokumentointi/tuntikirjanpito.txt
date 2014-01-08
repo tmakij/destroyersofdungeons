@@ -54,3 +54,7 @@
   8.1.2014
   - 3 tuntia
   - Vampyyri, haamut, spider/minotaur erikoisuudet, testej‰, v‰hennetty p‰‰llekk‰isyyksi‰ koodissa.
+  
+  9.1.2014
+  - 5 tuntia
+  - Javadoccia, testej‰/mutantteja pois, sekvenssikaavio, virheiden korjausta, koodin siistint‰‰.

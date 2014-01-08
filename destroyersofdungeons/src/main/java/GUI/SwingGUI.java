@@ -26,10 +26,11 @@ public final class SwingGUI {
     private IDungeonPanel currentPanel;
 
     /**
-     * Creates a new instance the gui. Localisation must be loaded before
-     * creating.
+     * Creates a new instance the gui. English localisation will be loaded on
+     * creation.
      */
     public SwingGUI() {
+        Dictionary.loadText("english");
         frame = new JFrame();
         frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);

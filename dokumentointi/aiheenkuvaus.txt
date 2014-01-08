@@ -1,8 +1,9 @@
-Tarkoitus on luoda tietokonepeli, jossa kaksi pelaajaa yrittää etsiä aarretta vanhassa tyrmässä (dungeon).
+Tarkoitus on luoda tietokonepeli, jossa yksi, tai useampi pelaaja yrittää etsiä aarretta vanhassa tyrmässä.
 Pelaajat liikuvat vuoropohjaisesti kartassa, joka on luotu sattumanvaraisesti. Oikeaa suuntaa ei kerrota.
-Käytävät voivat risteillä ja taitekohdissa voi olla useita vaihtoehtoja
-ja niillä voi kohdata erilaisia mörköjä, jotka täytyy tietenkin nitistää.
+Käytävät voivat risteillä ja taitekohdissa voi olla useita vaihtoehtoja.
+Tyrmässä voi kohdata erilaisia mörköjä, jotka täytyy tietenkin nitistää.
 Matkalta voi löytää esineitä, jotka auttavat voivat auttaa eritavoin.
+Peli on sekä englanniksi että suomeksi.
 Aarteenlöytäjä voittaa pelin.
 
 Tavoite:
