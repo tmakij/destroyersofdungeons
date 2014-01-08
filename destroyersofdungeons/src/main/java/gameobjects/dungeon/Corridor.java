@@ -1,5 +1,6 @@
 package gameobjects.dungeon;
 
+import constants.Constants;
 import gameobjects.UniqueObject;
 import gameobjects.actors.monsters.Monster;
 import gameobjects.items.Item;
@@ -15,6 +16,8 @@ import java.util.Set;
  */
 final class Corridor extends UniqueObject {
 
+    // For testing
+    @SuppressWarnings("ProtectedMemberInFinalClass")
     protected final Tunnel startBlock;
     private final Tunnel endBlock;
     private final boolean hasTreasure;
@@ -39,10 +42,10 @@ final class Corridor extends UniqueObject {
         for (int i = 0; i < lenght; i++) {
             block = new Tunnel(d.getGameID());
             block.addBlock(previous);
-            if (rand.nextDouble() <= 0.06D) {
+            if (rand.nextDouble() <= Constants.ITEM_SPAWN_CHANCE) {
                 block.addItem(Item.getRandomItem(rand));
             }
-            if (rand.nextDouble() <= 0.06D) {
+            if (rand.nextDouble() <= Constants.MONSTER_SPAWN_CHANCE) {
                 Monster m = Monster.getRandomMonster(rand, d.getGameID());
                 m.setMyBlock(block);
                 m.pickUpItems();

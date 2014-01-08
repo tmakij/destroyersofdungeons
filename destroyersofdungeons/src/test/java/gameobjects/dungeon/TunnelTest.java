@@ -6,14 +6,21 @@ import gameobjects.items.Item;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 public final class TunnelTest {
 
     private static final Random rand = new Random();
+
+    @BeforeClass
+    public static void onlyOnce() {
+        Item.loadItemTypes();
+    }
     private Tunnel tunnel;
 
     @Before
@@ -21,18 +28,13 @@ public final class TunnelTest {
         tunnel = new Tunnel(0);
     }
 
-    @BeforeClass
-    public static void onlyOnce() {
-        Item.loadItemTypes();
-    }
+        private Actor addDummyPlayer() {
+            Actor a = new Player(1, "TEST_PLAYER", null);
+            tunnel.addActor(a);
+            return a;
+        }
 
-    private Actor addDummyPlayer() {
-        Actor a = new Player(1, "TEST_PLAYER", null);
-        tunnel.addActor(a);
-        return a;
-    }
-
-    @Test
+        @Test
     public void testAddBlock() {
         final int amount = 29;
         for (int i = 1; i < amount + 1; i++) {

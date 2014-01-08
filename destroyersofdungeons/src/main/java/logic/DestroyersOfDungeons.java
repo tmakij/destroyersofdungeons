@@ -1,9 +1,9 @@
 package logic;
 
 import constants.Constants;
+import gameobjects.actors.Player;
 import gameobjects.dungeon.Dungeon;
 import gameobjects.dungeon.Tunnel;
-import gameobjects.actors.Player;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -71,7 +71,8 @@ public final class DestroyersOfDungeons {
             players.clear();
             return false;
         }
-        Player p = new Player(++playerIds, name, this);
+        playerIds++;
+        Player p = new Player(playerIds, name, this);
         if (players.isEmpty()) {
             currentPlayer = p;
         }

@@ -1,8 +1,9 @@
 package gameobjects.actors.monsters;
 
-import gameobjects.actors.races.Race;
 import gameobjects.actors.Actor;
+import gameobjects.actors.races.Race;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +21,40 @@ public abstract class Monster extends Actor {
     private static final Map<Type, Race> races = new HashMap<>();
     private static final List<String> names = new ArrayList<>();
 
+    public static Monster getRandomMonster(Random rand, int id) {
+        Monster m;
+        try {
+            @SuppressWarnings("unchecked")
+            Class<? extends Monster> cls = (Class<? extends Monster>) Class.forName(names.get(rand.nextInt(names.size())));
+            m = cls.getConstructor(Integer.TYPE).newInstance(id);
+        } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            m = null;
+        }
+        return m;
+    }
+
+    /**
+     * Loads the races. This method is only to be called once.
+     */
+    public static void loadRaces() {
+        Reflections itemInstances = new Reflections("gameobjects.actors.monsters");
+        Set<Class<? extends Monster>> racesInstancesClasses = itemInstances.getSubTypesOf(Monster.class);
+        for (Class<? extends Monster> m : racesInstancesClasses) {
+            try {
+                String name = m.getName();
+                name = name.replace("monster", "race");
+                name += "Race";
+                @SuppressWarnings("unchecked")
+                Class<? extends Race> cl = (Class<? extends Race>) Class.forName(name);
+                Constructor<? extends Race> ctor = cl.getConstructor();
+                ctor.setAccessible(true);
+                names.add(m.getName());
+                races.put(m, ctor.newInstance());
+            } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            }
+        }
+    }
+
     /**
      * Creates a new Monster.
      *
@@ -33,39 +68,5 @@ public abstract class Monster extends Actor {
     @Override
     public final boolean isPlayerControlled() {
         return false;
-    }
-
-    @SuppressWarnings("UseSpecificCatch")
-    public static Monster getRandomMonster(Random rand, int id) {
-        Monster m;
-        try {
-            Class<? extends Monster> cls = (Class<? extends Monster>) Class.forName(names.get(rand.nextInt(names.size())));
-            m = cls.getConstructor(Integer.TYPE).newInstance(id);
-        } catch (Exception ex) {
-            m = null;
-        }
-        return m;
-    }
-
-    /**
-     * Loads the races. This method is only to be called once.
-     */
-    @SuppressWarnings("UseSpecificCatch")
-    public static void loadRaces() {
-        Reflections itemInstances = new Reflections("gameobjects.actors.monsters");
-        Set<Class<? extends Monster>> racesInstancesClasses = itemInstances.getSubTypesOf(Monster.class);
-        for (Class<? extends Monster> m : racesInstancesClasses) {
-            try {
-                String name = m.getName();
-                name = name.replace("monster", "race");
-                name += "Race";
-                Class cl = Class.forName(name);
-                Constructor ctor = cl.getConstructor();
-                ctor.setAccessible(true);
-                names.add(m.getName());
-                races.put(m, (Race) ctor.newInstance());
-            } catch (Exception ex) {
-            }
-        }
     }
 }

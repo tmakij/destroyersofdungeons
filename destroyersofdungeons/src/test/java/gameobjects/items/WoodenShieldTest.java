@@ -4,19 +4,19 @@ import constants.Constants;
 import gameobjects.actors.Actor;
 import gameobjects.actors.Player;
 import logic.BattleAction;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 public final class WoodenShieldTest {
-
-    private Item i;
 
     @BeforeClass
     public static void onlyOnce() {
         Item.loadItemTypes();
     }
+
+    private Item i;
 
     @Before
     public void setUp() {

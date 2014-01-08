@@ -99,4 +99,12 @@ public enum Constants {
      * The percentage of the damage that is left after a hit to a ghost.
      */
     public static final double GHOTS_DAMAGE_REDUCTION = 0.5D;
+    /**
+     * The chance that a tunnel has an item.
+     */
+    public static final double ITEM_SPAWN_CHANCE = 0.08D;
+    /**
+     * The chance that a tunnel has a monster.
+     */
+    public static final double MONSTER_SPAWN_CHANCE = 0.11D;
 }

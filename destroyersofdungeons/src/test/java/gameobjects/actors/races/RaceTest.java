@@ -1,19 +1,19 @@
 package gameobjects.actors.races;
 
 import localisation.Dictionary;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 public final class RaceTest {
-
-    private Race race;
 
     @BeforeClass
     @SuppressWarnings("UseSpecificCatch")
     public static void setUpOnce() {
         Dictionary.loadText("english");
     }
+
+    private Race race;
 
     @Test
     public void testToString() {

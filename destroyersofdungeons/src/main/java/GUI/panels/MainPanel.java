@@ -8,6 +8,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.util.Collection;
 import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -39,9 +40,17 @@ public final class MainPanel extends AbstractPanel {
         createButtonsForTunnels();
     }
 
-    private void createItemList() {
+    private JList<Item> getItemList() {
         Collection<Item> p_items = gui.getGame().getCurrentPlayer().getItems();
-        JList items = new JList(p_items.toArray());
+        DefaultListModel<Item> model = new DefaultListModel<>();
+        for (Item i : p_items) {
+            model.addElement(i);
+        }
+        return new JList<>(model);
+    }
+
+    private void createItemList() {
+        JList<Item> items = getItemList();
         JScrollPane scroll = new JScrollPane(items);
         layout.putConstraint(SpringLayout.NORTH, scroll,
                 0,

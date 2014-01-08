@@ -4,8 +4,8 @@ import GUI.panels.IDungeonPanel;
 import GUI.panels.MainMenuPanel;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-import logic.DestroyersOfDungeons;
 import localisation.Dictionary;
+import logic.DestroyersOfDungeons;
 
 /**
  * The GUI made with swing. Handles the game.

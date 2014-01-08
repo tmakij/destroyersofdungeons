@@ -5,14 +5,21 @@ import gameobjects.items.Item;
 import gameobjects.items.Treasure;
 import java.util.Random;
 import logic.DestroyersOfDungeons;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 public final class PlayerTest {
 
     private static final Random rand = new Random();
+
+    @BeforeClass
+    public static void onlyOnce() {
+        Item.loadItemTypes();
+    }
     private Player p, att, def;
     private DestroyersOfDungeons game;
 
@@ -30,11 +37,6 @@ public final class PlayerTest {
         game.addPlayer("TEST_PLAYER");
         p = game.getCurrentPlayer();
         p.die();
-    }
-
-    @BeforeClass
-    public static void onlyOnce() {
-        Item.loadItemTypes();
     }
 
     @Before
@@ -71,15 +73,15 @@ public final class PlayerTest {
         assertFalse(p.getMyBlock().getActors().contains(p));
     }
 
-    private void setUpBattle() {
-        game = new DestroyersOfDungeons();
-        game.addPlayer("TEST_PLAYER");
-        game.addPlayer("TEST_PLAYER_NO2");
-        att = game.getPlayers().get(0);
-        def = game.getPlayers().get(1);
-    }
+        private void setUpBattle() {
+            game = new DestroyersOfDungeons();
+            game.addPlayer("TEST_PLAYER");
+            game.addPlayer("TEST_PLAYER_NO2");
+            att = game.getPlayers().get(0);
+            def = game.getPlayers().get(1);
+        }
 
-    @Test
+        @Test
     public void testDefLosersDie() {
         setUpBattle();
         def.takeHit(Constants.ACTOR_BASE_HEALTH);

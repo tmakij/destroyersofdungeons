@@ -1,27 +1,30 @@
 package logic;
 
 import constants.Constants;
-import gameobjects.dungeon.Tunnel;
 import gameobjects.actors.Player;
+import gameobjects.dungeon.Tunnel;
 import gameobjects.items.Item;
 import gameobjects.items.Treasure;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 public final class DestroyersOfDungeonsTest {
 
     private static final Random rand = new Random();
-    private DestroyersOfDungeons game;
 
     @BeforeClass
     public static void onlyOnce() {
         Item.loadItemTypes();
     }
+    private DestroyersOfDungeons game;
 
     @Before
     public void setUp() {
@@ -29,11 +32,11 @@ public final class DestroyersOfDungeonsTest {
         game.addPlayer("TEST_PLAYER");
     }
 
-    private void addAnotherPlayer() {
-        game.addPlayer("TEST_PLAYER_NO2");
-    }
+        private void addAnotherPlayer() {
+            game.addPlayer("TEST_PLAYER_NO2");
+        }
 
-    @Test
+        @Test
     public void testDeathTimesHasPlayersSize() {
         addAnotherPlayer();
         game.removePlayer(game.getCurrentPlayer());
@@ -199,16 +202,16 @@ public final class DestroyersOfDungeonsTest {
         assertEquals(p, game.getWinner());
     }
 
-    private List<Player> createOthers() {
-        addAnotherPlayer();
-        Player p = game.getCurrentPlayer();
-        game.nextPlayer();
-        List<Player> others = new ArrayList<>();
-        others.add(p);
-        return others;
-    }
+        private List<Player> createOthers() {
+            addAnotherPlayer();
+            Player p = game.getCurrentPlayer();
+            game.nextPlayer();
+            List<Player> others = new ArrayList<>();
+            others.add(p);
+            return others;
+        }
 
-    @Test
+        @Test
     public void testGetOtherPlayersWork() {
         List<Player> others = createOthers();
         assertEquals(others, game.getAllOtherPlayers(game.getCurrentPlayer()));
@@ -243,15 +246,15 @@ public final class DestroyersOfDungeonsTest {
         assertTrue(game.addPlayer("TEST_PLAYER_NO3"));
     }
 
-    private String getNameWithLenght(int l) {
-        String n = "";
-        for (int i = 0; i < l; i++) {
-            n += "a";
+        private String getNameWithLenght(int l) {
+            String n = "";
+            for (int i = 0; i < l; i++) {
+                n += "a";
+            }
+            return n;
         }
-        return n;
-    }
 
-    @Test
+        @Test
     public void testAddPlayerTooShort() {
         assertFalse(game.addPlayer(getNameWithLenght(Constants.PLAYER_NAME_MIN_LENGHT - 1)));
     }
@@ -269,15 +272,13 @@ public final class DestroyersOfDungeonsTest {
 
     @Test
     public void testAddInvalidPlayerSomeInvalidChars() {
-        boolean added = false;
         for (int i = 0; i < 1024; i++) {
             String name = Character.toString((char) i);
             if (!name.matches("[" + Constants.ALLOWED_CHARACTERS + "]") && game.addPlayer(name)) {
-                added = true;
-                System.out.println("Added regardless: " + name);
+                fail("Added regardless: " + name);
             }
         }
-        assertFalse(added);
+        assertTrue(true);
     }
 
     @Test

@@ -1,7 +1,7 @@
 package gameobjects.actors.monsters;
 
-import logic.BattleAction;
 import constants.Constants;
+import logic.BattleAction;
 
 final class Spider extends Monster {
 

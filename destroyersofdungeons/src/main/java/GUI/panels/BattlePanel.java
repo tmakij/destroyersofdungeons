@@ -1,6 +1,5 @@
 package GUI.panels;
 
-import logic.IUpdate;
 import GUI.SwingGUI;
 import GUI.listeners.BattleActionListener;
 import gameobjects.actors.Actor;
@@ -11,6 +10,7 @@ import javax.swing.SpringLayout;
 import localisation.Dictionary;
 import logic.Battle;
 import logic.BattleAction;
+import logic.IUpdate;
 
 /**
  * The panel that handles all the battles between a player and another actor.

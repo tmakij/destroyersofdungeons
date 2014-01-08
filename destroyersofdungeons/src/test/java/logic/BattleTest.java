@@ -7,23 +7,26 @@ import gameobjects.actors.Player;
 import gameobjects.actors.monsters.Monster;
 import gameobjects.dungeon.Tunnel;
 import java.util.Random;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 public final class BattleTest {
+
+    @BeforeClass
+    public static void setUpOnce() {
+        Monster.loadRaces();
+    }
 
     private Battle bt;
     private Actor att;
     private Actor def;
     private Actor current;
     private testGUIPanel gui;
-
-    @BeforeClass
-    public static void setUpOnce() {
-        Monster.loadRaces();
-    }
 
     @Before
     public void setUp() {
@@ -63,17 +66,17 @@ public final class BattleTest {
         assertEquals(Constants.ACTOR_BASE_HEALTH - Constants.ACTOR_BASE_ATTACK, bt.getCurrent().getHealth());
     }
 
-    private void testDying() {
-        DestroyersOfDungeons game = new DestroyersOfDungeons();
-        game.addPlayer("TEST_PLAYER");
-        game.addPlayer("TEST_PLAYER_NO2");
-        def = game.getCurrentPlayer();
-        game.nextPlayer();
-        att = game.getCurrentPlayer();
-        bt = new Battle(att, def, new testGUIPanel());
-    }
+        private void testDying() {
+            DestroyersOfDungeons game = new DestroyersOfDungeons();
+            game.addPlayer("TEST_PLAYER");
+            game.addPlayer("TEST_PLAYER_NO2");
+            def = game.getCurrentPlayer();
+            game.nextPlayer();
+            att = game.getCurrentPlayer();
+            bt = new Battle(att, def, new testGUIPanel());
+        }
 
-    @Test
+        @Test
     public void testDefLosersDie() {
         testDying();
         def.takeHit(Constants.ACTOR_BASE_HEALTH - 1);
@@ -88,12 +91,12 @@ public final class BattleTest {
         assertEquals(true, bt.takeAction(BattleAction.ATTACK));
     }
 
-    private void emptyAction(BattleAction act, Actor a) {
-        bt.takeAction(act);
-        assertEquals(Constants.ACTOR_BASE_HEALTH, a.getHealth());
-    }
+        private void emptyAction(BattleAction act, Actor a) {
+            bt.takeAction(act);
+            assertEquals(Constants.ACTOR_BASE_HEALTH, a.getHealth());
+        }
 
-    @Test
+        @Test
     public void testTakeActionNothingAttackerLoseNothing() {
         emptyAction(BattleAction.DO_NOTHING, att);
     }

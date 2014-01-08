@@ -2,6 +2,7 @@ package gameobjects.items;
 
 import gameobjects.items.types.ItemType;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,9 +18,58 @@ import org.reflections.Reflections;
  */
 public abstract class Item {
 
-    private final ItemType type;
     private static final Map<Type, ItemType> itemTypesMap = new HashMap<>();
     private static final List<String> names = new ArrayList<>();
+
+    public static Item getRandomItem(Random rand) {
+        Item i;
+        try {
+            do {
+                @SuppressWarnings("unchecked")
+                Class<? extends Item> cls = (Class<? extends Item>) Class.forName(names.get(rand.nextInt(names.size())));
+                i = cls.getConstructor().newInstance();
+            } while (i.winsGame());
+        } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            i = null;
+        }
+        return i;
+    }
+
+    private static String getReflectingName(String name) {
+        String[] split = name.split("\\.");
+        StringBuilder refname = new StringBuilder(name.length());
+        for (int i = 0; i < split.length; i++) {
+            if (i == split.length - 1) {
+                refname.append("types.");
+            }
+            refname.append(split[i]);
+            if (i != split.length - 1) {
+                refname.append(".");
+            }
+        }
+        refname.append("Type");
+        return refname.toString();
+    }
+
+    public static void loadItemTypes() {
+        Reflections itemInstances = new Reflections("gameobjects.items");
+        Set<Class<? extends Item>> itemInstancesClasses = itemInstances.getSubTypesOf(Item.class);
+        int ids = 0;
+        for (Class<? extends Item> c : itemInstancesClasses) {
+            try {
+                String name = getReflectingName(c.getName());
+                @SuppressWarnings("unchecked")
+                Class<? extends ItemType> cl = (Class<? extends ItemType>) Class.forName(name);
+                Constructor<? extends ItemType> ctor = cl.getConstructor(Integer.TYPE);
+                names.add(name.replace("types.", "").replace("Type", ""));
+                itemTypesMap.put(c, ctor.newInstance(ids));
+                ids++;
+            } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            }
+        }
+    }
+
+    private final ItemType type;
 
     /**
      * Initialize a new item.
@@ -28,52 +78,6 @@ public abstract class Item {
      */
     protected Item(Type type) {
         this.type = itemTypesMap.get(type);
-    }
-
-    public static Item getRandomItem(Random rand) {
-        Item i;
-        try {
-            do {
-                Class<? extends Item> cls = (Class<? extends Item>) Class.forName(names.get(rand.nextInt(names.size())));
-                i = cls.getConstructor().newInstance();
-            } while (i.winsGame());
-        } catch (Exception ex) {
-            i = null;
-        }
-        return i;
-    }
-
-    private static String getReflectingName(String name) {
-        String[] split = name.split("\\.");
-        name = "";
-        for (int i = 0; i < split.length; i++) {
-            if (i == split.length - 1) {
-                name += "types.";
-            }
-            name += split[i];
-            if (i != split.length - 1) {
-                name += ".";
-            }
-        }
-        name += "Type";
-        return name;
-    }
-
-    @SuppressWarnings("UseSpecificCatch")
-    public static void loadItemTypes() {
-        Reflections itemInstances = new Reflections("gameobjects.items");
-        Set<Class<? extends Item>> itemInstancesClasses = itemInstances.getSubTypesOf(Item.class);
-        int ids = 0;
-        for (Class<? extends Item> c : itemInstancesClasses) {
-            try {
-                String name = getReflectingName(c.getName());
-                Class cl = Class.forName(name);
-                Constructor ctor = cl.getConstructor(Integer.TYPE);
-                names.add(name.replace("types.", "").replace("Type", ""));
-                itemTypesMap.put(c, (ItemType) ctor.newInstance(++ids));
-            } catch (Exception ex) {
-            }
-        }
     }
 
     @Override
@@ -87,7 +91,6 @@ public abstract class Item {
     }
 
     @Override
-    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
     public final boolean equals(Object obj) {
         if (obj == null || obj.getClass() != getClass()) {
             return false;

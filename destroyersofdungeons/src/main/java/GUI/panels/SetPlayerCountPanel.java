@@ -1,9 +1,9 @@
 package GUI.panels;
 
-import constants.Constants;
 import GUI.SwingGUI;
 import GUI.listeners.GoToMainMenuListener;
 import GUI.listeners.SetPlayerCountListener;
+import constants.Constants;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;

@@ -5,29 +5,30 @@ import gameobjects.items.Item;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Random;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 public final class ItemholderTest {
-
-    private Itemholder h;
     private static final Random rand = new Random();
-
-    private Collection<Item> getItems() {
-        Collection<Item> items = new HashSet<>();
-        items.add(Item.getRandomItem(rand));
-        do {
-            items.add(Item.getRandomItem(rand));
-        } while (items.size() < 2);
-        return items;
-    }
 
     @BeforeClass
     public static void onlyOnce() {
         Item.loadItemTypes();
     }
+
+    private Itemholder h;
+
+        private Collection<Item> getItems() {
+            Collection<Item> items = new HashSet<>();
+            items.add(Item.getRandomItem(rand));
+            do {
+                items.add(Item.getRandomItem(rand));
+            } while (items.size() < 2);
+            return items;
+        }
 
     @Before
     public void setUp() {

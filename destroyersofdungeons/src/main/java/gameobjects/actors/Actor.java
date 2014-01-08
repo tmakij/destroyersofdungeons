@@ -142,10 +142,11 @@ public abstract class Actor extends Itemholder {
     }
 
     protected int getHitDamage(int amount) {
+        int damage = amount;
         for (Item i : getItems()) {
-            amount = i.onDamageReceived(amount);
+            damage = i.onDamageReceived(damage);
         }
-        return amount;
+        return damage;
     }
 
     /**
@@ -157,10 +158,11 @@ public abstract class Actor extends Itemholder {
     }
 
     protected final void heal(int amount) {
+        int heal = amount;
         for (Item i : getItems()) {
-            amount = i.onHeal(amount);
+            heal = i.onHeal(heal);
         }
-        health += amount;
+        health += heal;
         if (health > Constants.ACTOR_BASE_HEALTH) {
             health = Constants.ACTOR_BASE_HEALTH;
         }

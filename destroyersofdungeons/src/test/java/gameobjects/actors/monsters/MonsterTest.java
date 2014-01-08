@@ -1,20 +1,21 @@
 package gameobjects.actors.monsters;
 
 import localisation.Dictionary;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 public final class MonsterTest {
-
-    private Monster mon;
 
     @BeforeClass
     @SuppressWarnings("UseSpecificCatch")
     public static void setUpOnce() {
         Dictionary.loadText("english");
     }
+
+    private Monster mon;
 
     @Before
     public void setUp() {

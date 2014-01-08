@@ -8,22 +8,25 @@ import gameobjects.items.Treasure;
 import java.util.Random;
 import logic.BattleAction;
 import logic.DestroyersOfDungeons;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 public final class ActorTest {
 
     private static final Random rand = new Random();
-    private Actor a;
-    private Tunnel t;
 
     @BeforeClass
     public static void onlyOnce() {
         Item.loadItemTypes();
         Monster.loadRaces();
     }
+    private Actor a;
+    private Tunnel t;
 
     @Before
     public void setUp() {
@@ -70,7 +73,6 @@ public final class ActorTest {
         a.addItem(new Treasure());
         a.takeHit(Constants.ACTOR_BASE_HEALTH);
         a.die();
-        System.out.println(a.getItems().size());
         assertEquals(1, t.getItems().size());
     }
 

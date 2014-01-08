@@ -3,10 +3,14 @@ package localisation;
 import gameobjects.actors.monsters.Monster;
 import gameobjects.items.Item;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Holds all the text of Destroyers of Dungeons. Cannot be created or inherited.
@@ -15,7 +19,7 @@ import java.util.Map;
 public enum Dictionary {
 
     ;
-    private static Map<String, String> strings;
+    private static volatile Map<String, String> strings;
     private static String language;
     private static String languages[];
     private static boolean loadedLanguages = false;
@@ -31,8 +35,11 @@ public enum Dictionary {
             Dictionary.language = language;
             int n = getLineNumber(reader.readLine());
             strings = new HashMap<>();
-            String line;
-            while ((line = reader.readLine()) != null) {
+            while (true) {
+                String line = reader.readLine();
+                if (line == null) {
+                    break;
+                }
                 String[] lineSplit = line.split(";");
                 if (lineSplit.length > n) {
                     strings.put(lineSplit[0], lineSplit[n]);
@@ -40,7 +47,10 @@ public enum Dictionary {
             }
             Monster.loadRaces();
             Item.loadItemTypes();
-        } catch (Exception ex) {
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(Dictionary.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Dictionary.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -69,7 +79,7 @@ public enum Dictionary {
     }
 
     public static String[] getLanguages() {
-        return languages;
+        return languages.clone();
     }
 
     /**
@@ -85,14 +95,15 @@ public enum Dictionary {
         if (strings == null) {
             return "Error on loading localisation for language " + language;
         }
+        String value = key;
         if (key != null && strings.containsKey(key)) {
-            key = strings.get(key);
+            value = strings.get(key);
             if (params != null) {
                 for (int i = 0; i < params.length; i++) {
-                    key = key.replaceAll(("\\$" + i + "\\$"), params[i].toString());
+                    value = value.replaceAll(("\\$" + i + "\\$"), params[i].toString());
                 }
             }
         }
-        return key;
+        return value;
     }
 }

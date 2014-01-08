@@ -10,8 +10,8 @@ final class Ghost extends Monster {
 
     @Override
     protected int getHitDamage(int amount) {
-        amount = super.getHitDamage(amount);
-        amount *= Constants.GHOTS_DAMAGE_REDUCTION;
-        return amount;
+        int damage = super.getHitDamage(amount);
+        damage *= Constants.GHOTS_DAMAGE_REDUCTION;
+        return damage;
     }
 }

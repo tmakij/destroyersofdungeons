@@ -55,6 +55,8 @@ public final class Dungeon {
     }
 
     int getGameID() {
-        return ++gameIDs;
+        int id = gameIDs;
+        gameIDs++;
+        return id;
     }
 }
