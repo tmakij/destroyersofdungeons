@@ -12,10 +12,7 @@ public final class RaceTest {
     @BeforeClass
     @SuppressWarnings("UseSpecificCatch")
     public static void setUpOnce() {
-        try {
-            Dictionary.loadText("english");
-        } catch (Exception ex) {
-        }
+        Dictionary.loadText("english");
     }
 
     @Test

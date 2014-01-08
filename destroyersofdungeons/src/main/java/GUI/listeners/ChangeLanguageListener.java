@@ -3,7 +3,6 @@ package GUI.listeners;
 import GUI.SwingGUI;
 import GUI.panels.MainMenuPanel;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
 import localisation.Dictionary;
 
 public final class ChangeLanguageListener extends AbstractGUIListener {
@@ -17,12 +16,8 @@ public final class ChangeLanguageListener extends AbstractGUIListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        try {
-            Dictionary.loadText(lang);
-        } catch (IOException | UnsupportedOperationException ex) {
-        } finally {
-            gui.updateTitle();
-            gui.setPanel(new MainMenuPanel(gui));
-        }
+        Dictionary.loadText(lang);
+        gui.updateTitle();
+        gui.setPanel(new MainMenuPanel(gui));
     }
 }

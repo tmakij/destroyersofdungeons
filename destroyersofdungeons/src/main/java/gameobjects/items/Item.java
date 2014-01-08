@@ -125,4 +125,15 @@ public abstract class Item {
     public boolean winsGame() {
         return false;
     }
+
+    /**
+     * If the item modifies the amount of health the owner receives on heal, it
+     * is modified by this method.
+     *
+     * @param amount The original health to be gained.
+     * @return The modified health to be gained.
+     */
+    public int onHeal(int amount) {
+        return amount;
+    }
 }

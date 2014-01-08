@@ -3,9 +3,9 @@ package gameobjects.dungeon;
 import gameobjects.actors.Actor;
 import gameobjects.actors.Player;
 import gameobjects.items.Item;
-import gameobjects.items.WoodenSword;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -13,6 +13,7 @@ import org.junit.BeforeClass;
 
 public final class TunnelTest {
 
+    private static final Random rand = new Random();
     private Tunnel tunnel;
 
     @Before
@@ -42,7 +43,7 @@ public final class TunnelTest {
 
     @Test
     public void testGetNextToWhenEmpty() {
-        assertEquals(0, tunnel.getNextTo().size());
+        assertTrue(tunnel.getNextTo().isEmpty());
     }
 
     @Test
@@ -58,19 +59,19 @@ public final class TunnelTest {
     @Test
     public void testAddActor() {
         Actor a = addDummyPlayer();
-        assertEquals(true, tunnel.getActors().contains(a));
+        assertTrue(tunnel.getActors().contains(a));
     }
 
     @Test
     public void testRemoveActor() {
         Actor a = addDummyPlayer();
         tunnel.removeActor(a);
-        assertEquals(false, tunnel.getActors().contains(a));
+        assertFalse(tunnel.getActors().contains(a));
     }
 
     @Test
     public void testgetActorSetWhenZero() {
-        assertEquals(0, tunnel.getActors().size());
+        assertTrue(tunnel.getActors().isEmpty());
     }
 
     @Test
@@ -94,16 +95,16 @@ public final class TunnelTest {
     public void testClearTunnelItemsWhenPicked() {
         Actor a = addDummyPlayer();
         a.setMyBlock(tunnel);
-        tunnel.addItem(new WoodenSword());
+        tunnel.addItem(Item.getRandomItem(rand));
         a.pickUpItems();
-        assertEquals(true, tunnel.getItems().isEmpty());
+        assertTrue(tunnel.getItems().isEmpty());
     }
 
     @Test
     public void testCantAddTunnelNextToItself() {
         Tunnel t2 = new Tunnel(0);
         tunnel.addBlock(t2);
-        assertEquals(true, tunnel.getNextTo().isEmpty());
+        assertTrue(tunnel.getNextTo().isEmpty());
     }
 
     @Test

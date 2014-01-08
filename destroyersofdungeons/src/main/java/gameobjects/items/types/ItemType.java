@@ -5,7 +5,7 @@ import localisation.Dictionary;
 
 public abstract class ItemType extends GameObject {
 
-    public ItemType(int id, String name) {
+    protected ItemType(int id, String name) {
         super(id, Dictionary.getValue(name));
     }
 }

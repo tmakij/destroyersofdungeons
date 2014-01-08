@@ -5,9 +5,9 @@ import gameobjects.dungeon.Tunnel;
 import gameobjects.actors.Player;
 import gameobjects.items.Item;
 import gameobjects.items.Treasure;
-import gameobjects.items.WoodenSword;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -15,6 +15,7 @@ import org.junit.BeforeClass;
 
 public final class DestroyersOfDungeonsTest {
 
+    private static final Random rand = new Random();
     private DestroyersOfDungeons game;
 
     @BeforeClass
@@ -44,7 +45,7 @@ public final class DestroyersOfDungeonsTest {
         addAnotherPlayer();
         Player p = game.getCurrentPlayer();
         game.removePlayer(p);
-        assertEquals(true, game.getDeathTimes().containsKey(p));
+        assertTrue(game.getDeathTimes().containsKey(p));
     }
 
     @Test
@@ -61,7 +62,7 @@ public final class DestroyersOfDungeonsTest {
                 isEmpty = false;
             }
         }
-        assertEquals(true, isEmpty);
+        assertTrue(isEmpty);
     }
 
     @Test
@@ -145,7 +146,7 @@ public final class DestroyersOfDungeonsTest {
     @Test
     public void testLastMoveCreatedCollisionsDefault() {
         game.getCurrentPlayer().getMyBlock().addActor(new Player(32, "TEST_PLAYER_NO2", null));
-        assertEquals(true, game.lastMoveCreatedCollisions());
+        assertTrue(game.lastMoveCreatedCollisions());
     }
 
     @Test
@@ -160,12 +161,12 @@ public final class DestroyersOfDungeonsTest {
         game.movePlayerTo(0);
         game.nextPlayer();
         game.movePlayerTo(0);
-        assertEquals(true, game.lastMoveCreatedCollisions());
+        assertTrue(game.lastMoveCreatedCollisions());
     }
 
     @Test
     public void testAloneDidNotCreateCollisions() {
-        assertEquals(false, game.lastMoveCreatedCollisions());
+        assertFalse(game.lastMoveCreatedCollisions());
     }
 
     @Test
@@ -175,13 +176,13 @@ public final class DestroyersOfDungeonsTest {
         nextTo.clear();
         nextTo.add(new Tunnel(0));
         game.movePlayerTo(0);
-        assertEquals(false, game.lastMoveCreatedCollisions());
+        assertFalse(game.lastMoveCreatedCollisions());
     }
 
     @Test
     public void testLastMoveCreatedCollisionsAfterMoveItem() {
-        game.getCurrentPlayer().getMyBlock().addItem(new WoodenSword());
-        assertEquals(true, game.lastMoveCreatedCollisions());
+        game.getCurrentPlayer().getMyBlock().addItem(Item.getRandomItem(rand));
+        assertTrue(game.lastMoveCreatedCollisions());
     }
 
     @Test
@@ -239,7 +240,7 @@ public final class DestroyersOfDungeonsTest {
 
     @Test
     public void testAddPlayerReturnTrue() {
-        assertEquals(true, game.addPlayer("TEST_PLAYER_NO3"));
+        assertTrue(game.addPlayer("TEST_PLAYER_NO3"));
     }
 
     private String getNameWithLenght(int l) {
@@ -252,18 +253,18 @@ public final class DestroyersOfDungeonsTest {
 
     @Test
     public void testAddPlayerTooShort() {
-        assertEquals(false, game.addPlayer(getNameWithLenght(Constants.PLAYER_NAME_MIN_LENGHT - 1)));
+        assertFalse(game.addPlayer(getNameWithLenght(Constants.PLAYER_NAME_MIN_LENGHT - 1)));
     }
 
     @Test
     public void testAddPlayerTooLong() {
-        assertEquals(false, game.addPlayer(getNameWithLenght(Constants.PLAYER_NAME_MAX_LENGHT + 1)));
+        assertFalse(game.addPlayer(getNameWithLenght(Constants.PLAYER_NAME_MAX_LENGHT + 1)));
     }
 
     @Test
     public void testAddInvalidPlayerDeletesOthers() {
         game.addPlayer(getNameWithLenght(Constants.PLAYER_NAME_MAX_LENGHT + 1));
-        assertEquals(true, game.getPlayers().isEmpty());
+        assertTrue(game.getPlayers().isEmpty());
     }
 
     @Test
@@ -276,7 +277,7 @@ public final class DestroyersOfDungeonsTest {
                 System.out.println("Added regardless: " + name);
             }
         }
-        assertEquals(false, added);
+        assertFalse(added);
     }
 
     @Test

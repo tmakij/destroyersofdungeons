@@ -35,7 +35,7 @@ final class Corridor extends UniqueObject {
         endBlock = new TunnelEnd(d.getGameID());
         startBlock = previous;
 
-        Tunnel block;
+        Tunnel block = null;
         for (int i = 0; i < lenght; i++) {
             block = new Tunnel(d.getGameID());
             block.addBlock(previous);
@@ -48,11 +48,8 @@ final class Corridor extends UniqueObject {
                 m.pickUpItems();
             }
             previous = block;
-            if (i == lenght - 1) {
-                endBlock.addBlock(block);
-            }
         }
-
+        endBlock.addBlock(block);
         if (treasure) {
             endBlock.addItem(new Treasure());
         }

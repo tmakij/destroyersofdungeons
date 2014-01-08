@@ -26,7 +26,7 @@ public final class CorridorTest {
                 break;
             }
         }
-        assertEquals(false, gotEnd);
+        assertFalse(gotEnd);
     }
 
     @Test

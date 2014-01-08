@@ -38,3 +38,19 @@
   2.1.2014
   - 7 tuntia
   - Testej‰, kielenvaihto/settings, paljon aikaa ett‰ sai rakennettua toimivan JARin, GUI k‰ytt‰‰ SpringLayouttia aina, Sekvenssi ja luokkakaavioiden teko.
+  
+  4.1.2014
+  - 6 tuntia
+  - Koodikatselmointia, testej‰, gui/logiikan eriytyst‰.
+  
+  5.1.2014
+  - 7 tuntia
+  - koodikatselmointi loppuun, dungeon sattumanvaraisena.
+  
+  6.1.2014
+  - 7 tuntia
+  - 1-12 pelaajaa mahdollista, ItemTypet, monsterit ja itemit ladataan reflectionilla ja ne luodaan randomisti sill‰.
+  
+  8.1.2014
+  - 3 tuntia
+  - Vampyyri, haamut, spider/minotaur erikoisuudet, testej‰, v‰hennetty p‰‰llekk‰isyyksi‰ koodissa.

@@ -5,7 +5,7 @@ import constants.Constants;
 /**
  * Woodenshield item, decrease damage taken. Overrides onDamageReceived.
  */
-public final class WoodenShield extends Item {
+final class WoodenShield extends Item {
 
     /**
      * Creates a woodenshield.

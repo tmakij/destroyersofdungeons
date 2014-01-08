@@ -17,10 +17,7 @@ public final class GameObjectTest {
     @BeforeClass
     @SuppressWarnings({"BroadCatchBlock", "TooBroadCatch", "UseSpecificCatch"})
     public static void setUpStatic() {
-        try {
-            Dictionary.loadText("english");
-        } catch (Exception ex) {
-        }
+        Dictionary.loadText("english");
     }
 
     @Before
@@ -51,19 +48,18 @@ public final class GameObjectTest {
     @Test
     public void testEqualsFalse() {
         go2 = new Tunnel(5688254);
-        assertEquals(false, go.equals(go2));
+        assertNotEquals(go, go2);
     }
 
     @Test
-    @SuppressWarnings("ObjectEqualsNull")
     public void testEqualsNullFalse() {
-        assertEquals(false, go.equals(null));
+        assertNotEquals(go, null);
     }
 
     @Test
     public void testEqualsOtherClassFalse() {
         Actor a = new Player(34, "TEST_PLAYER_N02", null);
-        assertEquals(false, go.equals(a));
+        assertNotEquals(go, a);
     }
 
     @Test

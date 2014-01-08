@@ -3,7 +3,7 @@ package gameobjects.actors;
 import constants.Constants;
 import gameobjects.items.Item;
 import gameobjects.items.Treasure;
-import gameobjects.items.WoodenSword;
+import java.util.Random;
 import logic.DestroyersOfDungeons;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +12,7 @@ import org.junit.BeforeClass;
 
 public final class PlayerTest {
 
+    private static final Random rand = new Random();
     private Player p, att, def;
     private DestroyersOfDungeons game;
 
@@ -43,31 +44,31 @@ public final class PlayerTest {
 
     @Test
     public void testisPlayerControlled() {
-        assertEquals(true, p.isPlayerControlled());
+        assertTrue(p.isPlayerControlled());
     }
 
     @Test
     public void testDyeingAndRemovalFromGame() {
         killPlayer();
-        assertEquals(false, game.getPlayers().contains(p));
+        assertFalse(game.getPlayers().contains(p));
     }
 
     @Test
     public void testLivingKeepPlayingGame() {
         dontDie();
-        assertEquals(true, game.getPlayers().contains(p));
+        assertTrue(game.getPlayers().contains(p));
     }
 
     @Test
     public void testLivingStayInYourBlock() {
         dontDie();
-        assertEquals(true, p.getMyBlock().getActors().contains(p));
+        assertTrue(p.getMyBlock().getActors().contains(p));
     }
 
     @Test
     public void testDyeingAndRemovalFromMyBlock() {
         killPlayer();
-        assertEquals(false, p.getMyBlock().getActors().contains(p));
+        assertFalse(p.getMyBlock().getActors().contains(p));
     }
 
     private void setUpBattle() {
@@ -83,7 +84,7 @@ public final class PlayerTest {
         setUpBattle();
         def.takeHit(Constants.ACTOR_BASE_HEALTH);
         def.die();
-        assertEquals(false, game.getPlayers().contains(def));
+        assertFalse(game.getPlayers().contains(def));
     }
 
     @Test
@@ -91,31 +92,31 @@ public final class PlayerTest {
         setUpBattle();
         att.takeHit(Constants.ACTOR_BASE_HEALTH);
         att.die();
-        assertEquals(false, game.getPlayers().contains(att));
+        assertFalse(game.getPlayers().contains(att));
     }
 
     @Test
     public void testAttDontDie() {
         setUpBattle();
         att.takeHit(Constants.ACTOR_BASE_HEALTH - 1);
-        assertEquals(false, att.die());
+        assertFalse(att.die());
     }
 
     @Test
     public void testHasTresureWhenHasIt() {
         p.addItem(new Treasure());
-        assertEquals(true, p.hasTreasure());
+        assertTrue(p.hasTreasure());
     }
 
     @Test
     public void testHasntTresureWhenDoNotHaveIt() {
-        assertEquals(false, p.hasTreasure());
+        assertFalse(p.hasTreasure());
     }
 
     @Test
     public void testHasntTresureWhenHaveWrongItem() {
-        p.addItem(new WoodenSword());
-        assertEquals(false, p.hasTreasure());
+        p.addItem(Item.getRandomItem(rand));
+        assertFalse(p.hasTreasure());
     }
 
     @Test

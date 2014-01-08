@@ -4,10 +4,13 @@ import GUI.testGUIPanel;
 import constants.Constants;
 import gameobjects.actors.Actor;
 import gameobjects.actors.Player;
+import gameobjects.actors.monsters.Monster;
 import gameobjects.dungeon.Tunnel;
+import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 
 public final class BattleTest {
 
@@ -16,6 +19,11 @@ public final class BattleTest {
     private Actor def;
     private Actor current;
     private testGUIPanel gui;
+
+    @BeforeClass
+    public static void setUpOnce() {
+        Monster.loadRaces();
+    }
 
     @Before
     public void setUp() {
@@ -39,7 +47,7 @@ public final class BattleTest {
     @Test
     public void testTakeActionTurn() {
         bt.takeAction(BattleAction.DO_NOTHING);
-        assertEquals(false, current.equals(bt.getCurrent()));
+        assertNotEquals(current, bt.getCurrent());
     }
 
     @Test
@@ -69,7 +77,7 @@ public final class BattleTest {
     public void testDefLosersDie() {
         testDying();
         def.takeHit(Constants.ACTOR_BASE_HEALTH - 1);
-        assertEquals(true, bt.takeAction(BattleAction.ATTACK));
+        assertTrue(bt.takeAction(BattleAction.ATTACK));
     }
 
     @Test
@@ -141,7 +149,7 @@ public final class BattleTest {
     @Test
     public void testTakeActionFlee() {
         current.setMyBlock(new Tunnel(34432));
-        assertEquals(true, bt.takeAction(BattleAction.FLEE));
+        assertTrue(bt.takeAction(BattleAction.FLEE));
     }
 
     @Test
@@ -155,12 +163,20 @@ public final class BattleTest {
 
     @Test
     public void testTestGUINotUpdatedFirst() {
-        assertEquals(false, gui.isUpdated());
+        assertFalse(gui.isUpdated());
     }
 
     @Test
     public void testGUIGetsUpdated() {
         bt.takeAction(BattleAction.DO_NOTHING);
-        assertEquals(true, gui.isUpdated());
+        assertTrue(gui.isUpdated());
+    }
+
+    @Test
+    public void testAITakesAction() {
+        def = Monster.getRandomMonster(new Random(), 66);
+        bt = new Battle(att, def, gui);
+        bt.takeAction(BattleAction.DO_NOTHING);
+        assertEquals(att, bt.getCurrent());
     }
 }

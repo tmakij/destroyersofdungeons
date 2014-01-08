@@ -13,10 +13,7 @@ public final class MonsterTest {
     @BeforeClass
     @SuppressWarnings("UseSpecificCatch")
     public static void setUpOnce() {
-        try {
-            Dictionary.loadText("english");
-        } catch (Exception ex) {
-        }
+        Dictionary.loadText("english");
     }
 
     @Before
@@ -26,7 +23,7 @@ public final class MonsterTest {
 
     @Test
     public void testIsPlayerControlled() {
-        assertEquals(false, mon.isPlayerControlled());
+        assertFalse(mon.isPlayerControlled());
     }
 
     @Test

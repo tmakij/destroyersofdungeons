@@ -46,9 +46,16 @@ public final class DestroyersOfDungeons {
             current = 0;
         }
         currentPlayer = players.get(current);
+        turnsOver();
+    }
+
+    private void turnsOver() {
         if (playedTurn.size() >= players.size() && playedTurn.contains(currentPlayer)) {
             totalTurns++;
             playedTurn.clear();
+            for (Player p : players) {
+                p.heal();
+            }
         }
     }
 

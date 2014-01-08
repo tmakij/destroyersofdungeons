@@ -120,11 +120,16 @@ public abstract class Actor extends Itemholder {
      * @param act Multiplies the default damage by the action.
      */
     public final void attack(Actor to, BattleAction act) {
+        int amount = getAttack(act);
+        to.takeHit(amount);
+    }
+
+    protected int getAttack(BattleAction act) {
         int amount = (int) (Constants.ACTOR_BASE_ATTACK * act.actModifier());
         for (Item i : getItems()) {
             amount = i.onAttack(amount);
         }
-        to.takeHit(amount);
+        return amount;
     }
 
     /**
@@ -133,9 +138,31 @@ public abstract class Actor extends Itemholder {
      * @param amount How much damage is inflicted.
      */
     public final void takeHit(int amount) {
+        health -= getHitDamage(amount);
+    }
+
+    protected int getHitDamage(int amount) {
         for (Item i : getItems()) {
             amount = i.onDamageReceived(amount);
         }
-        health -= amount;
+        return amount;
+    }
+
+    /**
+     * The actor heals itself. The amount is defined by the constant
+     * ACTOR_HEAL_RATE and any items the actor may possess.
+     */
+    public final void heal() {
+        heal(Constants.ACTOR_HEAL_RATE);
+    }
+
+    protected final void heal(int amount) {
+        for (Item i : getItems()) {
+            amount = i.onHeal(amount);
+        }
+        health += amount;
+        if (health > Constants.ACTOR_BASE_HEALTH) {
+            health = Constants.ACTOR_BASE_HEALTH;
+        }
     }
 }

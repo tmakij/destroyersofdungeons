@@ -29,11 +29,11 @@ public enum Constants {
     /**
      * The percentage of damage that is inflicted on attack by a wooden sword.
      */
-    public static final double WOODEN_SWORD_ATTACK = 1.1D;
+    public static final double WOODEN_SWORD_ATTACK = 1.25D;
     /**
      * The percentage of damage that is passed through a wooden shield.
      */
-    public static final double WOODEN_SHIELD_DEFENSE = 0.9D;
+    public static final double WOODEN_SHIELD_DEFENSE = 0.75D;
     /**
      * The multiplier for the damage that is inflicted on attack action.
      */
@@ -41,7 +41,7 @@ public enum Constants {
     /**
      * The multiplier for the damage that is inflicted on the attacker.
      */
-    public static final double BATTLEACTION_DEFEND = 1.2D;
+    public static final double BATTLEACTION_DEFEND = 1.4D;
     /**
      * The multiplier for the damage that is inflicted when a spell is casted.
      */
@@ -61,17 +61,42 @@ public enum Constants {
     /**
      * The minimum length of a corridor.
      */
-    public static int CORRIDOR_MIN_LENGTH = 6;
+    public static final int CORRIDOR_MIN_LENGTH = 6;
     /**
      * The maximum length of a corridor.
      */
-    public static int CORRIDOR_MAX_LENGTH = 12;
+    public static final int CORRIDOR_MAX_LENGTH = 12;
     /**
      * Minimum amount of players in the game.
      */
-    public static int MINIMUM_PLAYER_COUNT = 1;
+    public static final int MINIMUM_PLAYER_COUNT = 1;
     /**
      * Maximum amount of players in the game.
      */
-    public static int MAXIMUM_PLAYER_COUNT = 12;
+    public static final int MAXIMUM_PLAYER_COUNT = 12;
+    /**
+     * The amount of health every player gains after everyone has played one
+     * turn.
+     */
+    public static final int ACTOR_HEAL_RATE = 10;
+    /**
+     * The percentage that the Elixir Of Life increases the base healing rate.
+     */
+    public static final double ELIXIR_OF_LIFE_HEALTH_MODFIER = 1.5D;
+    /**
+     * The amount of health vampires get from the damage inflicted.
+     */
+    public static final double VAMPIRE_HEALT_ABSORB = 0.5D;
+    /**
+     * The percentage that the minotaur attack damage is increased.
+     */
+    public static final double MINOTAUR_ATTACK_STRENGHT = 1.5D;
+    /**
+     * The percentage that the spider defense damage is increased.
+     */
+    public static final double SPIDER_DEFENSE_STRENGHT = 1.5D;
+    /**
+     * The percentage of the damage that is left after a hit to a ghost.
+     */
+    public static final double GHOTS_DAMAGE_REDUCTION = 0.5D;
 }

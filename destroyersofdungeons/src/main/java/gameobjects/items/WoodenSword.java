@@ -5,7 +5,7 @@ import constants.Constants;
 /**
  * Woodensword item, increases attack strength slightly. Overrides onattack.
  */
-public final class WoodenSword extends Item {
+final class WoodenSword extends Item {
 
     /**
      * Creates a woodensword.

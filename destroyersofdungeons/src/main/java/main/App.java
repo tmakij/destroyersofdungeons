@@ -6,16 +6,9 @@ import localisation.Dictionary;
 enum App {
 
     ;
-    @SuppressWarnings({"UseSpecificCatch", "BroadCatchBlock", "TooBroadCatch"})
     public static void main(String[] args) {
-        final SwingGUI sgui;
-        try {
-            Dictionary.loadText("english");
-            sgui = new SwingGUI();
-        } catch (Exception ex) {
-            System.exit(-1);
-            return;
-        }
+        Dictionary.loadText("english");
+        final SwingGUI sgui = new SwingGUI();
         sgui.start();
     }
 }

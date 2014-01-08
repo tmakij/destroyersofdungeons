@@ -2,10 +2,9 @@ package gameobjects;
 
 import gameobjects.actors.Player;
 import gameobjects.items.Item;
-import gameobjects.items.WoodenShield;
-import gameobjects.items.WoodenSword;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -14,11 +13,14 @@ import org.junit.BeforeClass;
 public final class ItemholderTest {
 
     private Itemholder h;
+    private static final Random rand = new Random();
 
     private Collection<Item> getItems() {
         Collection<Item> items = new HashSet<>();
-        items.add(new WoodenShield());
-        items.add(new WoodenSword());
+        items.add(Item.getRandomItem(rand));
+        do {
+            items.add(Item.getRandomItem(rand));
+        } while (items.size() < 2);
         return items;
     }
 
@@ -34,12 +36,12 @@ public final class ItemholderTest {
 
     @Test
     public void testDefaultItems() {
-        assertEquals(true, h.getItems().isEmpty());
+        assertTrue(h.getItems().isEmpty());
     }
 
     @Test
     public void testAddItem() {
-        h.addItem(new WoodenShield());
+        h.addItem(Item.getRandomItem(rand));
         assertEquals(1, h.getItems().size());
     }
 
@@ -58,16 +60,16 @@ public final class ItemholderTest {
 
     @Test
     public void testRemoveItem() {
-        Item i = new WoodenSword();
+        Item i = Item.getRandomItem(rand);
         h.addItem(i);
         h.removeItem(i);
-        assertEquals(true, h.getItems().isEmpty());
+        assertTrue(h.getItems().isEmpty());
     }
 
     @Test
     public void testRemoveAllItems() {
         h.addItems(getItems());
         h.removeAllItems();
-        assertEquals(true, h.getItems().isEmpty());
+        assertTrue(h.getItems().isEmpty());
     }
 }

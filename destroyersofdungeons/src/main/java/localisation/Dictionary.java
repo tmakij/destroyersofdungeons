@@ -3,7 +3,6 @@ package localisation;
 import gameobjects.actors.monsters.Monster;
 import gameobjects.items.Item;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
@@ -25,25 +24,24 @@ public enum Dictionary {
      * Loads all the text from localisation.txt file.
      *
      * @param language Which language is loaded.
-     * @throws java.io.IOException If the localisation is not found.
-     * @throws UnsupportedOperationException If the language is not found.
      */
-    @SuppressWarnings("ConvertToTryWithResources")
-    public static void loadText(String language) throws IOException, UnsupportedOperationException {
-        InputStream localfile = Dictionary.class.getResourceAsStream("/localisation/localtext.txt");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(localfile, "UTF-8"));
-        Dictionary.language = language;
-        int n = getLineNumber(reader.readLine());
-        strings = new HashMap<>();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            String[] lineSplit = line.split(";");
-            if (lineSplit.length > n) {
-                strings.put(lineSplit[0], lineSplit[n]);
+    public static void loadText(String language) {
+        try (InputStream localfile = Dictionary.class.getResourceAsStream("/localisation/localtext.txt");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(localfile, "UTF-8"))) {
+            Dictionary.language = language;
+            int n = getLineNumber(reader.readLine());
+            strings = new HashMap<>();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] lineSplit = line.split(";");
+                if (lineSplit.length > n) {
+                    strings.put(lineSplit[0], lineSplit[n]);
+                }
             }
+            Monster.loadRaces();
+            Item.loadItemTypes();
+        } catch (Exception ex) {
         }
-        Monster.loadRaces();
-        Item.loadItemTypes();
     }
 
     private static int getLineNumber(String line) {
@@ -67,7 +65,7 @@ public enum Dictionary {
             return ret;
         }
         strings = null;
-        throw new UnsupportedOperationException("Invalid language, loading cannot proceed");
+        return 1;
     }
 
     public static String[] getLanguages() {
