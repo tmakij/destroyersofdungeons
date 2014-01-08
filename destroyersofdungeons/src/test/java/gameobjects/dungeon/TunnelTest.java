@@ -28,13 +28,13 @@ public final class TunnelTest {
         tunnel = new Tunnel(0);
     }
 
-        private Actor addDummyPlayer() {
-            Actor a = new Player(1, "TEST_PLAYER", null);
-            tunnel.addActor(a);
-            return a;
-        }
+    private Actor addDummyPlayer() {
+        Actor a = new Player(1, "TEST_PLAYER", null);
+        tunnel.addActor(a);
+        return a;
+    }
 
-        @Test
+    @Test
     public void testAddBlock() {
         final int amount = 29;
         for (int i = 1; i < amount + 1; i++) {

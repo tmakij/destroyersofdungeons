@@ -28,7 +28,7 @@ public final class FoundItemsListener extends AbstractGUIListener {
         game.getCurrentPlayer().pickUpItems();
         Player p = game.getWinner();
         if (p == null) {
-            gui.getGame().nextPlayer();
+            game.nextPlayer();
             gui.setPanel(new TurnPanel(gui));
         } else {
             gui.setPanel(new EndGamePanel(gui));

@@ -10,6 +10,9 @@ import java.awt.event.ActionEvent;
  */
 public final class AttackActorListener extends AbstractGUIListener {
 
+    /**
+     * The enemy actor attached to the listener.
+     */
     private final Actor enemy;
 
     /**

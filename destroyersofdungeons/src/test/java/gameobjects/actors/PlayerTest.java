@@ -73,15 +73,15 @@ public final class PlayerTest {
         assertFalse(p.getMyBlock().getActors().contains(p));
     }
 
-        private void setUpBattle() {
-            game = new DestroyersOfDungeons();
-            game.addPlayer("TEST_PLAYER");
-            game.addPlayer("TEST_PLAYER_NO2");
-            att = game.getPlayers().get(0);
-            def = game.getPlayers().get(1);
-        }
+    private void setUpBattle() {
+        game = new DestroyersOfDungeons();
+        game.addPlayer("TEST_PLAYER");
+        game.addPlayer("TEST_PLAYER_NO2");
+        att = game.getPlayers().get(0);
+        def = game.getPlayers().get(1);
+    }
 
-        @Test
+    @Test
     public void testDefLosersDie() {
         setUpBattle();
         def.takeHit(Constants.ACTOR_BASE_HEALTH);

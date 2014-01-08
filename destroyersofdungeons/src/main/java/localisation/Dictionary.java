@@ -6,11 +6,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Holds all the text of Destroyers of Dungeons. Cannot be created or inherited.
@@ -19,9 +16,21 @@ import java.util.logging.Logger;
 public enum Dictionary {
 
     ;
+    /**
+    * The map that holds the localisation keys and their values.
+    */
     private static volatile Map<String, String> strings;
+    /**
+     * The loaded language.
+     */
     private static String language;
+    /**
+     * The available languages.
+     */
     private static String languages[];
+    /**
+     * Are the avalaible languages loaded.
+     */
     private static boolean loadedLanguages = false;
 
     /**
@@ -47,13 +56,16 @@ public enum Dictionary {
             }
             Monster.loadRaces();
             Item.loadItemTypes();
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(Dictionary.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(Dictionary.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    /**
+     * Get the column of the language.
+     *
+     * @param line The language line.
+     * @return The column of the language.
+     */
     private static int getLineNumber(String line) {
         String[] langs = line.split(";");
         int ret = 0;
@@ -78,6 +90,11 @@ public enum Dictionary {
         return 1;
     }
 
+    /**
+     * Get the available languages.
+     *
+     * @return The available languages.
+     */
     public static String[] getLanguages() {
         return languages.clone();
     }

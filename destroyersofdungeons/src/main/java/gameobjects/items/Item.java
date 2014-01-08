@@ -61,6 +61,7 @@ public abstract class Item {
                 @SuppressWarnings("unchecked")
                 Class<? extends ItemType> cl = (Class<? extends ItemType>) Class.forName(name);
                 Constructor<? extends ItemType> ctor = cl.getConstructor(Integer.TYPE);
+                ctor.setAccessible(true);
                 names.add(name.replace("types.", "").replace("Type", ""));
                 itemTypesMap.put(c, ctor.newInstance(ids));
                 ids++;
@@ -82,7 +83,7 @@ public abstract class Item {
 
     @Override
     public final int hashCode() {
-        return type.hashCode();
+        return getClass().hashCode();
     }
 
     @Override
@@ -92,11 +93,7 @@ public abstract class Item {
 
     @Override
     public final boolean equals(Object obj) {
-        if (obj == null || obj.getClass() != getClass()) {
-            return false;
-        }
-        final Item i = (Item) obj;
-        return type.equals(i.type);
+        return obj != null && obj.getClass() == getClass();
     }
 
     /**

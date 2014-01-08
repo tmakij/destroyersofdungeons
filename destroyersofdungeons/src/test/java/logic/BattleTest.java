@@ -66,17 +66,17 @@ public final class BattleTest {
         assertEquals(Constants.ACTOR_BASE_HEALTH - Constants.ACTOR_BASE_ATTACK, bt.getCurrent().getHealth());
     }
 
-        private void testDying() {
-            DestroyersOfDungeons game = new DestroyersOfDungeons();
-            game.addPlayer("TEST_PLAYER");
-            game.addPlayer("TEST_PLAYER_NO2");
-            def = game.getCurrentPlayer();
-            game.nextPlayer();
-            att = game.getCurrentPlayer();
-            bt = new Battle(att, def, new testGUIPanel());
-        }
+    private void testDying() {
+        DestroyersOfDungeons game = new DestroyersOfDungeons();
+        game.addPlayer("TEST_PLAYER");
+        game.addPlayer("TEST_PLAYER_NO2");
+        def = game.getCurrentPlayer();
+        game.nextPlayer();
+        att = game.getCurrentPlayer();
+        bt = new Battle(att, def, new testGUIPanel());
+    }
 
-        @Test
+    @Test
     public void testDefLosersDie() {
         testDying();
         def.takeHit(Constants.ACTOR_BASE_HEALTH - 1);
@@ -91,12 +91,12 @@ public final class BattleTest {
         assertEquals(true, bt.takeAction(BattleAction.ATTACK));
     }
 
-        private void emptyAction(BattleAction act, Actor a) {
-            bt.takeAction(act);
-            assertEquals(Constants.ACTOR_BASE_HEALTH, a.getHealth());
-        }
+    private void emptyAction(BattleAction act, Actor a) {
+        bt.takeAction(act);
+        assertEquals(Constants.ACTOR_BASE_HEALTH, a.getHealth());
+    }
 
-        @Test
+    @Test
     public void testTakeActionNothingAttackerLoseNothing() {
         emptyAction(BattleAction.DO_NOTHING, att);
     }

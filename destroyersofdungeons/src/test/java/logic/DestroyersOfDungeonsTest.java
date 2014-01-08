@@ -32,11 +32,11 @@ public final class DestroyersOfDungeonsTest {
         game.addPlayer("TEST_PLAYER");
     }
 
-        private void addAnotherPlayer() {
-            game.addPlayer("TEST_PLAYER_NO2");
-        }
+    private void addAnotherPlayer() {
+        game.addPlayer("TEST_PLAYER_NO2");
+    }
 
-        @Test
+    @Test
     public void testDeathTimesHasPlayersSize() {
         addAnotherPlayer();
         game.removePlayer(game.getCurrentPlayer());
@@ -202,16 +202,16 @@ public final class DestroyersOfDungeonsTest {
         assertEquals(p, game.getWinner());
     }
 
-        private List<Player> createOthers() {
-            addAnotherPlayer();
-            Player p = game.getCurrentPlayer();
-            game.nextPlayer();
-            List<Player> others = new ArrayList<>();
-            others.add(p);
-            return others;
-        }
+    private List<Player> createOthers() {
+        addAnotherPlayer();
+        Player p = game.getCurrentPlayer();
+        game.nextPlayer();
+        List<Player> others = new ArrayList<>();
+        others.add(p);
+        return others;
+    }
 
-        @Test
+    @Test
     public void testGetOtherPlayersWork() {
         List<Player> others = createOthers();
         assertEquals(others, game.getAllOtherPlayers(game.getCurrentPlayer()));
@@ -246,15 +246,15 @@ public final class DestroyersOfDungeonsTest {
         assertTrue(game.addPlayer("TEST_PLAYER_NO3"));
     }
 
-        private String getNameWithLenght(int l) {
-            String n = "";
-            for (int i = 0; i < l; i++) {
-                n += "a";
-            }
-            return n;
+    private String getNameWithLenght(int l) {
+        String n = "";
+        for (int i = 0; i < l; i++) {
+            n += "a";
         }
+        return n;
+    }
 
-        @Test
+    @Test
     public void testAddPlayerTooShort() {
         assertFalse(game.addPlayer(getNameWithLenght(Constants.PLAYER_NAME_MIN_LENGHT - 1)));
     }

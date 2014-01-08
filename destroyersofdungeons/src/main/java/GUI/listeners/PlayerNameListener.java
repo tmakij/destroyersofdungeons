@@ -12,6 +12,9 @@ import javax.swing.text.JTextComponent;
  */
 public final class PlayerNameListener extends AbstractGUIListener {
 
+    /**
+     * The player name fields where the names are added.
+     */
     private final JTextComponent[] fields;
 
     /**

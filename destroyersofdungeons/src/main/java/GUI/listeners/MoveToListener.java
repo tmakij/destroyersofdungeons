@@ -11,6 +11,9 @@ import java.awt.event.ActionEvent;
  */
 public final class MoveToListener extends AbstractGUIListener {
 
+    /**
+     * The number of the tunnel where to move.
+     */
     private final int moveTo;
 
     /**

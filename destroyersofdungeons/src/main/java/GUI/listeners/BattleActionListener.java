@@ -15,8 +15,14 @@ import logic.DestroyersOfDungeons;
  * of a battle in the BattlePanel.
  */
 public final class BattleActionListener extends AbstractGUIListener {
-    
+
+    /**
+     * The current battle.
+     */
     private final Battle battle;
+    /**
+     * The BattleAction attached to the button.
+     */
     private final BattleAction act;
 
     /**
@@ -31,7 +37,7 @@ public final class BattleActionListener extends AbstractGUIListener {
         this.battle = battle;
         this.act = act;
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         DestroyersOfDungeons game = gui.getGame();

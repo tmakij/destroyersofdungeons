@@ -12,6 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public final class ItemholderTest {
+
     private static final Random rand = new Random();
 
     @BeforeClass
@@ -21,14 +22,14 @@ public final class ItemholderTest {
 
     private Itemholder h;
 
-        private Collection<Item> getItems() {
-            Collection<Item> items = new HashSet<>();
+    private Collection<Item> getItems() {
+        Collection<Item> items = new HashSet<>();
+        items.add(Item.getRandomItem(rand));
+        do {
             items.add(Item.getRandomItem(rand));
-            do {
-                items.add(Item.getRandomItem(rand));
-            } while (items.size() < 2);
-            return items;
-        }
+        } while (items.size() < 2);
+        return items;
+    }
 
     @Before
     public void setUp() {

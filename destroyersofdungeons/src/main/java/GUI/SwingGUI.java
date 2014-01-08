@@ -12,8 +12,17 @@ import logic.DestroyersOfDungeons;
  */
 public final class SwingGUI {
 
+    /**
+     * The program main frame.
+     */
     private final JFrame frame;
+    /**
+     * The game logic.
+     */
     private DestroyersOfDungeons game;
+    /**
+     * The current visible panel.
+     */
     private IDungeonPanel currentPanel;
 
     /**
@@ -38,7 +47,7 @@ public final class SwingGUI {
     }
 
     /**
-     * Ends the current game, by setting it to null.
+     * Ends the current game by setting it to null.
      */
     public void endGame() {
         game = null;

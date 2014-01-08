@@ -11,13 +11,16 @@ import javax.swing.JSpinner;
  */
 public final class SetPlayerCountListener extends AbstractGUIListener {
 
+    /**
+     * The player count.
+     */
     private final JSpinner count;
 
     /**
      * Creates a new PlayerNameListener.
      *
      * @param gui SwingGUI that handles the game.
-     * @param count The JSpinner from where to take the player count.
+     * @param count The JSpinner where to take the player count.
      */
     public SetPlayerCountListener(SwingGUI gui, JSpinner count) {
         super(gui);
