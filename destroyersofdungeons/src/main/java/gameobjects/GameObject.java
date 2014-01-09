@@ -1,10 +1,13 @@
 package gameobjects;
 
 /**
- * Default class for gameobjects, Name and toString methods.
+ * Default class for gameobjects, contains Name and toString methods.
  */
 public abstract class GameObject extends UniqueObject {
 
+    /**
+     * The name of the object.
+     */
     private final String name;
 
     /**

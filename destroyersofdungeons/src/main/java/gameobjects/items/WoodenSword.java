@@ -8,7 +8,8 @@ import constants.Constants;
 final class WoodenSword extends Item {
 
     /**
-     * Creates a woodensword.
+     * Items are created using reflection, the constructor should not be called
+     * for other than testing purposes.
      */
     public WoodenSword() {
         super(WoodenSword.class);

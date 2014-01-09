@@ -120,12 +120,4 @@ public final class PlayerTest {
         p.addItem(Item.getRandomItem(rand));
         assertFalse(p.hasTreasure());
     }
-
-    @Test
-    public void testIDAssignedOnGameCreate() {
-        game = new DestroyersOfDungeons();
-        game.addPlayer("TEST_PLAYER_NX");
-        p = new Player(1, "TEST_PLAYER_NY", game);
-        assertEquals(p, game.getCurrentPlayer());
-    }
 }

@@ -1,12 +1,13 @@
 package gameobjects.actors.races;
 
 /**
- * The race of spiders.
+ * The race of Spiders.
  */
 final class SpiderRace extends Race {
 
     /**
-     * Creates the The race of spiders.
+     * Races are loaded using reflection, the constructor should never be
+     * called.
      */
     public SpiderRace() {
         super("SPIDER");

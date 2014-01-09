@@ -9,6 +9,9 @@ import logic.DestroyersOfDungeons;
  */
 public final class Player extends Actor {
 
+    /**
+     * The current instance of the game where the players is.
+     */
     private final DestroyersOfDungeons game;
 
     /**

@@ -18,13 +18,33 @@ import java.util.Set;
  */
 public final class DestroyersOfDungeons {
 
+    /**
+     * The set of player who have played their turn.
+     */
     private final Set<Player> playedTurn = new HashSet<>();
+    /**
+     * The list of all living players in the game.
+     */
     private final List<Player> players = new ArrayList<>();
+    /**
+     * The deathtimes of the players.
+     */
     private final Map<Player, Integer> deathTimes = new HashMap<>();
+    /**
+     * The current dungeon.
+     */
     private final Dungeon map;
+    /**
+     * The current player.
+     */
     private Player currentPlayer;
+    /**
+     * currentPlayer's position on the player list.
+     */
     private int current = 0;
-    private int playerIds = 0;
+    /**
+     * The total rounds played, where everyone has played their turn.
+     */
     private int totalTurns = 1;
 
     /**
@@ -49,6 +69,10 @@ public final class DestroyersOfDungeons {
         turnsOver();
     }
 
+    /**
+     * If every player has played a turn, then the playedTurn is cleared and all
+     * players healed.
+     */
     private void turnsOver() {
         if (playedTurn.size() >= players.size() && playedTurn.contains(currentPlayer)) {
             totalTurns++;
@@ -71,8 +95,7 @@ public final class DestroyersOfDungeons {
             players.clear();
             return false;
         }
-        playerIds++;
-        Player p = new Player(playerIds, name, this);
+        Player p = new Player(map.getGameID(), name, this);
         if (players.isEmpty()) {
             currentPlayer = p;
         }
@@ -194,6 +217,14 @@ public final class DestroyersOfDungeons {
         return totalTurns;
     }
 
+    /**
+     * Add other players from a collection to a list, ignoring the specified
+     * player.
+     *
+     * @param list Where to add.
+     * @param where Where to take.
+     * @param ignore Who to ignore.
+     */
     private void addOtherPlayers(List<Player> list, Collection<Player> where, Player ignore) {
         for (Player p : where) {
             if (!p.equals(ignore)) {

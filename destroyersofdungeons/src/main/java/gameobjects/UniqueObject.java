@@ -1,12 +1,20 @@
 package gameobjects;
 
 /**
- * Class for objects with id, holds hashcode and equals methods.
+ * Baseclass for objects with id, holds hashcode and equals methods.
  */
 public abstract class UniqueObject {
 
+    /**
+     * The unique id of the object.
+     */
     private final int id;
 
+    /**
+     * Creates a unique object.
+     *
+     * @param id The unique id of the object.
+     */
     protected UniqueObject(int id) {
         this.id = id;
     }

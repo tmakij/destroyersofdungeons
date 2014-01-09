@@ -9,11 +9,29 @@ import java.util.Random;
  */
 public final class Battle {
 
+    /**
+     * The gui which will be updated on after actions.
+     */
     private final IUpdate gui;
+    /**
+     * The attacker.
+     */
     private final Actor attacker;
+    /**
+     * The defender.
+     */
     private final Actor defender;
+    /**
+     * The random which chooses AI's actions.
+     */
     private final Random rand;
+    /**
+     * The actor currently in turn.
+     */
     private Actor current;
+    /**
+     * The lastAction that was taken in the battle.
+     */
     private BattleAction lastAction;
 
     /**
@@ -70,6 +88,11 @@ public final class Battle {
         return abortBattle;
     }
 
+    /**
+     * Makes the random pick an action for the AI.
+     *
+     * @return A random BattleAction.
+     */
     private BattleAction aiChooseAction() {
         BattleAction act;
         double c = rand.nextDouble();

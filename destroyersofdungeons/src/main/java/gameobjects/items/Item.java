@@ -18,9 +18,21 @@ import org.reflections.Reflections;
  */
 public abstract class Item {
 
+    /**
+     * The map of items and their types.
+     */
     private static final Map<Type, ItemType> itemTypesMap = new HashMap<>();
+    /**
+     * The names of items. Used for reflection.
+     */
     private static final List<String> names = new ArrayList<>();
 
+    /**
+     * Get a random item from the available items. The item cannot winsGame.
+     *
+     * @param rand The random used for randomisation.
+     * @return The random item.
+     */
     public static Item getRandomItem(Random rand) {
         Item i;
         try {
@@ -35,6 +47,13 @@ public abstract class Item {
         return i;
     }
 
+    /**
+     * Modifies the item name to match its ItemType path. Items must be loaded
+     * before calling this method.
+     *
+     * @param name The item name.
+     * @return Path to the items ItemType.
+     */
     private static String getReflectingName(String name) {
         String[] split = name.split("\\.");
         StringBuilder refname = new StringBuilder(name.length());
@@ -51,6 +70,11 @@ public abstract class Item {
         return refname.toString();
     }
 
+    /**
+     * Loads all the items. This method should only be called once. Note: All
+     * items must have a ItemType in the items.types package. Its name must be
+     * ItemNameType. For example ElixirOfLife must have ElixirOfLifeType class.
+     */
     public static void loadItemTypes() {
         Reflections itemInstances = new Reflections("gameobjects.items");
         Set<Class<? extends Item>> itemInstancesClasses = itemInstances.getSubTypesOf(Item.class);
@@ -70,6 +94,9 @@ public abstract class Item {
         }
     }
 
+    /**
+     * The ItemType of the the item.
+     */
     private final ItemType type;
 
     /**

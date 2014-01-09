@@ -3,8 +3,15 @@ package gameobjects.actors.monsters;
 import constants.Constants;
 import logic.BattleAction;
 
+/**
+ * The Spider monster.
+ */
 final class Spider extends Monster {
 
+    /**
+     * The monsters are created using reflection. You should not create them
+     * manually for other than test purposes.
+     */
     public Spider(int id) {
         super(id, Spider.class);
     }

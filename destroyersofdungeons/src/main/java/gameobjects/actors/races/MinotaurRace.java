@@ -1,12 +1,13 @@
 package gameobjects.actors.races;
 
 /**
- * The race of minotaurs.
+ * The race of Minotaurs.
  */
 final class MinotaurRace extends Race {
 
     /**
-     * Creates the race of Minotaurs.
+     * Races are loaded using reflection, the constructor should never be
+     * called.
      */
     public MinotaurRace() {
         super("MINOTAUR");

@@ -8,11 +8,17 @@ import localisation.Dictionary;
 
 /**
  * The basic block from which the dungeon is build. Can contain actors and
- * items. Knows the blocks that are next to it.
+ * items. Knows the blocks that are next to it. Is an ItemHolder.
  */
 public class Tunnel extends Itemholder {
 
+    /**
+     * The neighbouring tunnels.
+     */
     private final List<Tunnel> nextTo = new ArrayList<>();
+    /**
+     * The actors in the tunnel.
+     */
     private final List<Actor> actors = new ArrayList<>();
 
     /**

@@ -5,10 +5,13 @@ import java.util.Collection;
 import java.util.HashSet;
 
 /**
- * Baseclass for all itemowners, actors and tunnels.
+ * Baseclass for all itemowners; actors and tunnels. Has the item collection.
  */
 public abstract class Itemholder extends GameObject {
 
+    /**
+     * The items owned by the item holder.
+     */
     private final Collection<Item> items = new HashSet<>();
 
     /**

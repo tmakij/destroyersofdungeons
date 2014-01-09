@@ -18,9 +18,23 @@ import org.reflections.Reflections;
  */
 public abstract class Monster extends Actor {
 
+    /**
+     * The map of monsters and their races.
+     */
     private static final Map<Type, Race> races = new HashMap<>();
+    /**
+     * The names of the monster classes. Used for reflection.
+     */
     private static final List<String> names = new ArrayList<>();
 
+    /**
+     * Get a random monster from all the available monsters. Races must be
+     * loaded before calling this methdod.
+     *
+     * @param rand The java.util.Random which is used to randomize the result.
+     * @param id A unique id for the monster.
+     * @return A random monster with the provided id.
+     */
     public static Monster getRandomMonster(Random rand, int id) {
         Monster m;
         try {
@@ -34,7 +48,10 @@ public abstract class Monster extends Actor {
     }
 
     /**
-     * Loads the races. This method is only to be called once.
+     * Loads the races usin reflection. This method is only to be called once.
+     * Note: every monster must have a race defined in the races package. It
+     * must be called "MonsterClassNameType". For example Minotaur must have a
+     * race called MinotaurRace.
      */
     public static void loadRaces() {
         Reflections itemInstances = new Reflections("gameobjects.actors.monsters");

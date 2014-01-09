@@ -14,7 +14,15 @@ import logic.BattleAction;
  */
 public abstract class Actor extends Itemholder {
 
+    /**
+     * Contains the block history, where the actor is and has been. Is used to
+     * get the current block and to retreat. The maximum amount of blocks in the
+     * Queue is defined in the constants.
+     */
     private final Deque<Tunnel> myBlockHistory = new ArrayDeque<>();
+    /**
+     * The health of the actor. If it is not positive, the actor dies.
+     */
     private int health;
 
     /**
@@ -141,6 +149,13 @@ public abstract class Actor extends Itemholder {
         health -= getHitDamage(amount);
     }
 
+    /**
+     * Get the damage, after it is modified by items and possibly any racial
+     * bonuses.
+     *
+     * @param amount The original amount.
+     * @return The modified amount.
+     */
     protected int getHitDamage(int amount) {
         int damage = amount;
         for (Item i : getItems()) {
@@ -157,6 +172,12 @@ public abstract class Actor extends Itemholder {
         heal(Constants.ACTOR_HEAL_RATE);
     }
 
+    /**
+     * Heals the actor by certain amount. Cannot heal over maximum health
+     * defined in the constants. Items may modify the amount of health gained.
+     *
+     * @param amount How much to heal, may be modified by items.
+     */
     protected final void heal(int amount) {
         int heal = amount;
         for (Item i : getItems()) {

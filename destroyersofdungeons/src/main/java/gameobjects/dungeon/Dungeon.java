@@ -10,8 +10,17 @@ import java.util.Random;
  */
 public final class Dungeon {
 
+    /**
+     * The List of all the corridors in the dungeon.
+     */
     private final List<Corridor> corridors = new ArrayList<>();
+    /**
+     * The Random which is used for the randomisation.
+     */
     private final Random rand = new Random();
+    /**
+     * The game ids. No UniquueObject may have the same id.
+     */
     private int gameIDs = 0;
 
     /**
@@ -54,7 +63,12 @@ public final class Dungeon {
         return c.getStartingBlock();
     }
 
-    int getGameID() {
+    /**
+     * Get a unique game id. Increments the gameIDs.
+     *
+     * @return A unique game id.
+     */
+    public int getGameID() {
         int id = gameIDs;
         gameIDs++;
         return id;

@@ -8,12 +8,15 @@ import localisation.Dictionary;
  */
 public abstract class Race {
 
+    /**
+     * The name of the race.
+     */
     private final String name;
 
     /**
      * Creates a new Race.
      *
-     * @param name The name of the Race.
+     * @param name The key for the name of the race for Dictionary.
      */
     protected Race(String name) {
         this.name = Dictionary.getValue(name);

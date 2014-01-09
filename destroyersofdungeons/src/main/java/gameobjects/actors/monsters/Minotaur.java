@@ -4,10 +4,14 @@ import constants.Constants;
 import logic.BattleAction;
 
 /**
- * Minotaur monster.
+ * The Minotaur monster.
  */
 final class Minotaur extends Monster {
 
+    /**
+     * The monsters are created using reflection. You should not create them
+     * manually for other than test purposes.
+     */
     public Minotaur(int id) {
         super(id, Minotaur.class);
     }

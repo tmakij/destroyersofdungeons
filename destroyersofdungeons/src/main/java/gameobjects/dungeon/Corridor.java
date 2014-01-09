@@ -5,10 +5,10 @@ import gameobjects.UniqueObject;
 import gameobjects.actors.monsters.Monster;
 import gameobjects.items.Item;
 import gameobjects.items.Treasure;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 /**
  * Corridor is a line of tunnel blocks. In the end of it there are one or more
@@ -18,10 +18,24 @@ final class Corridor extends UniqueObject {
 
     // For testing
     @SuppressWarnings("ProtectedMemberInFinalClass")
+    /**
+     * The first member of the corridor.
+     */
     protected final Tunnel startBlock;
+    /**
+     * The last member of the corridor.
+     */
     private final Tunnel endBlock;
+    /**
+     * Has this corridor the treasure. If yes, no player can start in this
+     * corridor.
+     */
     private final boolean hasTreasure;
-    private final Set<Corridor> nextTo = new HashSet<>();
+    /**
+     * The collection of corridors next to this. A corridor is next other one,
+     * if their end- or startblocks are next to each other.
+     */
+    private final Collection<Corridor> nextTo = new HashSet<>();
 
     /**
      * Creates a new Corridor with a certain lenght.
@@ -58,6 +72,12 @@ final class Corridor extends UniqueObject {
         }
     }
 
+    /**
+     * Makes this corridor neighbour to another one.
+     *
+     * @param c The corridor which to add to neighbours. Makes its endblock
+     * neighbour to this one's startblock.
+     */
     void makeNeighbour(Corridor c) {
         if (!nextTo.contains(c) && !c.equals(this)) {
             nextTo.add(c);
@@ -66,14 +86,30 @@ final class Corridor extends UniqueObject {
         }
     }
 
+    /**
+     * Get the total amount of neighbours.
+     *
+     * @return The total amount of neighbours.
+     */
     int neighboursTotal() {
         return nextTo.size();
     }
 
+    /**
+     * Has this corridor a tresure.
+     *
+     * @return Has this corridor a tresure.
+     */
     boolean hasTreasure() {
         return hasTreasure;
     }
 
+    /**
+     * Get a starting block. The block cannot be a startng or ending block, and
+     * it cannot have items or other actors.
+     *
+     * @return
+     */
     Tunnel getStartingBlock() {
         for (Tunnel t : startBlock.getNextTo()) {
             if (!t.isEndBlock()) {
