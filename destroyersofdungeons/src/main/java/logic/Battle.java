@@ -32,7 +32,9 @@ public final class Battle {
     /**
      * The lastAction that was taken in the battle.
      */
-    private BattleAction lastAction;
+    @SuppressWarnings("ProtectedMemberInFinalClass")
+    //For tests
+    protected BattleAction lastAction;
 
     /**
      * Creates a new battle.

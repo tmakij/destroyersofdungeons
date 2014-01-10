@@ -176,4 +176,39 @@ public final class BattleTest {
         bt.takeAction(BattleAction.DO_NOTHING);
         assertEquals(att, bt.getCurrent());
     }
+
+    private void repeatAIActions(BattleAction act) {
+        final int iter = 100;
+        boolean actHappened = false;
+        def = Monster.getRandomMonster(new Random(), 66);
+        bt = new Battle(att, def, gui);
+        for (int i = 0; i < iter; i++) {
+            bt.takeAction(BattleAction.DO_NOTHING);
+            if (bt.lastAction == act) {
+                actHappened = true;
+                break;
+            }
+            final int heals = Constants.ACTOR_BASE_HEALTH / Constants.ACTOR_BASE_HEALTH;
+            for (int j = 0; j < heals; j++) {
+                bt.getAttacker().heal();
+                bt.getAttacker().heal();
+            }
+        }
+        assertTrue(actHappened);
+    }
+
+    @Test
+    public void testAITakesAttack() {
+        repeatAIActions(BattleAction.ATTACK);
+    }
+
+    @Test
+    public void testAITakesDefend() {
+        repeatAIActions(BattleAction.DEFEND);
+    }
+
+    @Test
+    public void testAITakesCastSpell() {
+        repeatAIActions(BattleAction.CAST_SPELL);
+    }
 }

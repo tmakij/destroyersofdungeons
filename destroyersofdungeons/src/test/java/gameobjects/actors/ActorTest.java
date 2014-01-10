@@ -165,7 +165,7 @@ public final class ActorTest {
 
     @Test
     public void testActorHeal() {
-        final int damage = Constants.ACTOR_BASE_HEALTH + 1;
+        final int damage = Constants.ACTOR_HEAL_RATE + 1;
         a.takeHit(damage);
         a.heal();
         assertEquals(Constants.ACTOR_BASE_HEALTH - damage + Constants.ACTOR_HEAL_RATE, a.getHealth());
@@ -173,15 +173,21 @@ public final class ActorTest {
 
     @Test
     public void testActorDontHealOverLimit() {
-        a.takeHit(Constants.ACTOR_HEAL_RATE);
-        a.heal(Constants.ACTOR_HEAL_RATE + 1);
+        a.takeHit(Constants.ACTOR_HEAL_RATE - 1);
+        a.heal();
         assertEquals(Constants.ACTOR_BASE_HEALTH, a.getHealth());
     }
 
     @Test
     public void testActorHealOnLimitToo() {
         a.takeHit(Constants.ACTOR_HEAL_RATE);
-        a.heal(Constants.ACTOR_HEAL_RATE);
+        a.heal();
         assertEquals(Constants.ACTOR_BASE_HEALTH, a.getHealth());
+    }
+
+    @Test
+    public void testActorDontHealOver() {
+        a.heal(1);
+        assertTrue(Constants.ACTOR_BASE_HEALTH >= a.getHealth());
     }
 }

@@ -1,0 +1,14 @@
+Ohjelmassa EI ole testattu käyttöliittymää tai paljoa sattumanvaraisuutta.
+	Käyttöliittymää on testattu käynnistämällä ohjelma ja katsomalla ja/tai
+painelemalla kaikkea.
+	Sattumanvaraisuutta on testattu pääosin kokeilulla. Esimerkiksi loopit
+eivät jäädytä ohjelmaa, ei päädy eristyksissä olevaan Corridoriin.
+Automaattiseen testaukseen voisi kehitellä algoritmin, joka tutkisi automaattisesti
+tätä. Tämä kuitenkin olisi vaatinut huomattavasti aikaa.
+	Pit ja Cobertura myös ilmoittaa, ettei montaa try/catch lausetta ole testattu.
+Dictionaryssa se johtuu siitä, että kääntäjä generoi automaattisesti monia metodeja
+siihen, eikä niiden testaus ole realistisesti mahdollista. Esimerkiksi InputStream
+close() ei tarvitse kutsua, sillä se kutsutaan sen destruktorissa myös. Kuitenkin
+sen kutsuminen on hyvä asia, sillä se vapauttaa muistista resurssit välittömästi.
+Item ja Monsterien getRandom() metodesissa taas null arvoa ei voi tulla, sillä
+staattisess konstruktorissa on jo varmistettu reflectionella että luokat ovat olemassa.

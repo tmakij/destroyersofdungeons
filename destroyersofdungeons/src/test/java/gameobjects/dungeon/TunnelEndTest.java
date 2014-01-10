@@ -2,11 +2,17 @@ package gameobjects.dungeon;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import org.junit.Before;
 import org.junit.Test;
 
 public final class TunnelEndTest {
 
-    private Tunnel t = new TunnelEnd(0);
+    private Tunnel t;
+
+    @Before
+    public void setUp() {
+        t = new TunnelEnd(0);
+    }
 
     @Test
     public void testIsEndBlock() {
