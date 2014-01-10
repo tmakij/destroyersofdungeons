@@ -4,8 +4,9 @@ import constants.Constants;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
+import testSetUp.InitClass;
 
-public final class GhostTest {
+public final class GhostTest extends InitClass {
 
     private Ghost g;
 

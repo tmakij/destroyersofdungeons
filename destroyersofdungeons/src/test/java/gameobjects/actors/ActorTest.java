@@ -1,7 +1,6 @@
 package gameobjects.actors;
 
 import constants.Constants;
-import gameobjects.actors.monsters.Monster;
 import gameobjects.dungeon.Tunnel;
 import gameobjects.items.Item;
 import gameobjects.items.Treasure;
@@ -13,18 +12,13 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import testSetUp.InitClass;
 
-public final class ActorTest {
+public final class ActorTest extends InitClass {
 
     private static final Random rand = new Random();
 
-    @BeforeClass
-    public static void onlyOnce() {
-        Item.loadItemTypes();
-        Monster.loadRaces();
-    }
     private Actor a;
     private Tunnel t;
 

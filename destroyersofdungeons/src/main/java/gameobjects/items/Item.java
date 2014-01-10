@@ -1,7 +1,6 @@
 package gameobjects.items;
 
-import gameobjects.items.types.ItemType;
-import java.lang.reflect.Constructor;
+import gameobjects.GameObjectType;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public abstract class Item {
     /**
      * The map of items and their types.
      */
-    private static final Map<Type, ItemType> itemTypesMap = new HashMap<>();
+    private static final Map<Type, GameObjectType> itemTypesMap = new HashMap<>();
     /**
      * The names of items. Used for reflection.
      */
@@ -48,56 +47,23 @@ public abstract class Item {
     }
 
     /**
-     * Modifies the item name to match its ItemType path. Items must be loaded
-     * before calling this method.
-     *
-     * @param name The item name.
-     * @return Path to the items ItemType.
-     */
-    private static String getReflectingName(String name) {
-        String[] split = name.split("\\.");
-        StringBuilder refname = new StringBuilder(name.length());
-        for (int i = 0; i < split.length; i++) {
-            if (i == split.length - 1) {
-                refname.append("types.");
-            }
-            refname.append(split[i]);
-            if (i != split.length - 1) {
-                refname.append(".");
-            }
-        }
-        refname.append("Type");
-        return refname.toString();
-    }
-
-    /**
-     * Loads all the items. This method should only be called once. Note: All
-     * items must have a ItemType in the items.types package. Its name must be
-     * ItemNameType. For example ElixirOfLife must have ElixirOfLifeType class.
+     * Loads all the items. This method needs to be called only once.
      */
     public static void loadItemTypes() {
         Reflections itemInstances = new Reflections("gameobjects.items");
         Set<Class<? extends Item>> itemInstancesClasses = itemInstances.getSubTypesOf(Item.class);
-        int ids = 0;
         for (Class<? extends Item> c : itemInstancesClasses) {
-            try {
-                String name = getReflectingName(c.getName());
-                @SuppressWarnings("unchecked")
-                Class<? extends ItemType> cl = (Class<? extends ItemType>) Class.forName(name);
-                Constructor<? extends ItemType> ctor = cl.getConstructor(Integer.TYPE);
-                ctor.setAccessible(true);
-                names.add(name.replace("types.", "").replace("Type", ""));
-                itemTypesMap.put(c, ctor.newInstance(ids));
-                ids++;
-            } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-            }
+            String name = c.getSimpleName().toUpperCase();
+            GameObjectType got = new GameObjectType(name);
+            names.add(c.getName());
+            itemTypesMap.put(c, got);
         }
     }
 
     /**
-     * The ItemType of the the item.
+     * The type of the the item.
      */
-    private final ItemType type;
+    private final GameObjectType type;
 
     /**
      * Initialize a new item.

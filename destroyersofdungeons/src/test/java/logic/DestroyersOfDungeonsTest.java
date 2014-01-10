@@ -13,17 +13,13 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import testSetUp.InitClass;
 
-public final class DestroyersOfDungeonsTest {
+public final class DestroyersOfDungeonsTest extends InitClass {
 
     private static final Random rand = new Random();
 
-    @BeforeClass
-    public static void onlyOnce() {
-        Item.loadItemTypes();
-    }
     private DestroyersOfDungeons game;
 
     @Before

@@ -1,8 +1,7 @@
 package gameobjects.actors.monsters;
 
+import gameobjects.GameObjectType;
 import gameobjects.actors.Actor;
-import gameobjects.actors.races.Race;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public abstract class Monster extends Actor {
     /**
      * The map of monsters and their races.
      */
-    private static final Map<Type, Race> races = new HashMap<>();
+    private static final Map<Type, GameObjectType> races = new HashMap<>();
     /**
      * The names of the monster classes. Used for reflection.
      */
@@ -48,27 +47,17 @@ public abstract class Monster extends Actor {
     }
 
     /**
-     * Loads the races usin reflection. This method is only to be called once.
-     * Note: every monster must have a race defined in the races package. It
-     * must be called "MonsterClassNameType". For example Minotaur must have a
-     * race called MinotaurRace.
+     * Loads the races using reflection. This method needs only to be called
+     * once.
      */
     public static void loadRaces() {
         Reflections itemInstances = new Reflections("gameobjects.actors.monsters");
         Set<Class<? extends Monster>> racesInstancesClasses = itemInstances.getSubTypesOf(Monster.class);
         for (Class<? extends Monster> m : racesInstancesClasses) {
-            try {
-                String name = m.getName();
-                name = name.replace("monster", "race");
-                name += "Race";
-                @SuppressWarnings("unchecked")
-                Class<? extends Race> cl = (Class<? extends Race>) Class.forName(name);
-                Constructor<? extends Race> ctor = cl.getConstructor();
-                ctor.setAccessible(true);
-                names.add(m.getName());
-                races.put(m, ctor.newInstance());
-            } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-            }
+            String name = m.getSimpleName().toUpperCase();
+            GameObjectType r = new GameObjectType(name);
+            names.add(m.getName());
+            races.put(m, r);
         }
     }
 

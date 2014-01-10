@@ -10,17 +10,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import testSetUp.InitClass;
 
-public final class TunnelTest {
+public final class TunnelTest extends InitClass {
 
     private static final Random rand = new Random();
 
-    @BeforeClass
-    public static void onlyOnce() {
-        Item.loadItemTypes();
-    }
     private Tunnel tunnel;
 
     @Before

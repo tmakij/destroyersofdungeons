@@ -3,32 +3,18 @@ package gameobjects.actors.monsters;
 import constants.Constants;
 import gameobjects.actors.Player;
 import logic.BattleAction;
-import org.junit.After;
-import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import testSetUp.InitClass;
 
-public final class VampireTest {
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
+public final class VampireTest extends InitClass {
 
     private Vampire v;
 
     @Before
     public void setUp() {
         v = new Vampire(0);
-    }
-
-    @After
-    public void tearDown() {
     }
 
     @Test

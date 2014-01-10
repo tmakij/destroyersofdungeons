@@ -12,15 +12,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import testSetUp.InitClass;
 
-public final class BattleTest {
-
-    @BeforeClass
-    public static void setUpOnce() {
-        Monster.loadRaces();
-    }
+public final class BattleTest extends InitClass {
 
     private Battle bt;
     private Actor att;

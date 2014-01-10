@@ -6,26 +6,18 @@ import gameobjects.actors.Player;
 import logic.BattleAction;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-public final class WoodenSwordTest {
-
-    @BeforeClass
-    public static void onlyOnce() {
-        Item.loadItemTypes();
-    }
-
-    private Item i;
+public final class WoodenSwordTest extends ItemTestBase {
 
     @Before
     public void setUp() {
         i = new WoodenSword();
+        a = new Player(0, "", null);
     }
 
     @Test
     public void testOnAttack() {
-        Actor a = new Player(0, "", null);
         a.addItem(i);
         Actor b = new Player(1, "", null);
         a.attack(b, BattleAction.ATTACK);
