@@ -118,7 +118,7 @@ public final class DestroyersOfDungeonsTest {
     public void testMovePlayerToInvalidBlock() {
         Player p = game.getCurrentPlayer();
         Tunnel original = p.getMyBlock();
-        game.movePlayerTo(23434);
+        game.movePlayerTo(original.getNextTo().size());
         Tunnel newBlock = p.getMyBlock();
         assertEquals(original, newBlock);
     }
@@ -299,4 +299,29 @@ public final class DestroyersOfDungeonsTest {
         game.removePlayer(game.getCurrentPlayer());
         assertEquals(p, game.getCurrentPlayer());
     }
+
+    @Test
+    public void testHealPlayerOne() {
+        final int m = 2;
+        addAnotherPlayer();
+        game.getCurrentPlayer().takeHit(Constants.ACTOR_HEAL_RATE * m);
+        game.nextPlayer();
+        game.getCurrentPlayer().takeHit(Constants.ACTOR_HEAL_RATE * 3);
+        game.nextPlayer();
+        assertEquals(Constants.ACTOR_BASE_HEALTH - Constants.ACTOR_HEAL_RATE * (m - 1), game.getCurrentPlayer().getHealth());
+    }
+
+    @Test
+    public void testHealPlayerTwo() {
+        final int m = 3;
+        addAnotherPlayer();
+        game.getCurrentPlayer().takeHit(Constants.ACTOR_HEAL_RATE * 2);
+        game.nextPlayer();
+        Player p = game.getCurrentPlayer();
+        p.takeHit(Constants.ACTOR_HEAL_RATE * m);
+        game.nextPlayer();
+        assertEquals(Constants.ACTOR_BASE_HEALTH - Constants.ACTOR_HEAL_RATE * (m - 1), p.getHealth()
+        );
+    }
+
 }

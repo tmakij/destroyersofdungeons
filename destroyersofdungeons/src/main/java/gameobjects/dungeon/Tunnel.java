@@ -49,8 +49,8 @@ public class Tunnel extends Itemholder {
         if (t != null && !t.equals(this) && !nextTo.contains(t)) {
             nextTo.add(t);
             if (isEndBlock() && t.isEndBlock()) {
-                for (int i = 0; i < nextTo.size(); i++) {
-                    Tunnel t2 = nextTo.get(i);
+                for (int i = 0; i < t.nextTo.size(); i++) {
+                    Tunnel t2 = t.nextTo.get(i);
                     if (t2.isEndBlock()) {
                         addBlock(t2);
                     }

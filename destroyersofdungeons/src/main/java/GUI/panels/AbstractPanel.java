@@ -14,9 +14,21 @@ import localisation.Dictionary;
  */
 abstract class AbstractPanel implements IDungeonPanel {
 
+    /**
+     * The panel where the components are added and which is shown.
+     */
     protected final JPanel panel = new JPanel();
+    /**
+     * The panel layout.
+     */
     protected final SpringLayout layout = new SpringLayout();
+    /**
+     * The SwingGUI.
+     */
     protected final SwingGUI gui;
+    /**
+     * Is the panel disposed. If not, it will be disposed on finalize().
+     */
     private boolean disposed = false;
 
     protected AbstractPanel(SwingGUI gui) {
@@ -42,6 +54,11 @@ abstract class AbstractPanel implements IDungeonPanel {
         return panel;
     }
 
+    /**
+     * Get the last added componen to the panel.
+     *
+     * @return The last added componen to the panel.
+     */
     protected final Component getLastComponent() {
         return panel.getComponents()[panel.getComponents().length - 1];
     }

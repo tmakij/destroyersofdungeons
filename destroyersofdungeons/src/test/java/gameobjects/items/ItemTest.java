@@ -75,4 +75,9 @@ public final class ItemTest extends ItemTestBase {
         Item i2 = new WoodenSword();
         assertEquals(i, i2);
     }
+
+    @Test
+    public void testHashCode() {
+        assertEquals(WoodenSword.class.hashCode(), i.hashCode());
+    }
 }

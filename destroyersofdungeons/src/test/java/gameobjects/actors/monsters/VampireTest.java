@@ -17,11 +17,18 @@ public final class VampireTest {
     }
 
     @Test
-    public void testGetAttack() {
-        v.takeHit(50);
+    public void testGetAttackHeals() {
+        final int hit = 50;
+        v.takeHit(hit);
         Player p = new Player(0, "TEST_PLAYER", null);
         v.attack(p, BattleAction.ATTACK);
-        long exp = (long) (50 + (Constants.ACTOR_BASE_ATTACK * BattleAction.ATTACK.actModifier() * Constants.VAMPIRE_HEALT_ABSORB));
+        long exp = (long) (Constants.ACTOR_BASE_HEALTH - hit + (Constants.ACTOR_BASE_ATTACK * BattleAction.ATTACK.actModifier() * Constants.VAMPIRE_HEALT_ABSORB));
         assertEquals(exp, v.getHealth());
+    }
+
+    @Test
+    public void testGetAttackReturnsDamage() {
+        long exp = (long) (Constants.ACTOR_BASE_ATTACK * BattleAction.ATTACK.actModifier());
+        assertEquals(exp, v.getAttack(BattleAction.ATTACK));
     }
 }

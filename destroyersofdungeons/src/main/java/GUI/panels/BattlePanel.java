@@ -19,11 +19,29 @@ import logic.IUpdate;
  */
 public final class BattlePanel extends AbstractPanel implements IUpdate {
 
+    /**
+     * The battle between two actors.
+     */
     private final Battle battle;
+    /**
+     * The label for attacker status.
+     */
     private final JLabel attackerStatus = new JLabel();
+    /**
+     * The label for defender status.
+     */
     private final JLabel defenderStatus = new JLabel();
+    /**
+     * The label to show whose turn it is.
+     */
     private final JLabel turn = new JLabel();
 
+    /**
+     * Create a new instance of the BattlePanel.
+     *
+     * @param gui The SwingGUI which holds the program.
+     * @param defender Who has been attacked.
+     */
     public BattlePanel(SwingGUI gui, Actor defender) {
         super(gui);
         battle = new Battle(gui.getGame().getCurrentPlayer(), defender, this);

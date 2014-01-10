@@ -8,8 +8,17 @@ import javax.swing.JLabel;
 import javax.swing.SpringLayout;
 import localisation.Dictionary;
 
+/**
+ * The panel which allows one to change settings. Currently the only setting is
+ * the language.
+ */
 public final class SettingsPanel extends AbstractPanel {
 
+    /**
+     * Create a new instance of the SettingsPanel.
+     *
+     * @param gui The SwingGUI which holds the program.
+     */
     public SettingsPanel(SwingGUI gui) {
         super(gui);
         createBack();
