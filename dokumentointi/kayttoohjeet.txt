@@ -1,0 +1,46 @@
+Destroyers Of Dungeons
+
+Peli on vuoropohjainen tekstiseikkailu, jonka tarkoitus on löytää tyrmän aarre.
+Pelin aloituksessa voi valita pelaaja määrän 1-12. Tämän jälkeen on annettava
+jokaiselle nimet, jotka koostuvat A-Z, 0-9, _ ja välilyönti merkeistä.
+	Ensimmäinen nimensä antanut aloittaa pelin. Jokaisen vuoron alussa tulee ilmoitus
+kenen vuoro on. Aloitettuaan vuoronsa, pelaaja näkee nykyisen tilanteensa. Mahdolliset
+esineet näkyvät vasemmalla, elinvoima keskellä ja liikkumissuunnat oikealla. Tunneleita on
+kahta tyyppiä; normaalia, yksisuuntaista tunnelia. Lisäksi ovat tunneliovet, jotka voivat
+olla joko umpikujia tai useiden käytävien risteyksiä.
+	Kun haluttua suunta painetaan, tulee seurausruutu. Jos tunneli oli tyhjä,
+tulee ilmoitus liikkumisesta. Jos tunnelissa oli esineitä, tulee ilmoitus niiden
+löydöstä. Jos tunnelissa oli toinen pelaaja, tai mosnteri alkaa taistelu.
+	Taistelu ruudussa näkyy osapuolet sekä heidän elinvoimansa, vuorossa oleva sekä
+vuorossa olevan toiminta mahdollisuudet:
+
+	Hyökkäys: Hyökkää toisen kimppuun, iskien vakio vahinkoa.
+	Puolusta: Ei hyökkää, mutta jos toinen hyökkää niin tällöin tekee suurempaa
+			  vahinkoa kuin normaalisti.
+	Tee taika: Tekee vähemmän vahinkoa kuin hyökkäys, mutta iskulta ei voi puolustautua.
+	Älä tee mitään: Ei tee mitään...
+	Pakene: Pakenee mahollisesti useankin ruudun taaksepäin ja lopettaen taistelun.
+
+Taistelu jatkuu, kunnes toinen osapuoli pakenee tai kuolee. Taistelun loputtua
+voittava osapuoli saa hävinneen esineet, jos toinen ei paennut. Jos hyökkääjä
+voittaa niin hän pääsee liikumaan tunneliin.
+
+	Tyrmästä löytyy erilaisia monstereita, jotka vaikeuttavat aarteen etsintää.
+	
+		Minotauros: Muinanen olento, jolla on härän voimat. Lyö kovampaa kuin muut.
+		Hämähäkki: Monijalkaisen olennon kimppuun on erittäin vaikea hyökätä,
+				   kun se keskittyy vain puolustamaan. Puolustautuu kovempaa kuin muut.
+		Haamu: Fyysinen koostumus on tuntematon, voimakas pimeä taika suojelee heitä
+			   vahingolta. Ottaa vähemmän vahinkoa kuin muut.
+		Vampyyri: Kuolematon pimeän ruhtinas, joka verta juomalla on pysynyt hengissä vuosituhannet.
+				  Saa osan aiheuttamasta vahingostaan takaisin omaan elinvoimaansa.
+	
+	Tyrmään on myös jäänyt esineitä vuosituhansien saatossa. Ne voivat auttaa erilailla.
+
+		Elämän Eliksiiri: Nopeuttaa parantumista.
+		Puumiekka: Lyö kovempaa.
+		Puukilpi: Ottaa vähemmän vahinkoa.
+
+	Pelaajat liikkuvat tunnelista tunneliin, etsien tyrmän aarretta. Kun aarre löydetään,
+sen löytäjä voittaa pelin ja muut häviävät. On myös mahdollista että kaikki pelaajat kuolevat.
+Tällöin tulee tasapeli.

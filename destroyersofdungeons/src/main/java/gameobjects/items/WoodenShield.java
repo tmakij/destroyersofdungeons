@@ -12,7 +12,6 @@ final class WoodenShield extends Item {
      * for other than testing purposes.
      */
     public WoodenShield() {
-        super(WoodenShield.class);
     }
 
     @Override

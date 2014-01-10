@@ -1,9 +1,8 @@
 package gameobjects.items;
 
 import gameobjects.actors.Actor;
-import testSetUp.InitClass;
 
-abstract class ItemTestBase extends InitClass {
+abstract class ItemTestBase {
 
     protected Item i;
     protected Actor a;

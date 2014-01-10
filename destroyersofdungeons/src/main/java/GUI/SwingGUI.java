@@ -8,7 +8,7 @@ import localisation.Dictionary;
 import logic.DestroyersOfDungeons;
 
 /**
- * The GUI made with swing. Handles the game.
+ * The GUI made with swing. Holds the game.
  */
 public final class SwingGUI {
 
@@ -26,11 +26,9 @@ public final class SwingGUI {
     private IDungeonPanel currentPanel;
 
     /**
-     * Creates a new instance the gui. English localisation will be loaded on
-     * creation.
+     * Creates a new instance the gui.
      */
     public SwingGUI() {
-        Dictionary.loadText("english");
         frame = new JFrame();
         frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);

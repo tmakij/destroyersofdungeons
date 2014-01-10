@@ -13,7 +13,7 @@ final class Vampire extends Monster {
      * manually for other than test purposes.
      */
     public Vampire(int id) {
-        super(id, Vampire.class);
+        super(id);
     }
 
     @Override

@@ -6,9 +6,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import org.junit.Before;
 import org.junit.Test;
-import testSetUp.InitClass;
 
-public final class CorridorTest extends InitClass {
+public final class CorridorTest {
 
     private Corridor c;
 

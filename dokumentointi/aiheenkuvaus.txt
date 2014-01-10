@@ -1,25 +1,7 @@
-Tarkoitus on luoda tietokonepeli, jossa yksi, tai useampi pelaaja yrittää etsiä aarretta vanhassa tyrmässä.
+Destroyers of Dungeons on tekstipohjainen tietokonepeli, jossa yksi, tai useampi pelaaja yrittää etsiä aarretta vanhassa tyrmässä.
 Pelaajat liikuvat vuoropohjaisesti kartassa, joka on luotu sattumanvaraisesti. Oikeaa suuntaa ei kerrota.
 Käytävät voivat risteillä ja taitekohdissa voi olla useita vaihtoehtoja.
-Tyrmässä voi kohdata erilaisia mörköjä, jotka täytyy tietenkin nitistää.
-Matkalta voi löytää esineitä, jotka auttavat voivat auttaa eritavoin.
+Tyrmässä voi kohdata erilaisia mörköjä, jotka täytyy tietenkin nitistää. Myös Pelaajat voivat taistella
+toistensa kanssa. Matkalta voi löytää esineitä, jotka auttavat voivat auttaa eritavoin.
 Peli on sekä englanniksi että suomeksi.
 Aarteenlöytäjä voittaa pelin.
-
-Tavoite:
-- Vähintään kaksi pelaaja
-- Pari monsteria
-- Jokunen esine
-- Taistelut
-- Sattumanvarainen tyrmä
-- Yksinkertainen, graafinen, käyttöliittymä (ei liikaa kuvia)
-
-Ekstra tavoitteet (jos aikaa jää...):
-- Lokalisointi, kaikki teksti yhteen erilliseen tiedostoon josta sitten ladataan oikean kielen tekstit
-- Ääretön määrä pelaajia
-- Paljon monstereita
-- Paljon enemmän esineitä
-- erilaisia tapahtumia, joita voi kohdata (esimerkiksi katto sortuu)
-- Pelaajien väilinen taistelu, jos sattuu kohtaamaan
-- Nettipeli
-- 2D/3D grafiikka

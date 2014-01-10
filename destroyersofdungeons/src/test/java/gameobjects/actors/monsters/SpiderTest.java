@@ -5,9 +5,8 @@ import logic.BattleAction;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
-import testSetUp.InitClass;
 
-public final class SpiderTest extends InitClass {
+public final class SpiderTest {
 
     private Spider s;
 

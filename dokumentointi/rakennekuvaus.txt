@@ -1,0 +1,13 @@
+DestroyersOfDungeons luokka hoitaa pelilogiikkaa, esim vuorot, pelaajat + kuolemat, voitto, liikkumismahollisuudet.
+Se on liitettynä SwingGUI luokkaa, jossa on myös JFrame. SwingGUI:hin laitetaan aina IDungeonPanel interfacen
+toteuttava luokka, joka näytetään. Nämä paneelit kutsuvat SwingGui:hin liitettyä DestroyersOfDungeons objektia,
+kun tarve vaatii. Esim kun pelaaja painaa vuoron ohi niin nextPlayeriä kutsutaan.
+	DestroyersOfDungeons:illa on Dungeon luokka, joka on pelin kartta. Siinä on kaikki Corridorit joissa on kaikki
+tunnelit. Tunneleissa voi olla Actoreita tai Itemejä. Actori voi olla Player tai Monster, ja myös sillä voi olla
+Itemejä.
+	Monsteri on abstrakti, ja se tarjoaa vain rajapinnan näkyville. Sen todellisen toiminta tulee Actorista tai
+Monsterin alaluokista. Itemit toimivat jokseenkin samalla tavalla; ne eivät tee mitään mitä ei ole niiden alaluokissa
+erikseen määrätty. Itemit toimivat siten, että jokaista tapahtumaa ennen mihin Item voi vaikuttaa, niin käydään
+läpi kaikki Actorin Itemit, jotka vaikuttavat asiaan jos vaikuttavat. Koko toiminta tapahtuu rajapinnan kautta.
+	Kaikki lokalisaatio haetaan Dictionary luokasta. Sitä ei voi luoda ja siitä ei voi periytyä, sen metodit ovat
+staatisia.

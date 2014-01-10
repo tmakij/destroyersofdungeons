@@ -1,6 +1,6 @@
 package logic;
 
-import GUI.testGUIPanel;
+import GUI.TestGUIPanel;
 import constants.Constants;
 import gameobjects.actors.Actor;
 import gameobjects.actors.Player;
@@ -13,21 +13,20 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
-import testSetUp.InitClass;
 
-public final class BattleTest extends InitClass {
+public final class BattleTest {
 
     private Battle bt;
     private Actor att;
     private Actor def;
     private Actor current;
-    private testGUIPanel gui;
+    private TestGUIPanel gui;
 
     @Before
     public void setUp() {
         att = new Player(0, "TEST_PLAYER", null);
         def = new Player(1, "TEST_PLAYER_NO2", null);
-        gui = new testGUIPanel();
+        gui = new TestGUIPanel();
         bt = new Battle(att, def, gui);
         current = bt.getCurrent();
     }
@@ -68,7 +67,7 @@ public final class BattleTest extends InitClass {
         def = game.getCurrentPlayer();
         game.nextPlayer();
         att = game.getCurrentPlayer();
-        bt = new Battle(att, def, new testGUIPanel());
+        bt = new Battle(att, def, new TestGUIPanel());
     }
 
     @Test

@@ -7,7 +7,7 @@ import java.util.HashSet;
 /**
  * Baseclass for all itemowners; actors and tunnels. Has the item collection.
  */
-public abstract class Itemholder extends GameObject {
+public abstract class Itemholder extends UniqueObject {
 
     /**
      * The items owned by the item holder.
@@ -18,10 +18,9 @@ public abstract class Itemholder extends GameObject {
      * Creates a new ItemHolder.
      *
      * @param id The unique id.
-     * @param name The name of the object.
      */
-    protected Itemholder(int id, String name) {
-        super(id, name);
+    protected Itemholder(int id) {
+        super(id);
     }
 
     /**

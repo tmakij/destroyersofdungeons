@@ -9,7 +9,6 @@ public final class Treasure extends Item {
      * Creates a new treasure.
      */
     public Treasure() {
-        super(Treasure.class);
     }
 
     @Override

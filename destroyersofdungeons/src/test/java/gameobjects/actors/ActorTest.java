@@ -13,9 +13,8 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
-import testSetUp.InitClass;
 
-public final class ActorTest extends InitClass {
+public final class ActorTest {
 
     private static final Random rand = new Random();
 
@@ -115,7 +114,7 @@ public final class ActorTest extends InitClass {
         assertTrue(a.getItems().contains(i));
     }
 
-    private Tunnel TunnelHistoryWorks(int addedToMax, int returnN) {
+    private Tunnel tunnelHistoryWorks(int addedToMax, int returnN) {
         Tunnel first = null;
         for (int i = 0; i < Constants.TUNNEL_HISTORY + addedToMax; i++) {
             t = new Tunnel((i + 1) * 12);
@@ -130,25 +129,25 @@ public final class ActorTest extends InitClass {
 
     @Test
     public void testTunnelHistoryAndRetreatWhenWithinLimit() {
-        t = TunnelHistoryWorks(0, 0);
+        t = tunnelHistoryWorks(0, 0);
         assertEquals(t, a.getMyBlock());
     }
 
     @Test
     public void testTunnelHistoryAndRetreatWhenOverLimit() {
-        t = TunnelHistoryWorks(1, 0);
+        t = tunnelHistoryWorks(1, 0);
         assertNotEquals(a.getMyBlock(), t);
     }
 
     @Test
     public void testTunnelHistoryAndRetreatReturnCorrectTunnel() {
-        t = TunnelHistoryWorks(1, 1);
+        t = tunnelHistoryWorks(1, 1);
         assertEquals(t, a.getMyBlock());
     }
 
     @Test
     public void testTunnelHistoryAndRetreatHistoryClears() {
-        t = TunnelHistoryWorks(0, 0);
+        t = tunnelHistoryWorks(0, 0);
         for (int i = 0; i < Constants.TUNNEL_HISTORY / 2; i++) {
             a.setMyBlock(new Tunnel(566 + i));
         }

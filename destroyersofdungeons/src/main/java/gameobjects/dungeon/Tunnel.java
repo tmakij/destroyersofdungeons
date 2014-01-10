@@ -27,17 +27,7 @@ public class Tunnel extends Itemholder {
      * @param id The unique id.
      */
     public Tunnel(int id) {
-        super(id, Dictionary.getValue("TUNNEL", id));
-    }
-
-    /**
-     * Creates a new tunnel with name and id specified.
-     *
-     * @param id The unique id.
-     * @param name The name of the tunnel.
-     */
-    protected Tunnel(int id, String name) {
-        super(id, name);
+        super(id);
     }
 
     /**
@@ -132,5 +122,10 @@ public class Tunnel extends Itemholder {
      */
     public final List<Actor> getActors() {
         return actors;
+    }
+
+    @Override
+    public String toString() {
+        return Dictionary.getValue("TUNNEL", id);
     }
 }

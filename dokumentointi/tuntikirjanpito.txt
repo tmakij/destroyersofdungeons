@@ -58,3 +58,8 @@
   9.1.2014
   - 5 tuntia
   - Javadoccia, testejä/mutantteja pois, sekvenssikaavio, virheiden korjausta, koodin siistintää.
+
+  10.1
+  - 7 tuntia
+  - Äkillinen rakennemuutos loppuun; Racet, ItemTypet ja GameObject pois, staattiset constructorit reflection lataukselle, reflectionea yksinkertaistettu.
+  

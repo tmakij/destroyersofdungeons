@@ -1,14 +1,12 @@
 package gameobjects.items;
 
-import gameobjects.GameObjectType;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Locale;
 import java.util.Random;
 import java.util.Set;
+import localisation.Dictionary;
 import org.reflections.Reflections;
 
 /**
@@ -18,16 +16,24 @@ import org.reflections.Reflections;
 public abstract class Item {
 
     /**
-     * The map of items and their types.
-     */
-    private static final Map<Type, GameObjectType> itemTypesMap = new HashMap<>();
-    /**
      * The names of items. Used for reflection.
      */
     private static final List<String> names = new ArrayList<>();
 
     /**
-     * Get a random item from the available items. The item cannot winsGame.
+     * Loads the class names.
+     */
+    static {
+        Reflections itemInstances = new Reflections("gameobjects.items");
+        Set<Class<? extends Item>> itemInstancesClasses = itemInstances.getSubTypesOf(Item.class);
+        for (Class<? extends Item> c : itemInstancesClasses) {
+            names.add(c.getName());
+        }
+    }
+
+    /**
+     * Get a random item from the available items. The item cannot return true
+     * with winsGame().
      *
      * @param rand The random used for randomisation.
      * @return The random item.
@@ -47,31 +53,9 @@ public abstract class Item {
     }
 
     /**
-     * Loads all the items. This method needs to be called only once.
+     * Create a new Item.
      */
-    public static void loadItemTypes() {
-        Reflections itemInstances = new Reflections("gameobjects.items");
-        Set<Class<? extends Item>> itemInstancesClasses = itemInstances.getSubTypesOf(Item.class);
-        for (Class<? extends Item> c : itemInstancesClasses) {
-            String name = c.getSimpleName().toUpperCase();
-            GameObjectType got = new GameObjectType(name);
-            names.add(c.getName());
-            itemTypesMap.put(c, got);
-        }
-    }
-
-    /**
-     * The type of the the item.
-     */
-    private final GameObjectType type;
-
-    /**
-     * Initialize a new item.
-     *
-     * @param type The type of the item.
-     */
-    protected Item(Type type) {
-        this.type = itemTypesMap.get(type);
+    protected Item() {
     }
 
     @Override
@@ -81,7 +65,7 @@ public abstract class Item {
 
     @Override
     public final String toString() {
-        return type.toString();
+        return Dictionary.getValue(getClass().getSimpleName().toUpperCase(Locale.ENGLISH));
     }
 
     @Override

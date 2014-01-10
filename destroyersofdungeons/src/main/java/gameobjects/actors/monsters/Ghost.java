@@ -12,7 +12,7 @@ final class Ghost extends Monster {
      * manually for other than test purposes.
      */
     public Ghost(int id) {
-        super(id, Ghost.class);
+        super(id);
     }
 
     @Override

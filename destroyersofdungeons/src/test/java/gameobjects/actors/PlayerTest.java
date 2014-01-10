@@ -5,13 +5,13 @@ import gameobjects.items.Item;
 import gameobjects.items.Treasure;
 import java.util.Random;
 import logic.DestroyersOfDungeons;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
-import testSetUp.InitClass;
 
-public final class PlayerTest extends InitClass {
+public final class PlayerTest {
 
     private static final Random rand = new Random();
 
@@ -40,7 +40,7 @@ public final class PlayerTest extends InitClass {
     }
 
     @Test
-    public void testisPlayerControlled() {
+    public void testIsPlayerControlled() {
         assertTrue(p.isPlayerControlled());
     }
 
@@ -114,5 +114,10 @@ public final class PlayerTest extends InitClass {
     public void testHasntTresureWhenHaveWrongItem() {
         p.addItem(Item.getRandomItem(rand));
         assertFalse(p.hasTreasure());
+    }
+
+    @Test
+    public void testToString() {
+        assertEquals("TEST_PLAYER", p.toString());
     }
 }

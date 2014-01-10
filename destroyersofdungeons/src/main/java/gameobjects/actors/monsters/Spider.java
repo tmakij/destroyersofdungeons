@@ -13,7 +13,7 @@ final class Spider extends Monster {
      * manually for other than test purposes.
      */
     public Spider(int id) {
-        super(id, Spider.class);
+        super(id);
     }
 
     @Override

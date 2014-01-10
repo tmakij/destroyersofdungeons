@@ -35,7 +35,7 @@ MY_HEALTH;My health: $0$;Elinvoimani: $0$;;;;;;
 SETTINGS;Settings;Asetukset;;;;;;
 CHANGE_LANGUAGE;Change language;Vaihda Kieli;;;;;;
 TUNNEL;Tunnel $0$;Tunneli $0$;;;;;;
-TUNNEL_START;TunnelDoor ($0$);TunneliOvi ($0$);;;;;;
+TUNNEL_START;TunnelDoor $0$;TunneliOvi $0$;;;;;;
 CONTINUE;Continue;Jatka;;;;;;
 PLAYER_COUNT;Adventure count;Seikkailijoiden määrä;;;;;;
 RETURN_PLAYER_COUNT;Return;Palaa;;;;;;

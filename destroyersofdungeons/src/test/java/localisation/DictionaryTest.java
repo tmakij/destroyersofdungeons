@@ -1,14 +1,14 @@
 package localisation;
 
-import org.junit.After;
+import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public final class DictionaryTest {
 
-    @After
-    public void tearDown() {
+    @AfterClass
+    public static void tearDown() {
         Dictionary.loadText("english");
     }
 
@@ -23,7 +23,7 @@ public final class DictionaryTest {
     public void testGetValueWhenLanguageNotFound() {
         Dictionary.loadText("pirate");
         String key = Dictionary.getValue("YARR");
-        assertEquals("YARR", key);
+        assertEquals("Error on loading localisation for language pirate", key);
     }
 
     @Test
@@ -56,6 +56,7 @@ public final class DictionaryTest {
 
     @Test
     public void testGetLanguageWhenLoaded() {
+        Dictionary.loadText("english");
         assertTrue(Dictionary.getLanguages().length > 0);
     }
 }

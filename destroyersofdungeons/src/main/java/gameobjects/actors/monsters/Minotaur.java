@@ -13,7 +13,7 @@ final class Minotaur extends Monster {
      * manually for other than test purposes.
      */
     public Minotaur(int id) {
-        super(id, Minotaur.class);
+        super(id);
     }
 
     @Override

@@ -11,9 +11,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
-import testSetUp.InitClass;
 
-public final class TunnelTest extends InitClass {
+public final class TunnelTest {
 
     private static final Random rand = new Random();
 
@@ -111,5 +110,10 @@ public final class TunnelTest extends InitClass {
         tunnel.addBlock(t2);
         tunnel.addBlock(t2);
         assertEquals(1, tunnel.getNextTo().size());
+    }
+
+    @Test
+    public void testToString() {
+        assertEquals("Tunnel 0", tunnel.toString());
     }
 }

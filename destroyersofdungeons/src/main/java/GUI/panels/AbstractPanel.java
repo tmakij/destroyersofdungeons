@@ -12,7 +12,7 @@ import localisation.Dictionary;
  * Base class for all panels. Implements IDungeonPanel. Contains the JPanel,
  * SpringLayout.
  */
-public abstract class AbstractPanel implements IDungeonPanel {
+abstract class AbstractPanel implements IDungeonPanel {
 
     protected final JPanel panel = new JPanel();
     protected final SpringLayout layout = new SpringLayout();

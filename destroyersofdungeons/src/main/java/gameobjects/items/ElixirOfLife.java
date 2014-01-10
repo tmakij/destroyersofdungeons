@@ -13,7 +13,6 @@ final class ElixirOfLife extends Item {
      * for other than testing purposes.
      */
     public ElixirOfLife() {
-        super(ElixirOfLife.class);
     }
 
     @Override

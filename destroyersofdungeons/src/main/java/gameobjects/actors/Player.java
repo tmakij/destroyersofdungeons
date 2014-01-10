@@ -14,6 +14,8 @@ public final class Player extends Actor {
      */
     private final DestroyersOfDungeons game;
 
+    private final String name;
+
     /**
      * Creates a new instance of the player.
      *
@@ -22,7 +24,8 @@ public final class Player extends Actor {
      * @param game The game instance.
      */
     public Player(int id, String name, DestroyersOfDungeons game) {
-        super(id, name);
+        super(id);
+        this.name = name;
         this.game = game;
     }
 
@@ -52,5 +55,10 @@ public final class Player extends Actor {
     @Override
     public boolean isPlayerControlled() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

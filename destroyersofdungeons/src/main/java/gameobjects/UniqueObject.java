@@ -8,7 +8,7 @@ public abstract class UniqueObject {
     /**
      * The unique id of the object.
      */
-    private final int id;
+    protected final int id;
 
     /**
      * Creates a unique object.

@@ -14,9 +14,8 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
-import testSetUp.InitClass;
 
-public final class DestroyersOfDungeonsTest extends InitClass {
+public final class DestroyersOfDungeonsTest {
 
     private static final Random rand = new Random();
 
@@ -243,11 +242,11 @@ public final class DestroyersOfDungeonsTest extends InitClass {
     }
 
     private String getNameWithLenght(int l) {
-        String n = "";
+        StringBuilder b = new StringBuilder();
         for (int i = 0; i < l; i++) {
-            n += "a";
+            b.append("a");
         }
-        return n;
+        return b.toString();
     }
 
     @Test

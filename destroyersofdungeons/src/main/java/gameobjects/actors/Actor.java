@@ -29,10 +29,9 @@ public abstract class Actor extends Itemholder {
      * Create a new Actor.
      *
      * @param id The unique id.
-     * @param name The name of the object.
      */
-    protected Actor(int id, String name) {
-        super(id, name);
+    protected Actor(int id) {
+        super(id);
         health = Constants.ACTOR_BASE_HEALTH;
     }
 
@@ -132,6 +131,12 @@ public abstract class Actor extends Itemholder {
         to.takeHit(amount);
     }
 
+    /**
+     * Get the damage which is inflicted when attacking.
+     *
+     * @param act The BattleAction leading to the attack.
+     * @return The damage to be inflicted.
+     */
     protected int getAttack(BattleAction act) {
         int amount = (int) (Constants.ACTOR_BASE_ATTACK * act.actModifier());
         for (Item i : getItems()) {

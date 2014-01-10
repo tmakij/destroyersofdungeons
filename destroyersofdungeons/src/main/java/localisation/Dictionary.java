@@ -1,7 +1,5 @@
 package localisation;
 
-import gameobjects.actors.monsters.Monster;
-import gameobjects.items.Item;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,7 +17,7 @@ public enum Dictionary {
     /**
     * The map that holds the localisation keys and their values.
     */
-    private static volatile Map<String, String> strings;
+    private static final Map<String, String> strings;
     /**
      * The loaded language.
      */
@@ -27,11 +25,27 @@ public enum Dictionary {
     /**
      * The available languages.
      */
-    private static String languages[];
-    /**
-     * Are the avalaible languages loaded.
-     */
-    private static boolean loadedLanguages = false;
+    private static final String languages[];
+
+    static {
+        strings = new HashMap<>();
+        String langs[] = null;
+        try (InputStream localfile = Dictionary.class.getResourceAsStream("/localisation/localtext.txt");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(localfile, "UTF-8"))) {
+            String line = reader.readLine();
+            if (line != null) {
+                String l[] = line.split(";");
+                langs = new String[l.length - 1];
+                for (int i = 1; i < l.length; i++) {
+                    langs[i - 1] = l[i];
+                }
+            }
+        } catch (IOException ex) {
+        } finally {
+            languages = langs;
+        }
+        loadText("english");
+    }
 
     /**
      * Loads all the text from localisation.txt file.
@@ -39,11 +53,16 @@ public enum Dictionary {
      * @param language Which language is loaded.
      */
     public static void loadText(String language) {
+        strings.clear();
         try (InputStream localfile = Dictionary.class.getResourceAsStream("/localisation/localtext.txt");
                 BufferedReader reader = new BufferedReader(new InputStreamReader(localfile, "UTF-8"))) {
             Dictionary.language = language;
-            int n = getLineNumber(reader.readLine());
-            strings = new HashMap<>();
+            int n = getLineNumber();
+            if (n == 0) {
+                return;
+            }
+            reader.readLine();
+            //First line is the language line
             while (true) {
                 String line = reader.readLine();
                 if (line == null) {
@@ -54,8 +73,6 @@ public enum Dictionary {
                     strings.put(lineSplit[0], lineSplit[n]);
                 }
             }
-            Monster.loadRaces();
-            Item.loadItemTypes();
         } catch (IOException ex) {
         }
     }
@@ -66,28 +83,14 @@ public enum Dictionary {
      * @param line The language line.
      * @return The column of the language.
      */
-    private static int getLineNumber(String line) {
-        String[] langs = line.split(";");
+    private static int getLineNumber() {
         int ret = 0;
-        for (int i = 1; i < langs.length; i++) {
-            String lang = langs[i];
-            if (!loadedLanguages) {
-                if (languages == null) {
-                    languages = new String[langs.length - 1];
-                }
-                languages[i - 1] = lang;
-            }
-            if (lang.equals(language)) {
-                language = lang;
-                ret = i;
+        for (int i = 0; i < languages.length; i++) {
+            if (languages[i].equals(language)) {
+                ret = i + 1;
             }
         }
-        loadedLanguages = true;
-        if (ret > 0) {
-            return ret;
-        }
-        strings = null;
-        return 1;
+        return ret;
     }
 
     /**
@@ -109,7 +112,7 @@ public enum Dictionary {
      * is returned.
      */
     public static String getValue(String key, Object... params) {
-        if (strings == null) {
+        if (strings.isEmpty()) {
             return "Error on loading localisation for language " + language;
         }
         String value = key;

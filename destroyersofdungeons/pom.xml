@@ -32,7 +32,8 @@
     <build>
         <plugins>
             <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
+                <artifactId>maven-assembly-plugin</artifactId>                
+                <version>2.4</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -52,15 +53,14 @@
                         </goals>
                     </execution>
                 </executions>
-                <version>2.4</version>
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
                 </configuration>
-                <version>3.1</version>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -87,7 +87,6 @@
                         <param>gameobjects*</param>
                         <param>gameobjects.actors*</param>
                         <param>gameobjects.actors.monsters*</param>
-                        <param>gameobjects.actors.races*</param>
                         <param>gameobjects.dungeon*</param>
                         <param>gameobjects.items*</param>
                         <param>localisation*</param>
@@ -97,7 +96,6 @@
                         <param>gameobjects*</param>
                         <param>gameobjects.actors*</param>
                         <param>gameobjects.actors.monsters*</param>
-                        <param>gameobjects.actors.races*</param>
                         <param>gameobjects.dungeon*</param>
                         <param>gameobjects.items*</param>
                         <param>localisation*</param>

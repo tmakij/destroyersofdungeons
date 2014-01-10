@@ -13,11 +13,16 @@ final class TunnelEnd extends Tunnel {
      * @param id A unique id.
      */
     TunnelEnd(int id) {
-        super(id, Dictionary.getValue("TUNNEL_START", id));
+        super(id);
     }
 
     @Override
     protected boolean isEndBlock() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return Dictionary.getValue("TUNNEL_START", id);
     }
 }
